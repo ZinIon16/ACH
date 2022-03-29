@@ -94,7 +94,7 @@ namespace WindowsFormsApp1
         {
             StreamWriter File = new StreamWriter("demo.txt");
             String[] NoOfRows = new string[5];
-            int FalseRows = ((dataGridView1.Rows.Count) - 1);
+            int FalseRows = ((dataGridView1.Rows.Count) - 2);
             String Rows = (FalseRows.ToString());
             long TotalAmount = 0;
             String TotAmount = "";
@@ -112,13 +112,14 @@ namespace WindowsFormsApp1
                 '0', '0', '0', '0', '0', '0', '0', '0', '0', '0' , '0', '0', '0', '0', '0', '0', '0', '0', '0', '0' };
 
             //TOTAL ROWS
-            int a = (Rows.Length)-1;
+            
+            //int a = (Rows.Length)-1;
 
-            for (int i = 4; i > (4-(Rows.Length)); i--)
-            {
-                ArrayRows[i] = Rows[a];
-                a--;
-            }
+            //for (int i = 4; i > (4-(Rows.Length)); i--)
+            //{
+            //    ArrayRows[i] = Rows[a];
+            //    a--;
+            //}
 
             //for (int i = 4; i > -1; i--)
             //{
@@ -157,32 +158,37 @@ namespace WindowsFormsApp1
             //TOTAL ROWS
 
             File.Write("H");
-            for (int i = 0; i < 5; i++)
-            {
+            Rows = "00000" + Rows;
+            Rows = Rows.Substring(Rows.Length - 5);
+            File.Write(Rows);
+            //for (int i = 0; i < 5; i++)
+            //{
 
-                File.Write(ArrayRows[i]);
+            //    File.Write(ArrayRows[i]);
 
-            }
+            //}
             //TOTAL AMOUNT
             TotAmount = Convert.ToString(TotalAmount);
+            TotAmount = "0000000000" + TotAmount;
+            TotAmount = TotAmount.Substring(TotAmount.Length - 10);
+            File.Write(TotAmount);
 
+            //int b = TotAmount.Length - 1;
+            //for (int i = 9; i > (9 - TotAmount.Length); i--)
+            //{
+            //    ArrayTotalAmount[i] = TotAmount[b];
+            //    b--;
+            //}
 
-            int b = TotAmount.Length - 1;
-            for (int i = 9; i > (9 - TotAmount.Length); i--)
-            {
-                ArrayTotalAmount[i] = TotAmount[b];
-                b--;
-            }
+            //for (int i = 0; i < 10; i++)
+            //{
 
-            for (int i = 0; i < 10; i++)
-            {
+            //    File.Write(ArrayTotalAmount[i]);
 
-                File.Write(ArrayTotalAmount[i]);
-
-            }
+            //}
 
             //R format
-           
+
             //ACCOUNTNUMBER
 
             for (int k = 1; k < dataGridView1.Rows.Count - 1; k++)
@@ -194,15 +200,15 @@ namespace WindowsFormsApp1
                 EntityName = "";
                 TransactionCode = "";
                 Description = "";
-                ArrayAccNo = new char[20] { '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0' };
-                ArrayBankID = new char[10] { '0', '0', '0', '0', '0', '0', '0', '0', '0', '0' };
-                ArrayAmount = new char[10] { '0', '0', '0', '0', '0', '0', '0', '0', '0', '0' };
-                ArrayEntID = new char[20] { '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0' };
-                ArrayEntName = new char[20] { '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0' };
-                ArrayTCode = new char[5] { '0', '0', '0', '0', '0' };
-                ArrayDescription = new char[50] { '0', '0', '0', '0', '0', '0', '0', '0', '0', '0' , '0',
-            '0', '0', '0', '0', '0', '0', '0', '0', '0' , '0', '0', '0', '0', '0', '0', '0', '0', '0', '0' ,
-            '0', '0', '0', '0', '0', '0', '0', '0', '0', '0' , '0', '0', '0', '0', '0', '0', '0', '0', '0', '0' };
+            //    ArrayAccNo = new char[20] { '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0' };
+            //    ArrayBankID = new char[10] { '0', '0', '0', '0', '0', '0', '0', '0', '0', '0' };
+            //    ArrayAmount = new char[10] { '0', '0', '0', '0', '0', '0', '0', '0', '0', '0' };
+            //    ArrayEntID = new char[20] { '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0' };
+            //    ArrayEntName = new char[20] { '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0' };
+            //    ArrayTCode = new char[5] { '0', '0', '0', '0', '0' };
+            //    ArrayDescription = new char[50] { '0', '0', '0', '0', '0', '0', '0', '0', '0', '0' , '0',
+            //'0', '0', '0', '0', '0', '0', '0', '0', '0' , '0', '0', '0', '0', '0', '0', '0', '0', '0', '0' ,
+            //'0', '0', '0', '0', '0', '0', '0', '0', '0', '0' , '0', '0', '0', '0', '0', '0', '0', '0', '0', '0' };
 
 
                 File.WriteLine("");
@@ -217,19 +223,22 @@ namespace WindowsFormsApp1
 
                             AccountNumber = dataGridView1.Rows[k].Cells[j].Value.ToString();
 
-                            int c = (AccountNumber.Length - 1);
-                            for (int x = 19; x > (19 - AccountNumber.Length); x--)
-                            {
-                                ArrayAccNo[x] = AccountNumber[c];
-                                c--;
-                            }
+                            AccountNumber = "00000000000000000000" + AccountNumber;
+                            AccountNumber = AccountNumber.Substring(AccountNumber.Length - 20);
+                            File.Write(AccountNumber);
+                            //int c = (AccountNumber.Length - 1);
+                            //for (int x = 19; x > (19 - AccountNumber.Length); x--)
+                            //{
+                            //    ArrayAccNo[x] = AccountNumber[c];
+                            //    c--;
+                            //}
 
-                            for (int x = 0; x < 20; x++)
-                            {
+                            //for (int x = 0; x < 20; x++)
+                            //{
 
-                                File.Write(ArrayAccNo[x]);
+                            //    File.Write(ArrayAccNo[x]);
 
-                            }
+                            //}
 
                         }
 
@@ -248,20 +257,23 @@ namespace WindowsFormsApp1
                         {
 
                             BankID = (dataGridView1.Rows[k].Cells[j].Value.ToString());
-                            int d = BankID.Length - 1;
+                            BankID = "0000000000" + BankID;
+                            BankID = BankID.Substring(BankID.Length - 10);
+                            File.Write(BankID);
+                            //int d = BankID.Length - 1;
 
-                            for (int x = 9; x > (9 - BankID.Length); x--)
-                            {
-                                ArrayBankID[x] = BankID[d];
-                                d--;
-                            }
+                            //for (int x = 9; x > (9 - BankID.Length); x--)
+                            //{
+                            //    ArrayBankID[x] = BankID[d];
+                            //    d--;
+                            //}
 
-                            for (int x = 0; x < 10; x++)
-                            {
+                            //for (int x = 0; x < 10; x++)
+                            //{
 
-                                File.Write(ArrayBankID[x]);
+                            //    File.Write(ArrayBankID[x]);
 
-                            }
+                            //}
 
                         }
                     }
@@ -278,20 +290,23 @@ namespace WindowsFormsApp1
                         {
 
                             Amount = (dataGridView1.Rows[k].Cells[j].Value.ToString());
-                            int f = Amount.Length - 1;
+                            Amount = "0000000000" + Amount;
+                            Amount = Amount.Substring(Amount.Length - 10);
+                            File.Write(Amount);
+                            //int f = Amount.Length - 1;
 
-                            for (int x = 9; x > (9 - Amount.Length); x--)
-                            {
-                                ArrayAmount[x] = Amount[f];
-                                f--;
-                            }
+                            //for (int x = 9; x > (9 - Amount.Length); x--)
+                            //{
+                            //    ArrayAmount[x] = Amount[f];
+                            //    f--;
+                            //}
 
-                            for (int x = 0; x < 10; x++)
-                            {
+                            //for (int x = 0; x < 10; x++)
+                            //{
 
-                                File.Write(ArrayAmount[x]);
+                            //    File.Write(ArrayAmount[x]);
 
-                            }
+                            //}
                         }
                     }
                 }
@@ -307,20 +322,23 @@ namespace WindowsFormsApp1
                         {
 
                             EntityID = (dataGridView1.Rows[k].Cells[j].Value.ToString());
-                            int g = EntityID.Length - 1;
+                            EntityID = "00000000000000000000" + EntityID;
+                            EntityID = EntityID.Substring(EntityID.Length - 20);
+                            File.Write(EntityID);
+                            //int g = EntityID.Length - 1;
 
-                            for (int x = 19; x > (19 - EntityID.Length); x--)
-                            {
-                                ArrayEntID[x] = EntityID[g];
-                                g--;
-                            }
+                            //for (int x = 19; x > (19 - EntityID.Length); x--)
+                            //{
+                            //    ArrayEntID[x] = EntityID[g];
+                            //    g--;
+                            //}
 
-                            for (int x = 0; x < 20; x++)
-                            {
+                            //for (int x = 0; x < 20; x++)
+                            //{
 
-                                File.Write(ArrayEntID[x]);
+                            //    File.Write(ArrayEntID[x]);
 
-                            }
+                            //}
 
                         }
                     }
@@ -335,22 +353,24 @@ namespace WindowsFormsApp1
                         if (dataGridView1.Rows[i].Cells[j].Value.ToString() == "Entity Name")
                         {
 
-
                             EntityName = (dataGridView1.Rows[k].Cells[j].Value.ToString());
-                            int h = EntityName.Length - 1;
+                            EntityName = "00000000000000000000" + EntityName;
+                            EntityName = EntityName.Substring(EntityName.Length - 20);
+                            File.Write(EntityName);
+                            //int h = EntityName.Length - 1;
 
-                            for (int x = 19; x > (19 - EntityName.Length); x--)
-                            {
-                                ArrayEntName[x] = EntityName[h];
-                                h--;
-                            }
+                            //for (int x = 19; x > (19 - EntityName.Length); x--)
+                            //{
+                            //    ArrayEntName[x] = EntityName[h];
+                            //    h--;
+                            //}
 
-                            for (int x = 0; x < 20; x++)
-                            {
+                            //for (int x = 0; x < 20; x++)
+                            //{
 
-                                File.Write(ArrayEntName[x]);
+                            //    File.Write(ArrayEntName[x]);
 
-                            }
+                            //}
 
                         }
                     }
@@ -364,21 +384,25 @@ namespace WindowsFormsApp1
 
                         if (dataGridView1.Rows[i].Cells[j].Value.ToString() == "Transaction Code")
                         {
+                          
                             TransactionCode = (dataGridView1.Rows[k].Cells[j].Value.ToString());
-                            int l = TransactionCode.Length - 1;
+                            TransactionCode = "00000" + TransactionCode;
+                            TransactionCode = TransactionCode.Substring(TransactionCode.Length - 5);
+                            File.Write(TransactionCode);
+                            //int l = TransactionCode.Length - 1;
 
-                            for (int x = 4; x > (4 - TransactionCode.Length); x--)
-                            {
-                                ArrayTCode[x] = TransactionCode[l];
-                                l--;
-                            }
+                            //for (int x = 4; x > (4 - TransactionCode.Length); x--)
+                            //{
+                            //    ArrayTCode[x] = TransactionCode[l];
+                            //    l--;
+                            //}
 
-                            for (int x = 0; x < 5; x++)
-                            {
+                            //for (int x = 0; x < 5; x++)
+                            //{
 
-                                File.Write(ArrayTCode[x]);
+                            //    File.Write(ArrayTCode[x]);
 
-                            }
+                            //}
 
                         }
                     }
@@ -395,20 +419,24 @@ namespace WindowsFormsApp1
 
 
                             Description = (dataGridView1.Rows[k].Cells[j].Value.ToString());
-                            int m = Description.Length - 1;
+                            Description = (dataGridView1.Rows[k].Cells[j].Value.ToString());
+                            Description = "00000000000000000000000000000000000000000000000000" + Description;
+                            Description = Description.Substring(Description.Length - 50);
+                            File.Write(Description);
+                            //int m = Description.Length - 1;
 
-                            for (int x = 49; x > (49 - Description.Length); x--)
-                            {
-                                ArrayDescription[x] = Description[m];
-                                m--;
-                            }
+                            //for (int x = 49; x > (49 - Description.Length); x--)
+                            //{
+                            //    ArrayDescription[x] = Description[m];
+                            //    m--;
+                            //}
 
-                            for (int x = 0; x < 50; x++)
-                            {
+                            //for (int x = 0; x < 50; x++)
+                            //{
 
-                                File.Write(ArrayDescription[x]);
+                            //    File.Write(ArrayDescription[x]);
 
-                            }
+                            //}
                         }
                     }
                 }
