@@ -151,7 +151,7 @@ namespace WindowsFormsApp1
             string EntityName = "";
             string TransactionCode = "";
             string Description = "";
-
+            
             //_______________________________________________________________________________________________________
             //File Write
             //TOTAL ROWS
@@ -187,6 +187,24 @@ namespace WindowsFormsApp1
 
             for (int k = 1; k < dataGridView1.Rows.Count - 1; k++)
             {
+                AccountNumber = "";
+                BankID = "";
+                Amount = "";
+                EntityID = "";
+                EntityName = "";
+                TransactionCode = "";
+                Description = "";
+                ArrayAccNo = new char[20] { '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0' };
+                ArrayBankID = new char[10] { '0', '0', '0', '0', '0', '0', '0', '0', '0', '0' };
+                ArrayAmount = new char[10] { '0', '0', '0', '0', '0', '0', '0', '0', '0', '0' };
+                ArrayEntID = new char[20] { '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0' };
+                ArrayEntName = new char[20] { '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0' };
+                ArrayTCode = new char[5] { '0', '0', '0', '0', '0' };
+                ArrayDescription = new char[50] { '0', '0', '0', '0', '0', '0', '0', '0', '0', '0' , '0',
+            '0', '0', '0', '0', '0', '0', '0', '0', '0' , '0', '0', '0', '0', '0', '0', '0', '0', '0', '0' ,
+            '0', '0', '0', '0', '0', '0', '0', '0', '0', '0' , '0', '0', '0', '0', '0', '0', '0', '0', '0', '0' };
+
+
                 File.WriteLine("");
                 File.Write("R");
                 for (int i = 0; i < dataGridView1.Rows.Count - 1; i++)
