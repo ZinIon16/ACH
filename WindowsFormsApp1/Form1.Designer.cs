@@ -35,6 +35,8 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.txtSheet = new System.Windows.Forms.Label();
             this.btnExport = new System.Windows.Forms.Button();
+            this.txtBank = new System.Windows.Forms.Label();
+            this.cboBank = new System.Windows.Forms.ComboBox();
             btnBrowse = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -101,11 +103,30 @@
             this.btnExport.UseVisualStyleBackColor = true;
             this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
+            // txtBank
+            // 
+            this.txtBank.AutoSize = true;
+            this.txtBank.Location = new System.Drawing.Point(514, 356);
+            this.txtBank.Name = "txtBank";
+            this.txtBank.Size = new System.Drawing.Size(63, 13);
+            this.txtBank.TabIndex = 7;
+            this.txtBank.Text = "Bank Name";
+            // 
+            // cboBank
+            // 
+            this.cboBank.FormattingEnabled = true;
+            this.cboBank.Location = new System.Drawing.Point(583, 351);
+            this.cboBank.Name = "cboBank";
+            this.cboBank.Size = new System.Drawing.Size(121, 21);
+            this.cboBank.TabIndex = 8;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(794, 450);
+            this.Controls.Add(this.cboBank);
+            this.Controls.Add(this.txtBank);
             this.Controls.Add(this.btnExport);
             this.Controls.Add(this.txtSheet);
             this.Controls.Add(this.textBox1);
@@ -131,6 +152,8 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label txtSheet;
         private System.Windows.Forms.Button btnExport;
+        private System.Windows.Forms.Label txtBank;
+        private System.Windows.Forms.ComboBox cboBank;
     }
 }
 
