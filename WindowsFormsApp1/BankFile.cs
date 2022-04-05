@@ -1,14 +1,15 @@
-﻿using System;
-using System.Data;
-using System.IO;
+﻿using System.Data;
 
 namespace WindowsFormsApp1
 {
     internal abstract class BankFile
     {
-        public string HeaderPrefix;
+        public string Header;
+        public string SubHeader;
         public string TailPrefix;
-        public abstract void Export(DataTable dt);
+        public string RecordPrefix;
+        public string Record;
 
+        public abstract void Export(DataTable dt);
     }
 }

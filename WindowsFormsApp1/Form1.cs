@@ -1,18 +1,8 @@
 ﻿using ExcelDataReader;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.UI.WebControls;
 using System.Windows.Forms;
-using System.Web;
-using System.Web.UI;
-using System.Xml;
 
 namespace WindowsFormsApp1
 {
@@ -28,6 +18,7 @@ namespace WindowsFormsApp1
         {
             //OpenFile();
         }
+
         //private void OpenFile()
         //{
         //    Excel excel = new Excel(@"demo.xlsx", 1);
@@ -42,12 +33,12 @@ namespace WindowsFormsApp1
         //            //}
         //            //else
         //            //{
-
         //            //}
         //        }
         //    }
         //}
-        DataTableCollection tableCollection;
+        private DataTableCollection tableCollection;
+
         private void btnBrowse_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog dlg = new OpenFileDialog() { Filter = "Excel Workbook|*.xlsx" })
@@ -61,7 +52,7 @@ namespace WindowsFormsApp1
                         {
                             DataSet result = reader.AsDataSet(new ExcelDataSetConfiguration()
                             {
-                                ConfigureDataTable = (_) => new ExcelDataTableConfiguration()
+                                ConfigureDataTable = ExcelDataReader => new ExcelDataTableConfiguration()
                                 {
                                     UseHeaderRow = false
                                 }
@@ -90,7 +81,6 @@ namespace WindowsFormsApp1
             //StreamWriter File = new StreamWriter("demo.txt");
             //File.Write(data);
             //File.Close();
-
         }
 
         private void btnExport_Click(object sender, EventArgs e)
@@ -100,8 +90,6 @@ namespace WindowsFormsApp1
             if (cboBank.SelectedIndex == 0)
             {
                 objBank = new BMO();
-
-                
             }
             else if (cboBank.SelectedIndex == 1)
             {
@@ -111,5 +99,3 @@ namespace WindowsFormsApp1
         }
     }
 }
-
-
