@@ -1,7 +1,7 @@
 ﻿using System.Data;
 
 namespace WindowsFormsApp1
-{
+{ 
     internal abstract class BankFile
     {
         public string Header;
