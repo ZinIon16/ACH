@@ -3,7 +3,7 @@
 namespace WindowsFormsApp1
 {
     internal abstract class BankFile
-    {
+    { 
         public string Header;
         public string SubHeader;
         public string TailPrefix;
