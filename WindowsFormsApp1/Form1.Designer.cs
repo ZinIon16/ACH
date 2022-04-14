@@ -37,6 +37,14 @@
             this.btnExport = new System.Windows.Forms.Button();
             this.txtBank = new System.Windows.Forms.Label();
             this.cboBank = new System.Windows.Forms.ComboBox();
+            this.lblAcc = new System.Windows.Forms.Label();
+            this.lblX = new System.Windows.Forms.Label();
+            this.lblY = new System.Windows.Forms.Label();
+            this.txtAcc = new System.Windows.Forms.TextBox();
+            this.txtX = new System.Windows.Forms.TextBox();
+            this.txtY = new System.Windows.Forms.TextBox();
+            this.lblHeader = new System.Windows.Forms.Label();
+            this.txtHeader = new System.Windows.Forms.TextBox();
             btnBrowse = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -120,11 +128,83 @@
             this.cboBank.Size = new System.Drawing.Size(121, 21);
             this.cboBank.TabIndex = 8;
             // 
+            // lblAcc
+            // 
+            this.lblAcc.AutoSize = true;
+            this.lblAcc.Location = new System.Drawing.Point(9, 392);
+            this.lblAcc.Name = "lblAcc";
+            this.lblAcc.Size = new System.Drawing.Size(94, 13);
+            this.lblAcc.TabIndex = 9;
+            this.lblAcc.Text = "Company Account";
+            // 
+            // lblX
+            // 
+            this.lblX.AutoSize = true;
+            this.lblX.Location = new System.Drawing.Point(514, 396);
+            this.lblX.Name = "lblX";
+            this.lblX.Size = new System.Drawing.Size(14, 13);
+            this.lblX.TabIndex = 10;
+            this.lblX.Text = "X";
+            // 
+            // lblY
+            // 
+            this.lblY.AutoSize = true;
+            this.lblY.Location = new System.Drawing.Point(514, 428);
+            this.lblY.Name = "lblY";
+            this.lblY.Size = new System.Drawing.Size(14, 13);
+            this.lblY.TabIndex = 11;
+            this.lblY.Text = "Y";
+            // 
+            // txtAcc
+            // 
+            this.txtAcc.Location = new System.Drawing.Point(109, 389);
+            this.txtAcc.Name = "txtAcc";
+            this.txtAcc.Size = new System.Drawing.Size(100, 20);
+            this.txtAcc.TabIndex = 12;
+            // 
+            // txtX
+            // 
+            this.txtX.Location = new System.Drawing.Point(583, 389);
+            this.txtX.Name = "txtX";
+            this.txtX.Size = new System.Drawing.Size(100, 20);
+            this.txtX.TabIndex = 13;
+            // 
+            // txtY
+            // 
+            this.txtY.Location = new System.Drawing.Point(583, 421);
+            this.txtY.Name = "txtY";
+            this.txtY.Size = new System.Drawing.Size(100, 20);
+            this.txtY.TabIndex = 14;
+            // 
+            // lblHeader
+            // 
+            this.lblHeader.AutoSize = true;
+            this.lblHeader.Location = new System.Drawing.Point(307, 396);
+            this.lblHeader.Name = "lblHeader";
+            this.lblHeader.Size = new System.Drawing.Size(42, 13);
+            this.lblHeader.TabIndex = 15;
+            this.lblHeader.Text = "Header";
+            // 
+            // txtHeader
+            // 
+            this.txtHeader.Location = new System.Drawing.Point(355, 389);
+            this.txtHeader.Name = "txtHeader";
+            this.txtHeader.Size = new System.Drawing.Size(100, 20);
+            this.txtHeader.TabIndex = 16;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(794, 450);
+            this.Controls.Add(this.txtHeader);
+            this.Controls.Add(this.lblHeader);
+            this.Controls.Add(this.txtY);
+            this.Controls.Add(this.txtX);
+            this.Controls.Add(this.txtAcc);
+            this.Controls.Add(this.lblY);
+            this.Controls.Add(this.lblX);
+            this.Controls.Add(this.lblAcc);
             this.Controls.Add(this.cboBank);
             this.Controls.Add(this.txtBank);
             this.Controls.Add(this.btnExport);
@@ -154,6 +234,14 @@
         private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.Label txtBank;
         private System.Windows.Forms.ComboBox cboBank;
+        private System.Windows.Forms.Label lblAcc;
+        private System.Windows.Forms.Label lblX;
+        private System.Windows.Forms.Label lblY;
+        private System.Windows.Forms.TextBox txtAcc;
+        private System.Windows.Forms.TextBox txtX;
+        private System.Windows.Forms.TextBox txtY;
+        private System.Windows.Forms.Label lblHeader;
+        private System.Windows.Forms.TextBox txtHeader;
     }
 }
 

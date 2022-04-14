@@ -87,6 +87,11 @@ namespace WindowsFormsApp1
 
         private void btnExport_Click(object sender, EventArgs e)
         {
+            string X, Y, CompanyAccount,Header;
+            X=txtX.Text;
+            Y=txtY.Text;
+            CompanyAccount=txtAcc.Text;
+            Header = txtHeader.Text;
             BankFile objBank = null;
             DataTable dt = (DataTable)dataGridView1.DataSource;
             if (cboBank.SelectedIndex == 0)
@@ -97,7 +102,7 @@ namespace WindowsFormsApp1
             {
                 objBank = new RBC();
             }
-            objBank.Export(dt);
+            objBank.Export(dt, X, Y, CompanyAccount, Header);
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.Data;
 
 namespace WindowsFormsApp1
-{ 
+{
     internal abstract class BankFile
     {
         public string Header;
@@ -10,6 +10,6 @@ namespace WindowsFormsApp1
         public string RecordPrefix;
         public string Record;
 
-        public abstract void Export(DataTable dt);
+        public abstract void Export(DataTable dt,string X,string Y,string CompanyAccount,string header);
     }
 }
