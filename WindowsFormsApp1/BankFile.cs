@@ -10,6 +10,6 @@ namespace WindowsFormsApp1
         public string RecordPrefix;
         public string Record;
 
-        public abstract void Export(DataTable dt,string X,string Y,string CompanyAccount,string header);
+        public abstract void Export(DataTable dt,string FileNo,string NoOfDays,string CompanyBank,string CompanyBranch,string CompanyAccount,string header,string DestinationDataCenter,string OriginatorID,string CompanyName, string TCO);
     }
 }

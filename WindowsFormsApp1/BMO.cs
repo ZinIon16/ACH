@@ -6,7 +6,7 @@ namespace WindowsFormsApp1
 {
     internal class BMO : BankFile
     {
-        public override void Export(DataTable dt, string X, string Y, string CompanyAccount, string header)
+        public override void Export(DataTable dt, string FileNo, string NoOfDays, string CompanyBank, string CompanyBranch, string CompanyAccount, string header, string DestinationDataCenter, string OriginatorID, string CompanyName, string TCO)
         {
             StreamWriter File = new StreamWriter("demo.txt");
             String[] NoOfRows = new string[5];
@@ -40,7 +40,7 @@ namespace WindowsFormsApp1
             //_______________________________________________________________________________________________________
             //File Write
             //TOTAL ROWS
-            File.WriteLine(X);
+            //File.WriteLine(X);
             File.Write("H" + base.Header);
             Rows = "00000" + Rows;
             Rows = Rows.Substring(Rows.Length - 5);

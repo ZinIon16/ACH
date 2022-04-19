@@ -6,7 +6,7 @@ namespace WindowsFormsApp1
 {
     internal class RBC : BankFile
     {
-        public override void Export(DataTable dt, string X, string Y, string CompanyAccount, string header)
+        public override void Export(DataTable dt, string FileNo, string NoOfDays, string CompanyBank, string CompanyBranch, string CompanyAccount, string header, string DestinationDataCenter, string OriginatorID, string CompanyName, string TCO)
         {
             StreamWriter File = new StreamWriter("demo.txt");
             int FalseRows = (dt.Rows.Count - 1);
@@ -17,6 +17,11 @@ namespace WindowsFormsApp1
             string TotRec = "000000000" + CountRec.ToString();
             TotRec = TotRec.Substring(TotRec.Length - 9);
 
+            //FileNumber and Number of Days
+            FileNo = "0000" + FileNo;
+            FileNo= FileNo.Substring(FileNo.Length - 4);
+            NoOfDays = "000" + NoOfDays;
+            NoOfDays= NoOfDays.Substring(NoOfDays.Length - 3);
             //TOTALAMOUNT
             for (int i = 0; i < dt.Rows.Count; i++)
             {
@@ -50,9 +55,11 @@ namespace WindowsFormsApp1
             TotRec = "";
             TotRec = "000000000" + CountRec.ToString();
             TotRec = TotRec.Substring(TotRec.Length - 9);
-            base.SubHeader = base.SubHeader.Replace("YY", Y);
-            base.SubHeader = base.SubHeader.Replace("XX", X); 
+            base.SubHeader = base.SubHeader.Replace("File", FileNo);
+            base.SubHeader = base.SubHeader.Replace("Day", NoOfDays); 
             base.SubHeader = base.SubHeader.Replace("TOTALRECD", TotRec);
+            base.SubHeader = base.SubHeader.Replace("DeDaC", DestinationDataCenter);
+            base.SubHeader = base.SubHeader.Replace("Originator", OriginatorID);
             File.Write("A" + base.SubHeader);
 
             //ROWS
@@ -82,9 +89,15 @@ namespace WindowsFormsApp1
                 //EntityName = "";
                 TransactionCode = "";
                 Description = "";
-                base.Record = "TCOAMOUNT_IND0220XXTRANSITCOACCOUNT     0000000000000000000000000MB ENTERPRISES ID                            MB ENTERPRISES I              2689620000ID                 COMPANYACCOUNTNO     000000000000000                        00000000000";
-                base.Record = base.Record.Replace("XX", X);
-                base.Record = base.Record.Replace("COMPANYACCOUNTNO", CompanyAccount);
+                base.Record = "TCOAMOUNT_IND022DayTRANSITCOACCOUNT     0000000000000000000000000MB ENTERPRISES ID                            CompanyName12345              OriginatorID                 BankBrnchAccount     000000000000000                        00000000000";
+                base.Record = base.Record.Replace("Day", NoOfDays);
+                base.Record = base.Record.Replace("Bank", CompanyBank);
+                base.Record = base.Record.Replace("Brnch", CompanyBranch);
+                base.Record = base.Record.Replace("Account", CompanyAccount);
+                base.Record = base.Record.Replace("Originator", OriginatorID);
+                base.Record = base.Record.Replace("CompanyName12345", CompanyName);
+                
+
                 //to check if data is empty
                 //for (int i = 0; i < dt.Rows.Count - 1; i++)
                 //{
@@ -99,13 +112,14 @@ namespace WindowsFormsApp1
                 if (k % 6 == 1)
                 {
                     CountRec += 1;
-                    base.RecordPrefix = "TOTALRECD268962000000YY";
+                    base.RecordPrefix = "TOTALRECDOriginatorFile";
                     TotRec = "";
                     TotRec = "000000000" + CountRec.ToString();
                     TotRec = TotRec.Substring(TotRec.Length - 9);
 
                     base.RecordPrefix = base.RecordPrefix.Replace("TOTALRECD", TotRec);
-                    base.RecordPrefix = base.RecordPrefix.Replace("YY", Y);
+                    base.RecordPrefix = base.RecordPrefix.Replace("File", FileNo);
+                    base.RecordPrefix = base.RecordPrefix.Replace("Originator", OriginatorID);
 
                     File.WriteLine("");
                     File.Write("C" + base.RecordPrefix);
@@ -117,7 +131,7 @@ namespace WindowsFormsApp1
 
                 if (k > dt.Rows.Count - 1)
                 {
-                    //File.Write("00000000000");
+                    File.Write("                                                                                                                                                                                                                                                ");
                 }
                 else
                 {
@@ -140,7 +154,7 @@ namespace WindowsFormsApp1
                         }
                     }
 
-                    //TCODE
+                    //TRANSITCODE
 
                     for (int i = 0; i < dt.Rows.Count - 1; i++)
                     {
@@ -213,21 +227,24 @@ namespace WindowsFormsApp1
                     }
 
                     ////TRANSACTIONCODE
-                    for (int i = 0; i < dt.Rows.Count - 1; i++)
-                    {
-                        for (int j = 0; j < dt.Columns.Count; j++)
-                        {
-                            if (dt.Rows[i][j].ToString() == "TranCode")
-                            {
-                                TransactionCode = (dt.Rows[k][j].ToString());
-                                TransactionCode = "000" + TransactionCode;
-                                TransactionCode = TransactionCode.Substring(TransactionCode.Length - 3);
-                                //base.Record = "TCOAMOUNTTT00022088TRANSITCOACCOUNTNUMBER     0000000000000000000000000MB STARTOFENTITYNAMEENDOFENTITYNAME      MB ENTERPRISES I              2689620000STARTOFENTITYNAMEENDOFENTITYNAME0003000021139658     000000000000000                        ";
-                                base.Record = base.Record.Replace("TCO", TransactionCode);
-                                //File.Write(TransactionCode);
-                            }
-                        }
-                    }
+                    //for (int i = 0; i < dt.Rows.Count - 1; i++)
+                    //{
+                    //    for (int j = 0; j < dt.Columns.Count; j++)
+                    //    {
+                    //        if (dt.Rows[i][j].ToString() == "TranCode")
+                    //        {
+                    //            TransactionCode = (dt.Rows[k][j].ToString());
+                    //            TransactionCode = "000" + TransactionCode;
+                    //            TransactionCode = TransactionCode.Substring(TransactionCode.Length - 3);
+                    //            //base.Record = "TCOAMOUNTTT00022088TRANSITCOACCOUNTNUMBER     0000000000000000000000000MB STARTOFENTITYNAMEENDOFENTITYNAME      MB ENTERPRISES I              2689620000STARTOFENTITYNAMEENDOFENTITYNAME0003000021139658     000000000000000                        ";
+                    //            base.Record = base.Record.Replace("TCO", TransactionCode);
+                    //            //File.Write(TransactionCode);
+                    //        }
+                    //    }
+                    //}
+
+                    //TCO
+                    base.Record = base.Record.Replace("TCO", TCO);
                     //DESCRIPTION
 
                     for (int i = 0; i < dt.Rows.Count - 1; i++)
@@ -254,20 +271,21 @@ namespace WindowsFormsApp1
             TotRec = "000000000" + CountRec.ToString();
             TotRec = TotRec.Substring(TotRec.Length - 9);
             //Tail Prefix
-            base.TailPrefix = base.TailPrefix.Replace("YY", Y);
+            base.TailPrefix = base.TailPrefix.Replace("File", FileNo);
             base.TailPrefix = base.TailPrefix.Replace("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", TotAmount);
             base.TailPrefix = base.TailPrefix.Replace("ROWSTOTA", Rows);
             base.TailPrefix = base.TailPrefix.Replace("TOTALRECD", TotRec);
+            base.TailPrefix = base.TailPrefix.Replace("Originator", OriginatorID);
             File.WriteLine("Z" + base.TailPrefix);
             File.Close();
         }
         public RBC()
         {
-            base.Header = "$$AAPDCPA1464[PROD[NL$$";
-            base.SubHeader = "TOTALRECD268962000000YY0220XX00320                    CAD ";
-            base.TailPrefix = "TOTALRECD268962000000YYxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxROWSTOTA0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
-            base.RecordPrefix = "TOTALRECD268962000000YY";
-            base.Record = "TCOAMOUNT_IND0220XXTRANSITCOACCOUNT     0000000000000000000000000MB ENTERPRISES ID                            MB ENTERPRISES I              2689620000ID                 COMPANYACCOUNTNO     000000000000000                        00000000000";
+            base.Header = "$$AAPDCPA1464[PROD[NL$$                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 ";
+            base.SubHeader = "TOTALRECDOriginatorFile022DayDeDaC                    CAD                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ";
+            base.TailPrefix = "TOTALRECDOriginatorFilexxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxROWSTOTA0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
+            base.RecordPrefix = "TOTALRECDOriginatorFile";
+            base.Record = "TCOAMOUNT_IND022DayTRANSITCOACCOUNT     0000000000000000000000000MB ENTERPRISES ID                            CompanyName12345              2689620000ID                 COMPANYACCOUNTNO     000000000000000                        00000000000";
         }
     }
 }
