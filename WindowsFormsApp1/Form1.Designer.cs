@@ -38,10 +38,8 @@
             this.txtBank = new System.Windows.Forms.Label();
             this.cboBank = new System.Windows.Forms.ComboBox();
             this.lblAcc = new System.Windows.Forms.Label();
-            this.lblNoOfDays = new System.Windows.Forms.Label();
             this.lblFileNo = new System.Windows.Forms.Label();
             this.txtAcc = new System.Windows.Forms.TextBox();
-            this.txtNoOfDays = new System.Windows.Forms.TextBox();
             this.txtFileNo = new System.Windows.Forms.TextBox();
             this.lblOrID = new System.Windows.Forms.Label();
             this.txtOrID = new System.Windows.Forms.TextBox();
@@ -143,20 +141,11 @@
             // lblAcc
             // 
             this.lblAcc.AutoSize = true;
-            this.lblAcc.Location = new System.Drawing.Point(483, 415);
+            this.lblAcc.Location = new System.Drawing.Point(483, 392);
             this.lblAcc.Name = "lblAcc";
             this.lblAcc.Size = new System.Drawing.Size(94, 13);
             this.lblAcc.TabIndex = 9;
             this.lblAcc.Text = "Company Account";
-            // 
-            // lblNoOfDays
-            // 
-            this.lblNoOfDays.AutoSize = true;
-            this.lblNoOfDays.Location = new System.Drawing.Point(514, 389);
-            this.lblNoOfDays.Name = "lblNoOfDays";
-            this.lblNoOfDays.Size = new System.Drawing.Size(58, 13);
-            this.lblNoOfDays.TabIndex = 10;
-            this.lblNoOfDays.Text = "No of days";
             // 
             // lblFileNo
             // 
@@ -169,17 +158,10 @@
             // 
             // txtAcc
             // 
-            this.txtAcc.Location = new System.Drawing.Point(583, 413);
+            this.txtAcc.Location = new System.Drawing.Point(583, 386);
             this.txtAcc.Name = "txtAcc";
             this.txtAcc.Size = new System.Drawing.Size(100, 20);
             this.txtAcc.TabIndex = 12;
-            // 
-            // txtNoOfDays
-            // 
-            this.txtNoOfDays.Location = new System.Drawing.Point(583, 389);
-            this.txtNoOfDays.Name = "txtNoOfDays";
-            this.txtNoOfDays.Size = new System.Drawing.Size(100, 20);
-            this.txtNoOfDays.TabIndex = 13;
             // 
             // txtFileNo
             // 
@@ -320,10 +302,8 @@
             this.Controls.Add(this.txtOrID);
             this.Controls.Add(this.lblOrID);
             this.Controls.Add(this.txtFileNo);
-            this.Controls.Add(this.txtNoOfDays);
             this.Controls.Add(this.txtAcc);
             this.Controls.Add(this.lblFileNo);
-            this.Controls.Add(this.lblNoOfDays);
             this.Controls.Add(this.lblAcc);
             this.Controls.Add(this.cboBank);
             this.Controls.Add(this.txtBank);
@@ -355,10 +335,8 @@
         private System.Windows.Forms.Label txtBank;
         private System.Windows.Forms.ComboBox cboBank;
         private System.Windows.Forms.Label lblAcc;
-        private System.Windows.Forms.Label lblNoOfDays;
         private System.Windows.Forms.Label lblFileNo;
         private System.Windows.Forms.TextBox txtAcc;
-        private System.Windows.Forms.TextBox txtNoOfDays;
         private System.Windows.Forms.TextBox txtFileNo;
         private System.Windows.Forms.Label lblOrID;
         private System.Windows.Forms.TextBox txtOrID;

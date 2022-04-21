@@ -87,18 +87,6 @@ namespace WindowsFormsApp1
 
         private void btnExport_Click(object sender, EventArgs e)
         {
-            string FileNo,NoOfDays,CompanyBank,CompanyBranch,CompanyAccount,Header,DestinationDataCenter,OriginatorID,CompanyName,TCO;
-
-            FileNo= txtFileNo.Text;
-            NoOfDays = txtNoOfDays.Text;
-            CompanyBank = txtCBNo.Text;
-            CompanyBranch=txtCBrNo.Text;
-            CompanyAccount =txtAcc.Text;
-            Header = txtHeader.Text;
-            DestinationDataCenter = txtlDesDataCenter.Text;
-            OriginatorID = txtOrID.Text;
-            CompanyName = txtCName.Text;
-            TCO = txtTco.Text;
             BankFile objBank = null;
             DataTable dt = (DataTable)dataGridView1.DataSource;
             if (cboBank.SelectedIndex == 0)
@@ -109,7 +97,16 @@ namespace WindowsFormsApp1
             {
                 objBank = new RBC();
             }
-            objBank.Export(dt, FileNo, NoOfDays,  CompanyBank, CompanyBranch, CompanyAccount, Header, DestinationDataCenter,OriginatorID, CompanyName,TCO);
+            objBank.FileNo = txtFileNo.Text;
+            objBank.CompanyBank = txtCBNo.Text;
+            objBank.CompanyBranch = txtCBrNo.Text;
+            objBank.CompanyAccount = txtAcc.Text;
+            objBank.Header = txtHeader.Text;
+            objBank.DestinationDataCenter = txtlDesDataCenter.Text;
+            objBank.OriginatorID = txtOrID.Text;
+            objBank.CompanyName = txtCName.Text;
+            objBank.TCO = txtTco.Text;
+            objBank.Export(dt);
         }
     }
 }
