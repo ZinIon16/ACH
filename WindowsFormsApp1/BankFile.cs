@@ -4,10 +4,10 @@ namespace WindowsFormsApp1
 {
     internal abstract class BankFile
     {
-        //public string Header;
+        public string MainHeader;
         public string SubHeader;
-
         public string TailPrefix;
+        public string Tail;
         public string RecordPrefix;
         public string Record;
         public string spaces = "";

@@ -306,9 +306,9 @@ namespace WindowsFormsApp1
         public RBC()
         {
             base.SubHeader = "TOTALRECDOriginatorFile022DayDeDaC" + spaces.PadRight(20) + "CAD" + spaces.PadRight(1406);
-            base.TailPrefix = "TOTALRECDOriginatorFile" + spaces.PadRight(1396, '0');
             base.RecordPrefix = "TOTALRECDOriginatorFile";
             base.Record = "TCOAMOUNT_IND022DayTRANSITCOACCOUNT" + spaces.PadRight(25, '0') + "MB ENTERPRISES ID" + "CompanyName12345" + "OriginatorIdBankBrnchAccount" + spaces.PadRight(5) + spaces.PadRight(15, '0') + spaces.PadRight(24);
-        }
+            base.TailPrefix = "TOTALRECDOriginatorFile" + spaces.PadRight(1396, '0');
+              }
     }
 }
