@@ -12,7 +12,7 @@ namespace WindowsFormsApp1
         public string Record;
         public string spaces = "";
         public string TotAmount = "";
-        public string FileNo, CompanyBank, CompanyBranch, CompanyAccount, Header, DestinationDataCenter, OriginatorID, CompanyName, TCO;
+        public string FileNo, CompanyBank, CompanyBranch, CompanyAccount, Header, DestinationDataCenter, OriginatorID, CompanyName;
 
         public abstract void Export(DataTable dt);
     }

@@ -49,8 +49,6 @@
             this.txtHeader = new System.Windows.Forms.TextBox();
             this.txtCName = new System.Windows.Forms.TextBox();
             this.lblCName = new System.Windows.Forms.Label();
-            this.lblTco = new System.Windows.Forms.Label();
-            this.txtTco = new System.Windows.Forms.TextBox();
             this.lblCBrNo = new System.Windows.Forms.Label();
             this.lblCBNo = new System.Windows.Forms.Label();
             this.txtCBrNo = new System.Windows.Forms.TextBox();
@@ -137,11 +135,12 @@
             this.cboBank.Name = "cboBank";
             this.cboBank.Size = new System.Drawing.Size(121, 21);
             this.cboBank.TabIndex = 8;
+            this.cboBank.SelectedIndexChanged += new System.EventHandler(this.cboBank_SelectedIndexChanged);
             // 
             // lblAcc
             // 
             this.lblAcc.AutoSize = true;
-            this.lblAcc.Location = new System.Drawing.Point(483, 392);
+            this.lblAcc.Location = new System.Drawing.Point(255, 388);
             this.lblAcc.Name = "lblAcc";
             this.lblAcc.Size = new System.Drawing.Size(94, 13);
             this.lblAcc.TabIndex = 9;
@@ -158,7 +157,7 @@
             // 
             // txtAcc
             // 
-            this.txtAcc.Location = new System.Drawing.Point(583, 386);
+            this.txtAcc.Location = new System.Drawing.Point(355, 386);
             this.txtAcc.Name = "txtAcc";
             this.txtAcc.Size = new System.Drawing.Size(100, 20);
             this.txtAcc.TabIndex = 12;
@@ -173,7 +172,7 @@
             // lblOrID
             // 
             this.lblOrID.AutoSize = true;
-            this.lblOrID.Location = new System.Drawing.Point(283, 392);
+            this.lblOrID.Location = new System.Drawing.Point(283, 359);
             this.lblOrID.Name = "lblOrID";
             this.lblOrID.Size = new System.Drawing.Size(66, 13);
             this.lblOrID.TabIndex = 15;
@@ -181,7 +180,7 @@
             // 
             // txtOrID
             // 
-            this.txtOrID.Location = new System.Drawing.Point(355, 386);
+            this.txtOrID.Location = new System.Drawing.Point(355, 356);
             this.txtOrID.Name = "txtOrID";
             this.txtOrID.Size = new System.Drawing.Size(100, 20);
             this.txtOrID.TabIndex = 16;
@@ -189,7 +188,7 @@
             // labelDesDataCenter
             // 
             this.labelDesDataCenter.AutoSize = true;
-            this.labelDesDataCenter.Location = new System.Drawing.Point(229, 361);
+            this.labelDesDataCenter.Location = new System.Drawing.Point(457, 392);
             this.labelDesDataCenter.Name = "labelDesDataCenter";
             this.labelDesDataCenter.Size = new System.Drawing.Size(120, 13);
             this.labelDesDataCenter.TabIndex = 17;
@@ -197,7 +196,7 @@
             // 
             // txtlDesDataCenter
             // 
-            this.txtlDesDataCenter.Location = new System.Drawing.Point(355, 358);
+            this.txtlDesDataCenter.Location = new System.Drawing.Point(583, 385);
             this.txtlDesDataCenter.Name = "txtlDesDataCenter";
             this.txtlDesDataCenter.Size = new System.Drawing.Size(100, 20);
             this.txtlDesDataCenter.TabIndex = 18;
@@ -233,22 +232,6 @@
             this.lblCName.Size = new System.Drawing.Size(82, 13);
             this.lblCName.TabIndex = 22;
             this.lblCName.Text = "Company Name";
-            // 
-            // lblTco
-            // 
-            this.lblTco.AutoSize = true;
-            this.lblTco.Location = new System.Drawing.Point(258, 416);
-            this.lblTco.Name = "lblTco";
-            this.lblTco.Size = new System.Drawing.Size(91, 13);
-            this.lblTco.TabIndex = 23;
-            this.lblTco.Text = "Transaction Code";
-            // 
-            // txtTco
-            // 
-            this.txtTco.Location = new System.Drawing.Point(355, 413);
-            this.txtTco.Name = "txtTco";
-            this.txtTco.Size = new System.Drawing.Size(100, 20);
-            this.txtTco.TabIndex = 24;
             // 
             // lblCBrNo
             // 
@@ -291,8 +274,6 @@
             this.Controls.Add(this.txtCBrNo);
             this.Controls.Add(this.lblCBNo);
             this.Controls.Add(this.lblCBrNo);
-            this.Controls.Add(this.txtTco);
-            this.Controls.Add(this.lblTco);
             this.Controls.Add(this.lblCName);
             this.Controls.Add(this.txtCName);
             this.Controls.Add(this.txtHeader);
@@ -346,8 +327,6 @@
         private System.Windows.Forms.TextBox txtHeader;
         private System.Windows.Forms.TextBox txtCName;
         private System.Windows.Forms.Label lblCName;
-        private System.Windows.Forms.Label lblTco;
-        private System.Windows.Forms.TextBox txtTco;
         private System.Windows.Forms.Label lblCBrNo;
         private System.Windows.Forms.Label lblCBNo;
         private System.Windows.Forms.TextBox txtCBrNo;
