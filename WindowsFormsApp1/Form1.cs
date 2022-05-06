@@ -65,23 +65,24 @@ namespace WindowsFormsApp1
             {
                 DataSet dataSet2 = new DataSet();
                 dataSet2.ReadXml("C:\\Users\\Latitude\\Downloads\\Bank.xml");
-                txtCName.Text = dataSet2.Tables["Banks"].Rows[0][0].ToString();
-                txtCBNo.Text = dataSet2.Tables["Banks"].Rows[0][1].ToString();
-                txtCBrNo.Text = dataSet2.Tables["Banks"].Rows[0][2].ToString();
-                txtAcc.Text = dataSet2.Tables["Banks"].Rows[0][3].ToString();
-                txtlDesDataCenter.Text = dataSet2.Tables["Banks"].Rows[0][4].ToString();
-                txtOrID.Text = dataSet2.Tables["Banks"].Rows[0][5].ToString();
+                txtCName.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[0][0].ToString());
+                txtCBNo.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[0][1].ToString());
+                txtCBrNo.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[0][2].ToString());
+                txtAcc.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[0][3].ToString());
+                txtlDesDataCenter.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[0][4].ToString());
+                txtOrID.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[0][5].ToString());
             }
+
             else if (cboBank.SelectedIndex == 1)
             {
                 DataSet dataSet2 = new DataSet();
                 dataSet2.ReadXml("C:\\Users\\Latitude\\Downloads\\Bank.xml");
-                txtCName.Text = dataSet2.Tables["Banks"].Rows[1][0].ToString();
-                txtCBNo.Text = dataSet2.Tables["Banks"].Rows[1][1].ToString();
-                txtCBrNo.Text = dataSet2.Tables["Banks"].Rows[1][2].ToString();
-                txtAcc.Text = dataSet2.Tables["Banks"].Rows[1][3].ToString();
-                txtlDesDataCenter.Text = dataSet2.Tables["Banks"].Rows[1][4].ToString();
-                txtOrID.Text = dataSet2.Tables["Banks"].Rows[1][5].ToString();
+                txtCName.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[1][0].ToString());
+                txtCBNo.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[1][1].ToString());
+                txtCBrNo.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[1][2].ToString());
+                txtAcc.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[1][3].ToString());
+                txtlDesDataCenter.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[1][4].ToString());
+                txtOrID.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[1][5].ToString());
             }
         }
 
@@ -167,19 +168,19 @@ namespace WindowsFormsApp1
 
             if (cboBank.SelectedIndex == 0)
             {
-                row1["CompanyName"] = txtCName.Text;
-                row1["CompanyBankNumber"] = txtCBNo.Text;
-                row1["CompanyBranchNumber"] = txtCBrNo.Text;
-                row1["CompanyAccountNumber"] = txtAcc.Text;
-                row1["DestinationDataCenter"] = txtlDesDataCenter.Text;
-                row1["OriginatorID"] = txtOrID.Text;
+                row1["CompanyName"] = Eramake.eCryptography.Encrypt(txtCName.Text);
+                row1["CompanyBankNumber"] = Eramake.eCryptography.Encrypt(txtCBNo.Text);
+                row1["CompanyBranchNumber"] = Eramake.eCryptography.Encrypt(txtCBrNo.Text);
+                row1["CompanyAccountNumber"] = Eramake.eCryptography.Encrypt(txtAcc.Text);
+                row1["DestinationDataCenter"] = Eramake.eCryptography.Encrypt(txtlDesDataCenter.Text);
+                row1["OriginatorID"] = Eramake.eCryptography.Encrypt(txtOrID.Text);
 
                 row2["CompanyName"] = dataSet2.Tables["Banks"].Rows[1][0].ToString();
-                row2["CompanyBankNumber"] = dataSet2.Tables["Banks"].Rows[1][1].ToString();
-                row2["CompanyBranchNumber"] = dataSet2.Tables["Banks"].Rows[1][2].ToString();
-                row2["CompanyAccountNumber"] = dataSet2.Tables["Banks"].Rows[1][3].ToString();
-                row2["DestinationDataCenter"] = dataSet2.Tables["Banks"].Rows[1][4].ToString();
-                row2["OriginatorID"] = dataSet2.Tables["Banks"].Rows[1][5].ToString();
+                row2["CompanyBankNumber"] =dataSet2.Tables["Banks"].Rows[1][1].ToString();
+                row2["CompanyBranchNumber"] =dataSet2.Tables["Banks"].Rows[1][2].ToString();
+                row2["CompanyAccountNumber"] =dataSet2.Tables["Banks"].Rows[1][3].ToString();
+                row2["DestinationDataCenter"] =dataSet2.Tables["Banks"].Rows[1][4].ToString();
+                row2["OriginatorID"] =dataSet2.Tables["Banks"].Rows[1][5].ToString();
                 dataSet.WriteXml("C:\\Users\\Latitude\\Downloads\\Bank.xml");
             }
             else if (cboBank.SelectedIndex == 1)
@@ -191,12 +192,12 @@ namespace WindowsFormsApp1
                 row1["DestinationDataCenter"] = dataSet2.Tables["Banks"].Rows[0][4].ToString();
                 row1["OriginatorID"] = dataSet2.Tables["Banks"].Rows[0][5].ToString();
 
-                row2["CompanyName"] = txtCName.Text;
-                row2["CompanyBankNumber"] = txtCBNo.Text;
-                row2["CompanyBranchNumber"] = txtCBrNo.Text;
-                row2["CompanyAccountNumber"] = txtAcc.Text;
-                row2["DestinationDataCenter"] = txtlDesDataCenter.Text;
-                row2["OriginatorID"] = txtOrID.Text;
+                row2["CompanyName"] = Eramake.eCryptography.Encrypt(txtCName.Text);
+                row2["CompanyBankNumber"] = Eramake.eCryptography.Encrypt(txtCBNo.Text);
+                row2["CompanyBranchNumber"] = Eramake.eCryptography.Encrypt(txtCBrNo.Text);
+                row2["CompanyAccountNumber"] = Eramake.eCryptography.Encrypt(txtAcc.Text);
+                row2["DestinationDataCenter"] = Eramake.eCryptography.Encrypt(txtlDesDataCenter.Text);
+                row2["OriginatorID"] = Eramake.eCryptography.Encrypt(txtOrID.Text);
 
                 dataSet.WriteXml("C:\\Users\\Latitude\\Downloads\\Bank.xml");
             }
