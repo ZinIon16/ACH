@@ -1,6 +1,7 @@
 ﻿using ExcelDataReader;
 using System;
 using System.Data;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
@@ -17,6 +18,7 @@ namespace WindowsFormsApp1
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            btnUpdate.Enabled = false;
         }
 
         private DataTableCollection tableCollection;
@@ -56,8 +58,99 @@ namespace WindowsFormsApp1
         private void cboSheet_SelectedIndexChanged(object sender, EventArgs e)
         {
             DataTable dt = tableCollection[cboSheet.SelectedItem.ToString()];
+      
             dataGridView1.DataSource = dt;
+
+            //Validation Check for Amount
+            for (int i = 0; i < (dt.Rows.Count); i++)
+            {
+                for (int j = 0; j < (dt.Columns.Count); j++)
+                {
+                    if (dt.Rows[i][j].ToString() == "Amount")
+                    {
+                        for (int x = i + 1; x < dt.Rows.Count; x++)
+                        {
+                            
+                            if (dataGridView1.Rows[x].Cells[j].Value.ToString().Contains(" ")==true)
+                            {
+                                dataGridView1.Rows[x].Cells[j].Style.ForeColor = Color.Red;
+                                DialogResult result = MessageBox.Show("Highlighted Amount field(s) have white spaces, do you want to make changes?", " Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                                if (result == DialogResult.Yes)
+                                {
+                                    //nothing
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Click on Export to proceed!", "Click on OK");
+                                }
+                            }
+
+                        }
+
+                    }
+                }
+            }
+            //Validation for Account Number
+            for (int i = 0; i < (dt.Rows.Count); i++)
+            {
+                for (int j = 0; j < (dt.Columns.Count); j++)
+                {
+                    if (dt.Rows[i][j].ToString() == "Account")
+                    {
+                        for (int x = i + 1; x < dt.Rows.Count; x++)
+                        {
+
+                            if (dataGridView1.Rows[x].Cells[j].Value.ToString().Contains(" ") == true)
+                            {
+                                dataGridView1.Rows[x].Cells[j].Style.ForeColor = Color.Red;
+                                DialogResult result = MessageBox.Show("Highlighted Account number field(s) have white spaces, do you want to make changes?", " Warning", MessageBoxButtons.YesNo,MessageBoxIcon.Warning);
+                                if (result == DialogResult.Yes)
+                                {
+                                    //nothing
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Click on Export to proceed!","Click on OK");
+                                }
+                            }
+
+                        }
+
+                    }
+                }
+            }
+            //Validation check for TransitCode
+            for (int i = 0; i < (dt.Rows.Count); i++)
+            {
+                for (int j = 0; j < (dt.Columns.Count); j++)
+                {
+                    if (dt.Rows[i][j].ToString() == "TransitCode")
+                    {
+                        for (int x = i + 1; x < dt.Rows.Count; x++)
+                        {
+                            if (dataGridView1.Rows[x].Cells[j].Value == null)
+                            {
+                                break;
+                            }
+                            if (dataGridView1.Rows[x].Cells[j].Value.ToString() != "TransitCode")
+                            {
+                                if (dataGridView1.Rows[x].Cells[j].Value.ToString().Length != 9)
+                                {   btnExport.Enabled = false;
+                                    btnUpdate.Enabled = true;
+                                    dataGridView1.Rows[x].Cells[j].Style.ForeColor = Color.Red;
+                                    dataGridView1.Rows[x].Cells[j].Value = dataGridView1.Rows[x].Cells[j].Value.ToString() + "*";
+                                    MessageBox.Show("The Transit Code must be of 9 digits, change it and then click on" + "Update Button" + " in order to proceed!", " Transit Code Error");
+                                }
+                            }
+
+                        }
+
+                    }
+                }
+            }
+           
         }
+
 
         private void cboBank_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -203,6 +296,51 @@ namespace WindowsFormsApp1
             }
 
             objBank.Export(dt);
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            DataTable dt = (DataTable)dataGridView1.DataSource;
+
+            //Validation check for TransitCode after changes
+            int check = 0;
+            for (int i = 0; i < (dt.Rows.Count); i++)
+            {
+                for (int j = 0; j < (dt.Columns.Count); j++)
+                {
+                    if (dt.Rows[i][j].ToString() == "TransitCode")
+                    {
+                        for (int x = i + 1; x < dt.Rows.Count; x++)
+                        {
+                            if (dataGridView1.Rows[x].Cells[j].Value == null)
+                            {
+                                break;
+                            }
+                            if (dataGridView1.Rows[x].Cells[j].Value.ToString() != "TransitCode")
+                            {
+                                if ((dataGridView1.Rows[x].Cells[j].Value.ToString().Length != 9) || dataGridView1.Rows[x].Cells[j].Value.ToString().Contains("*"))
+                                {
+                                    btnExport.Enabled = false;
+                                    dataGridView1.Rows[x].Cells[j].Style.ForeColor = Color.Red;
+                                    MessageBox.Show("The Transit Code must be of 9 digits, change it and then click on"+"Update Button"+" in order to proceed!", " Transit Code Error");
+                                }
+                                else
+                                {
+                                    check = check + 1;
+                                    dataGridView1.Rows[x].Cells[j].Style.ForeColor = Color.Black;
+                                }
+                            }
+
+                        }
+
+                    }
+                }
+            }
+            if(dt.Rows.Count-1==check)
+            {
+                btnExport.Enabled = true;
+                MessageBox.Show("The Transit Code has been updated successfully!", " Success");
+            }
         }
     }
 }
