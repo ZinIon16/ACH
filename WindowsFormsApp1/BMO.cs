@@ -15,9 +15,8 @@ namespace WindowsFormsApp1
             long TotalAmount = 0;
             String CompanyName2;
             string PrefixVar = "";
-      
+
             string NoOfDays;
-         
 
             //FileNumber and Number of Days
             FileNo = "0000" + FileNo;
@@ -119,9 +118,7 @@ namespace WindowsFormsApp1
             TotAmount = "00000000000000" + TotAmount;
             TotAmount = TotAmount.Substring(TotAmount.Length - 14);
 
-           
-
-            for (int k=dt.Rows.Count; k > 0; k--)
+            for (int k = dt.Rows.Count; k > 0; k--)
             {
                 AccountNumber = "";
                 TransitC = "";
@@ -173,15 +170,15 @@ namespace WindowsFormsApp1
                     }
 
                     //AMOUNT
-                    long Am=0;
+                    long Am = 0;
                     for (int i = 0; i < dt.Rows.Count - 1; i++)
                     {
                         for (int j = 0; j < dt.Columns.Count; j++)
                         {
                             if (dt.Rows[i][j].ToString() == "Amount")
                             {
-                                Amount= (dt.Rows[k][j].ToString());
-                                Am = ((Convert.ToInt64(Convert.ToDecimal(Amount) * 100)) );
+                                Amount = (dt.Rows[k][j].ToString());
+                                Am = ((Convert.ToInt64(Convert.ToDecimal(Amount) * 100)));
                                 Amount = "0000000000" + (Am).ToString();
                                 Amount = Amount.Substring(Amount.Length - 10);
                                 base.Record = base.Record.Replace("AMOUNT_IND", Amount);

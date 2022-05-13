@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.Button btnBrowse;
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.txtFilename = new System.Windows.Forms.Label();
             this.cboSheet = new System.Windows.Forms.ComboBox();
@@ -54,34 +56,49 @@
             this.txtCBrNo = new System.Windows.Forms.TextBox();
             this.txtCBNo = new System.Windows.Forms.TextBox();
             this.btnUpdate = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.btnExportxl = new System.Windows.Forms.Button();
+            this.lblOrIDBMO = new System.Windows.Forms.Label();
+            this.cboOrID = new System.Windows.Forms.ComboBox();
             btnBrowse = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnBrowse
             // 
+            btnBrowse.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            btnBrowse.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             btnBrowse.Location = new System.Drawing.Point(710, 291);
             btnBrowse.Name = "btnBrowse";
             btnBrowse.Size = new System.Drawing.Size(75, 23);
             btnBrowse.TabIndex = 0;
             btnBrowse.Text = "Browse..";
-            btnBrowse.UseVisualStyleBackColor = true;
+            btnBrowse.UseVisualStyleBackColor = false;
             btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
             // dataGridView1
             // 
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Sunken;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.GridColor = System.Drawing.SystemColors.InactiveCaption;
             this.dataGridView1.Location = new System.Drawing.Point(12, 12);
             this.dataGridView1.Name = "dataGridView1";
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.PaleTurquoise;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.RoyalBlue;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.Size = new System.Drawing.Size(773, 257);
             this.dataGridView1.TabIndex = 1;
             // 
             // txtFilename
             // 
             this.txtFilename.AutoSize = true;
+            this.txtFilename.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.txtFilename.Location = new System.Drawing.Point(12, 291);
             this.txtFilename.Name = "txtFilename";
             this.txtFilename.Size = new System.Drawing.Size(51, 13);
@@ -90,15 +107,17 @@
             // 
             // cboSheet
             // 
+            this.cboSheet.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.cboSheet.FormattingEnabled = true;
-            this.cboSheet.Location = new System.Drawing.Point(67, 323);
+            this.cboSheet.Location = new System.Drawing.Point(123, 326);
             this.cboSheet.Name = "cboSheet";
-            this.cboSheet.Size = new System.Drawing.Size(121, 21);
+            this.cboSheet.Size = new System.Drawing.Size(100, 21);
             this.cboSheet.TabIndex = 3;
             this.cboSheet.SelectedIndexChanged += new System.EventHandler(this.cboSheet_SelectedIndexChanged);
             // 
             // textBox1
             // 
+            this.textBox1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.textBox1.Location = new System.Drawing.Point(67, 291);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(637, 20);
@@ -107,7 +126,8 @@
             // txtSheet
             // 
             this.txtSheet.AutoSize = true;
-            this.txtSheet.Location = new System.Drawing.Point(12, 328);
+            this.txtSheet.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.txtSheet.Location = new System.Drawing.Point(12, 330);
             this.txtSheet.Name = "txtSheet";
             this.txtSheet.Size = new System.Drawing.Size(35, 13);
             this.txtSheet.TabIndex = 5;
@@ -115,18 +135,23 @@
             // 
             // btnExport
             // 
-            this.btnExport.Location = new System.Drawing.Point(710, 323);
+            this.btnExport.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.btnExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExport.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnExport.Location = new System.Drawing.Point(273, 416);
             this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(75, 23);
+            this.btnExport.Size = new System.Drawing.Size(99, 23);
             this.btnExport.TabIndex = 6;
-            this.btnExport.Text = "Export";
-            this.btnExport.UseVisualStyleBackColor = true;
+            this.btnExport.Text = "Export as text file";
+            this.btnExport.TextAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.btnExport.UseVisualStyleBackColor = false;
             this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
             // txtBank
             // 
             this.txtBank.AutoSize = true;
-            this.txtBank.Location = new System.Drawing.Point(514, 326);
+            this.txtBank.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.txtBank.Location = new System.Drawing.Point(613, 330);
             this.txtBank.Name = "txtBank";
             this.txtBank.Size = new System.Drawing.Size(63, 13);
             this.txtBank.TabIndex = 7;
@@ -134,17 +159,19 @@
             // 
             // cboBank
             // 
+            this.cboBank.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.cboBank.FormattingEnabled = true;
-            this.cboBank.Location = new System.Drawing.Point(583, 323);
+            this.cboBank.Location = new System.Drawing.Point(682, 326);
             this.cboBank.Name = "cboBank";
-            this.cboBank.Size = new System.Drawing.Size(121, 21);
+            this.cboBank.Size = new System.Drawing.Size(100, 21);
             this.cboBank.TabIndex = 8;
             this.cboBank.SelectedIndexChanged += new System.EventHandler(this.cboBank_SelectedIndexChanged);
             // 
             // lblAcc
             // 
             this.lblAcc.AutoSize = true;
-            this.lblAcc.Location = new System.Drawing.Point(255, 388);
+            this.lblAcc.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.lblAcc.Location = new System.Drawing.Point(278, 387);
             this.lblAcc.Name = "lblAcc";
             this.lblAcc.Size = new System.Drawing.Size(94, 13);
             this.lblAcc.TabIndex = 9;
@@ -153,7 +180,8 @@
             // lblFileNo
             // 
             this.lblFileNo.AutoSize = true;
-            this.lblFileNo.Location = new System.Drawing.Point(514, 361);
+            this.lblFileNo.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.lblFileNo.Location = new System.Drawing.Point(613, 360);
             this.lblFileNo.Name = "lblFileNo";
             this.lblFileNo.Size = new System.Drawing.Size(63, 13);
             this.lblFileNo.TabIndex = 11;
@@ -161,14 +189,16 @@
             // 
             // txtAcc
             // 
-            this.txtAcc.Location = new System.Drawing.Point(355, 386);
+            this.txtAcc.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.txtAcc.Location = new System.Drawing.Point(378, 383);
             this.txtAcc.Name = "txtAcc";
             this.txtAcc.Size = new System.Drawing.Size(100, 20);
             this.txtAcc.TabIndex = 12;
             // 
             // txtFileNo
             // 
-            this.txtFileNo.Location = new System.Drawing.Point(583, 356);
+            this.txtFileNo.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.txtFileNo.Location = new System.Drawing.Point(682, 356);
             this.txtFileNo.Name = "txtFileNo";
             this.txtFileNo.Size = new System.Drawing.Size(100, 20);
             this.txtFileNo.TabIndex = 14;
@@ -176,7 +206,8 @@
             // lblOrID
             // 
             this.lblOrID.AutoSize = true;
-            this.lblOrID.Location = new System.Drawing.Point(283, 359);
+            this.lblOrID.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.lblOrID.Location = new System.Drawing.Point(306, 360);
             this.lblOrID.Name = "lblOrID";
             this.lblOrID.Size = new System.Drawing.Size(66, 13);
             this.lblOrID.TabIndex = 15;
@@ -184,7 +215,8 @@
             // 
             // txtOrID
             // 
-            this.txtOrID.Location = new System.Drawing.Point(355, 356);
+            this.txtOrID.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.txtOrID.Location = new System.Drawing.Point(378, 356);
             this.txtOrID.Name = "txtOrID";
             this.txtOrID.Size = new System.Drawing.Size(100, 20);
             this.txtOrID.TabIndex = 16;
@@ -192,7 +224,8 @@
             // labelDesDataCenter
             // 
             this.labelDesDataCenter.AutoSize = true;
-            this.labelDesDataCenter.Location = new System.Drawing.Point(457, 392);
+            this.labelDesDataCenter.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.labelDesDataCenter.Location = new System.Drawing.Point(556, 387);
             this.labelDesDataCenter.Name = "labelDesDataCenter";
             this.labelDesDataCenter.Size = new System.Drawing.Size(120, 13);
             this.labelDesDataCenter.TabIndex = 17;
@@ -200,7 +233,8 @@
             // 
             // txtlDesDataCenter
             // 
-            this.txtlDesDataCenter.Location = new System.Drawing.Point(583, 385);
+            this.txtlDesDataCenter.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.txtlDesDataCenter.Location = new System.Drawing.Point(682, 383);
             this.txtlDesDataCenter.Name = "txtlDesDataCenter";
             this.txtlDesDataCenter.Size = new System.Drawing.Size(100, 20);
             this.txtlDesDataCenter.TabIndex = 18;
@@ -208,7 +242,8 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(307, 332);
+            this.label1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label1.Location = new System.Drawing.Point(330, 330);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(42, 13);
             this.label1.TabIndex = 19;
@@ -216,13 +251,15 @@
             // 
             // txtHeader
             // 
-            this.txtHeader.Location = new System.Drawing.Point(355, 326);
+            this.txtHeader.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.txtHeader.Location = new System.Drawing.Point(378, 326);
             this.txtHeader.Name = "txtHeader";
             this.txtHeader.Size = new System.Drawing.Size(100, 20);
             this.txtHeader.TabIndex = 20;
             // 
             // txtCName
             // 
+            this.txtCName.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.txtCName.Location = new System.Drawing.Point(123, 356);
             this.txtCName.Name = "txtCName";
             this.txtCName.Size = new System.Drawing.Size(100, 20);
@@ -231,7 +268,8 @@
             // lblCName
             // 
             this.lblCName.AutoSize = true;
-            this.lblCName.Location = new System.Drawing.Point(12, 361);
+            this.lblCName.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.lblCName.Location = new System.Drawing.Point(12, 360);
             this.lblCName.Name = "lblCName";
             this.lblCName.Size = new System.Drawing.Size(82, 13);
             this.lblCName.TabIndex = 22;
@@ -240,7 +278,8 @@
             // lblCBrNo
             // 
             this.lblCBrNo.AutoSize = true;
-            this.lblCBrNo.Location = new System.Drawing.Point(12, 416);
+            this.lblCBrNo.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.lblCBrNo.Location = new System.Drawing.Point(12, 414);
             this.lblCBrNo.Name = "lblCBrNo";
             this.lblCBrNo.Size = new System.Drawing.Size(108, 13);
             this.lblCBrNo.TabIndex = 25;
@@ -249,7 +288,8 @@
             // lblCBNo
             // 
             this.lblCBNo.AutoSize = true;
-            this.lblCBNo.Location = new System.Drawing.Point(12, 392);
+            this.lblCBNo.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.lblCBNo.Location = new System.Drawing.Point(12, 387);
             this.lblCBNo.Name = "lblCBNo";
             this.lblCBNo.Size = new System.Drawing.Size(99, 13);
             this.lblCBNo.TabIndex = 26;
@@ -257,27 +297,79 @@
             // 
             // txtCBrNo
             // 
-            this.txtCBrNo.Location = new System.Drawing.Point(123, 408);
+            this.txtCBrNo.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.txtCBrNo.Location = new System.Drawing.Point(123, 411);
             this.txtCBrNo.Name = "txtCBrNo";
             this.txtCBrNo.Size = new System.Drawing.Size(100, 20);
             this.txtCBrNo.TabIndex = 27;
             // 
             // txtCBNo
             // 
-            this.txtCBNo.Location = new System.Drawing.Point(123, 385);
+            this.txtCBNo.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.txtCBNo.Location = new System.Drawing.Point(123, 383);
             this.txtCBNo.Name = "txtCBNo";
             this.txtCBNo.Size = new System.Drawing.Size(100, 20);
             this.txtCBNo.TabIndex = 28;
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(229, 429);
+            this.btnUpdate.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUpdate.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnUpdate.Location = new System.Drawing.Point(378, 416);
             this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(399, 23);
+            this.btnUpdate.Size = new System.Drawing.Size(99, 23);
             this.btnUpdate.TabIndex = 29;
             this.btnUpdate.Text = "Update";
-            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.UseVisualStyleBackColor = false;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Mistral", 8.25F, System.Drawing.FontStyle.Bold);
+            this.label2.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.label2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label2.Location = new System.Drawing.Point(756, 435);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(29, 13);
+            this.label2.TabIndex = 30;
+            this.label2.Text = "zayn";
+            // 
+            // btnExportxl
+            // 
+            this.btnExportxl.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.btnExportxl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExportxl.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnExportxl.Location = new System.Drawing.Point(483, 416);
+            this.btnExportxl.Name = "btnExportxl";
+            this.btnExportxl.Size = new System.Drawing.Size(106, 23);
+            this.btnExportxl.TabIndex = 31;
+            this.btnExportxl.Text = "Export as excel file";
+            this.btnExportxl.TextAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.btnExportxl.UseVisualStyleBackColor = false;
+            this.btnExportxl.Click += new System.EventHandler(this.btnExportxl_Click);
+            // 
+            // lblOrIDBMO
+            // 
+            this.lblOrIDBMO.AutoSize = true;
+            this.lblOrIDBMO.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.lblOrIDBMO.Location = new System.Drawing.Point(306, 360);
+            this.lblOrIDBMO.Name = "lblOrIDBMO";
+            this.lblOrIDBMO.Size = new System.Drawing.Size(66, 13);
+            this.lblOrIDBMO.TabIndex = 32;
+            this.lblOrIDBMO.Text = "Originator ID";
+            // 
+            // cboOrID
+            // 
+            this.cboOrID.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.cboOrID.FormattingEnabled = true;
+            this.cboOrID.Location = new System.Drawing.Point(377, 356);
+            this.cboOrID.Name = "cboOrID";
+            this.cboOrID.Size = new System.Drawing.Size(100, 21);
+            this.cboOrID.TabIndex = 33;
+            this.cboOrID.Visible = false;
+            this.cboOrID.SelectedIndexChanged += new System.EventHandler(this.cboOrID_SelectedIndexChanged);
             // 
             // Form1
             // 
@@ -285,6 +377,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(794, 450);
+            this.Controls.Add(this.cboOrID);
+            this.Controls.Add(this.lblOrIDBMO);
+            this.Controls.Add(this.btnExportxl);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.txtCBNo);
             this.Controls.Add(this.txtCBrNo);
@@ -311,6 +407,10 @@
             this.Controls.Add(this.txtFilename);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(btnBrowse);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ACH";
@@ -348,6 +448,10 @@
         private System.Windows.Forms.TextBox txtCBrNo;
         private System.Windows.Forms.TextBox txtCBNo;
         private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btnExportxl;
+        private System.Windows.Forms.Label lblOrIDBMO;
+        private System.Windows.Forms.ComboBox cboOrID;
     }
 }
 
