@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.Button btnBrowse;
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
@@ -47,7 +48,7 @@
             this.txtOrID = new System.Windows.Forms.TextBox();
             this.labelDesDataCenter = new System.Windows.Forms.Label();
             this.txtlDesDataCenter = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblHeader = new System.Windows.Forms.Label();
             this.txtHeader = new System.Windows.Forms.TextBox();
             this.txtCName = new System.Windows.Forms.TextBox();
             this.lblCName = new System.Windows.Forms.Label();
@@ -60,6 +61,8 @@
             this.btnExportxl = new System.Windows.Forms.Button();
             this.lblOrIDBMO = new System.Windows.Forms.Label();
             this.cboOrID = new System.Windows.Forms.ComboBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.lblFileType = new System.Windows.Forms.Label();
             btnBrowse = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -239,15 +242,15 @@
             this.txtlDesDataCenter.Size = new System.Drawing.Size(100, 20);
             this.txtlDesDataCenter.TabIndex = 18;
             // 
-            // label1
+            // lblHeader
             // 
-            this.label1.AutoSize = true;
-            this.label1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label1.Location = new System.Drawing.Point(330, 330);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(42, 13);
-            this.label1.TabIndex = 19;
-            this.label1.Text = "Header";
+            this.lblHeader.AutoSize = true;
+            this.lblHeader.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.lblHeader.Location = new System.Drawing.Point(330, 330);
+            this.lblHeader.Name = "lblHeader";
+            this.lblHeader.Size = new System.Drawing.Size(42, 13);
+            this.lblHeader.TabIndex = 19;
+            this.lblHeader.Text = "Header";
             // 
             // txtHeader
             // 
@@ -364,12 +367,25 @@
             // 
             this.cboOrID.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.cboOrID.FormattingEnabled = true;
-            this.cboOrID.Location = new System.Drawing.Point(377, 356);
+            this.cboOrID.Location = new System.Drawing.Point(378, 326);
             this.cboOrID.Name = "cboOrID";
             this.cboOrID.Size = new System.Drawing.Size(100, 21);
             this.cboOrID.TabIndex = 33;
             this.cboOrID.Visible = false;
             this.cboOrID.SelectedIndexChanged += new System.EventHandler(this.cboOrID_SelectedIndexChanged);
+       
+     
+            // 
+            // lblFileType
+            // 
+            this.lblFileType.AutoSize = true;
+            this.lblFileType.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.lblFileType.Location = new System.Drawing.Point(322, 330);
+            this.lblFileType.Name = "lblFileType";
+            this.lblFileType.Size = new System.Drawing.Size(50, 13);
+            this.lblFileType.TabIndex = 34;
+            this.lblFileType.Text = "File Type";
+            this.lblFileType.Visible = false;
             // 
             // Form1
             // 
@@ -377,6 +393,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(794, 450);
+            this.Controls.Add(this.lblFileType);
             this.Controls.Add(this.cboOrID);
             this.Controls.Add(this.lblOrIDBMO);
             this.Controls.Add(this.btnExportxl);
@@ -389,7 +406,7 @@
             this.Controls.Add(this.lblCName);
             this.Controls.Add(this.txtCName);
             this.Controls.Add(this.txtHeader);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblHeader);
             this.Controls.Add(this.txtlDesDataCenter);
             this.Controls.Add(this.labelDesDataCenter);
             this.Controls.Add(this.txtOrID);
@@ -439,7 +456,7 @@
         private System.Windows.Forms.TextBox txtOrID;
         private System.Windows.Forms.Label labelDesDataCenter;
         private System.Windows.Forms.TextBox txtlDesDataCenter;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblHeader;
         private System.Windows.Forms.TextBox txtHeader;
         private System.Windows.Forms.TextBox txtCName;
         private System.Windows.Forms.Label lblCName;
@@ -452,6 +469,8 @@
         private System.Windows.Forms.Button btnExportxl;
         private System.Windows.Forms.Label lblOrIDBMO;
         private System.Windows.Forms.ComboBox cboOrID;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label lblFileType;
     }
 }
 
