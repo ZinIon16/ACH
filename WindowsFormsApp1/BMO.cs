@@ -64,11 +64,11 @@ namespace WindowsFormsApp1
             File.Write("A" + base.MainHeader);
 
             //Prefix
-            if (OriginatorID == "MBPOSCRD20")
+            if (FileType == "C")
             {
                 PrefixVar = "C";
             }
-            else if (OriginatorID == "MBPOSDRD20")
+            else if (FileType == "D")
             {
                 PrefixVar = "D";
             }

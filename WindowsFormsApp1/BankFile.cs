@@ -13,7 +13,7 @@ namespace WindowsFormsApp1
         public string spaces = "";
         public string TotAmount = "";
         public string FileNo, CompanyBank, CompanyBranch, CompanyAccount, Header, DestinationDataCenter, OriginatorID, CompanyName;
-
+        public string FileType;
         public abstract void Export(DataTable dt);
     }
 }

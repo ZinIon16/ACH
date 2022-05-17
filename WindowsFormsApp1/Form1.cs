@@ -152,9 +152,9 @@ namespace WindowsFormsApp1
             dataSet.Tables["Banks"].Rows.Add(row1);
             dataSet.Tables["Banks"].Rows.Add(row2);
             DataSet dataSet2 = new DataSet();
-            if (File.Exists("C:\\Users\\Latitude\\Downloads\\Bank.xml"))
+            if (File.Exists("Bank.xml"))
             {
-                dataSet2.ReadXml("C:\\Users\\Latitude\\Downloads\\Bank.xml");
+                dataSet2.ReadXml("Bank.xml");
                 if (dataSet2.Tables["Banks"].Rows.Count <= 1)
                 {
                     row1["CompanyName"] = "";
@@ -172,7 +172,7 @@ namespace WindowsFormsApp1
                     row2["DestinationDataCenter"] = "";
                     row2["OriginatorID"] = "";
 
-                    dataSet.WriteXml("C:\\Users\\Latitude\\Downloads\\Bank.xml");
+                    dataSet.WriteXml("Bank.xml");
                 }
             }
             else
@@ -192,7 +192,7 @@ namespace WindowsFormsApp1
                 row2["DestinationDataCenter"] = "";
                 row2["OriginatorID"] = "";
 
-                dataSet.WriteXml("C:\\Users\\Latitude\\Downloads\\Bank.xml");
+                dataSet.WriteXml("Bank.xml");
             }
         }
 
@@ -202,7 +202,7 @@ namespace WindowsFormsApp1
                 if (cboBank.SelectedIndex == 0)
                 {
                     DataSet dataSet2 = new DataSet();
-                    dataSet2.ReadXml("C:\\Users\\Latitude\\Downloads\\Bank.xml");
+                    dataSet2.ReadXml("Bank.xml");
                     txtCName.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[0][0].ToString());
                     txtCBNo.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[0][1].ToString());
                     txtCBrNo.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[0][2].ToString());
@@ -213,7 +213,7 @@ namespace WindowsFormsApp1
                 else if (cboBank.SelectedIndex == 1)
                 {
                     DataSet dataSet2 = new DataSet();
-                    dataSet2.ReadXml("C:\\Users\\Latitude\\Downloads\\Bank.xml");
+                    dataSet2.ReadXml("Bank.xml");
                     txtCName.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[1][0].ToString());
                     txtCBNo.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[1][1].ToString());
                     txtCBrNo.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[1][2].ToString());
@@ -261,14 +261,18 @@ namespace WindowsFormsApp1
             objBank.CompanyAccount = txtAcc.Text;
             objBank.Header = txtHeader.Text;
             objBank.DestinationDataCenter = txtlDesDataCenter.Text;
+            objBank.OriginatorID = txtOrID.Text;
+
             if (cboBank.SelectedIndex == 0)
             {
-                    objBank.OriginatorID = cboOrID.Text;
+                objBank.FileType = "C"; 
             }
             else
             {
-                objBank.OriginatorID = txtOrID.Text;
+                objBank.FileType = "D";
             }
+            
+           
 
             objBank.CompanyName = txtCName.Text;
 
@@ -292,7 +296,7 @@ namespace WindowsFormsApp1
             dataSet.Tables["Banks"].Rows.Add(row2);
             DataSet dataSet2 = new DataSet();
        
-            dataSet2.ReadXml("C:\\Users\\Latitude\\Downloads\\Bank.xml");
+            dataSet2.ReadXml("Bank.xml");
   
             if (cboBank.SelectedIndex == 0)
             {
@@ -312,7 +316,7 @@ namespace WindowsFormsApp1
                     row2["CompanyAccountNumber"] = dataSet2.Tables["Banks"].Rows[1][3].ToString();
                     row2["DestinationDataCenter"] = dataSet2.Tables["Banks"].Rows[1][4].ToString();
                     row2["OriginatorID"] = dataSet2.Tables["Banks"].Rows[1][5].ToString();
-                    dataSet.WriteXml("C:\\Users\\Latitude\\Downloads\\Bank.xml");
+                    dataSet.WriteXml("Bank.xml");
                 }
                 else
                 {
@@ -330,7 +334,7 @@ namespace WindowsFormsApp1
                     row2["CompanyAccountNumber"] = dataSet2.Tables["Banks"].Rows[1][3].ToString();
                     row2["DestinationDataCenter"] = dataSet2.Tables["Banks"].Rows[1][4].ToString();
                     row2["OriginatorID"] = dataSet2.Tables["Banks"].Rows[1][5].ToString();
-                    dataSet.WriteXml("C:\\Users\\Latitude\\Downloads\\Bank.xml");
+                    dataSet.WriteXml("Bank.xml");
                 }
             }
             if (cboBank.SelectedIndex == 1)
@@ -350,7 +354,7 @@ namespace WindowsFormsApp1
                 row2["DestinationDataCenter"] = Eramake.eCryptography.Encrypt(txtlDesDataCenter.Text);
                 row2["OriginatorID"] = Eramake.eCryptography.Encrypt(txtOrID.Text);
 
-                dataSet.WriteXml("C:\\Users\\Latitude\\Downloads\\Bank.xml");
+                dataSet.WriteXml("Bank.xml");
             }
 
             objBank.Export(dt);
@@ -412,14 +416,14 @@ namespace WindowsFormsApp1
             if (cboOrID.SelectedIndex == 0)
             {
                 DataSet dataSet2 = new DataSet();
-                dataSet2.ReadXml("C:\\Users\\Latitude\\Downloads\\Bank.xml");
+                dataSet2.ReadXml("Bank.xml");
                 txtOrID.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[0][6].ToString());
               
             }
             else if (cboOrID.SelectedIndex == 1)
             {
                 DataSet dataSet2 = new DataSet();
-                dataSet2.ReadXml("C:\\Users\\Latitude\\Downloads\\Bank.xml");
+                dataSet2.ReadXml("Bank.xml");
                 txtOrID.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[0][7].ToString());
 
             }
