@@ -14,6 +14,8 @@ namespace WindowsFormsApp1
         public string TotAmount = "";
         public string FileNo, CompanyBank, CompanyBranch, CompanyAccount, Header, DestinationDataCenter, OriginatorID, CompanyName;
         public string FileType;
+        public string FileName;
+
         public abstract void Export(DataTable dt);
     }
 }

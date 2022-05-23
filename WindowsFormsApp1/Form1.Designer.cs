@@ -63,6 +63,9 @@
             this.cboOrID = new System.Windows.Forms.ComboBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.lblFileType = new System.Windows.Forms.Label();
+            this.lblTotAmount = new System.Windows.Forms.Label();
+            this.TotAmount = new System.Windows.Forms.Label();
+            this.btnDelete = new System.Windows.Forms.Button();
             btnBrowse = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -72,7 +75,7 @@
             btnBrowse.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             btnBrowse.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            btnBrowse.Location = new System.Drawing.Point(710, 291);
+            btnBrowse.Location = new System.Drawing.Point(709, 300);
             btnBrowse.Name = "btnBrowse";
             btnBrowse.Size = new System.Drawing.Size(75, 23);
             btnBrowse.TabIndex = 0;
@@ -102,7 +105,7 @@
             // 
             this.txtFilename.AutoSize = true;
             this.txtFilename.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.txtFilename.Location = new System.Drawing.Point(12, 291);
+            this.txtFilename.Location = new System.Drawing.Point(11, 300);
             this.txtFilename.Name = "txtFilename";
             this.txtFilename.Size = new System.Drawing.Size(51, 13);
             this.txtFilename.TabIndex = 2;
@@ -112,7 +115,7 @@
             // 
             this.cboSheet.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.cboSheet.FormattingEnabled = true;
-            this.cboSheet.Location = new System.Drawing.Point(123, 326);
+            this.cboSheet.Location = new System.Drawing.Point(122, 335);
             this.cboSheet.Name = "cboSheet";
             this.cboSheet.Size = new System.Drawing.Size(100, 21);
             this.cboSheet.TabIndex = 3;
@@ -121,7 +124,7 @@
             // textBox1
             // 
             this.textBox1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.textBox1.Location = new System.Drawing.Point(67, 291);
+            this.textBox1.Location = new System.Drawing.Point(66, 300);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(637, 20);
             this.textBox1.TabIndex = 4;
@@ -130,7 +133,7 @@
             // 
             this.txtSheet.AutoSize = true;
             this.txtSheet.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.txtSheet.Location = new System.Drawing.Point(12, 330);
+            this.txtSheet.Location = new System.Drawing.Point(11, 339);
             this.txtSheet.Name = "txtSheet";
             this.txtSheet.Size = new System.Drawing.Size(35, 13);
             this.txtSheet.TabIndex = 5;
@@ -141,7 +144,7 @@
             this.btnExport.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.btnExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExport.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnExport.Location = new System.Drawing.Point(273, 416);
+            this.btnExport.Location = new System.Drawing.Point(240, 425);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(99, 23);
             this.btnExport.TabIndex = 6;
@@ -154,7 +157,7 @@
             // 
             this.txtBank.AutoSize = true;
             this.txtBank.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.txtBank.Location = new System.Drawing.Point(613, 330);
+            this.txtBank.Location = new System.Drawing.Point(612, 339);
             this.txtBank.Name = "txtBank";
             this.txtBank.Size = new System.Drawing.Size(63, 13);
             this.txtBank.TabIndex = 7;
@@ -164,7 +167,7 @@
             // 
             this.cboBank.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.cboBank.FormattingEnabled = true;
-            this.cboBank.Location = new System.Drawing.Point(682, 326);
+            this.cboBank.Location = new System.Drawing.Point(681, 335);
             this.cboBank.Name = "cboBank";
             this.cboBank.Size = new System.Drawing.Size(100, 21);
             this.cboBank.TabIndex = 8;
@@ -174,7 +177,7 @@
             // 
             this.lblAcc.AutoSize = true;
             this.lblAcc.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblAcc.Location = new System.Drawing.Point(278, 387);
+            this.lblAcc.Location = new System.Drawing.Point(277, 396);
             this.lblAcc.Name = "lblAcc";
             this.lblAcc.Size = new System.Drawing.Size(94, 13);
             this.lblAcc.TabIndex = 9;
@@ -184,7 +187,7 @@
             // 
             this.lblFileNo.AutoSize = true;
             this.lblFileNo.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblFileNo.Location = new System.Drawing.Point(613, 360);
+            this.lblFileNo.Location = new System.Drawing.Point(612, 369);
             this.lblFileNo.Name = "lblFileNo";
             this.lblFileNo.Size = new System.Drawing.Size(63, 13);
             this.lblFileNo.TabIndex = 11;
@@ -193,7 +196,7 @@
             // txtAcc
             // 
             this.txtAcc.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.txtAcc.Location = new System.Drawing.Point(378, 383);
+            this.txtAcc.Location = new System.Drawing.Point(377, 392);
             this.txtAcc.Name = "txtAcc";
             this.txtAcc.Size = new System.Drawing.Size(100, 20);
             this.txtAcc.TabIndex = 12;
@@ -201,7 +204,7 @@
             // txtFileNo
             // 
             this.txtFileNo.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.txtFileNo.Location = new System.Drawing.Point(682, 356);
+            this.txtFileNo.Location = new System.Drawing.Point(681, 365);
             this.txtFileNo.Name = "txtFileNo";
             this.txtFileNo.Size = new System.Drawing.Size(100, 20);
             this.txtFileNo.TabIndex = 14;
@@ -210,7 +213,7 @@
             // 
             this.lblOrID.AutoSize = true;
             this.lblOrID.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblOrID.Location = new System.Drawing.Point(306, 360);
+            this.lblOrID.Location = new System.Drawing.Point(305, 369);
             this.lblOrID.Name = "lblOrID";
             this.lblOrID.Size = new System.Drawing.Size(66, 13);
             this.lblOrID.TabIndex = 15;
@@ -219,7 +222,7 @@
             // txtOrID
             // 
             this.txtOrID.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.txtOrID.Location = new System.Drawing.Point(378, 356);
+            this.txtOrID.Location = new System.Drawing.Point(377, 365);
             this.txtOrID.Name = "txtOrID";
             this.txtOrID.Size = new System.Drawing.Size(100, 20);
             this.txtOrID.TabIndex = 16;
@@ -228,7 +231,7 @@
             // 
             this.labelDesDataCenter.AutoSize = true;
             this.labelDesDataCenter.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.labelDesDataCenter.Location = new System.Drawing.Point(556, 387);
+            this.labelDesDataCenter.Location = new System.Drawing.Point(555, 396);
             this.labelDesDataCenter.Name = "labelDesDataCenter";
             this.labelDesDataCenter.Size = new System.Drawing.Size(120, 13);
             this.labelDesDataCenter.TabIndex = 17;
@@ -237,7 +240,7 @@
             // txtlDesDataCenter
             // 
             this.txtlDesDataCenter.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.txtlDesDataCenter.Location = new System.Drawing.Point(682, 383);
+            this.txtlDesDataCenter.Location = new System.Drawing.Point(681, 392);
             this.txtlDesDataCenter.Name = "txtlDesDataCenter";
             this.txtlDesDataCenter.Size = new System.Drawing.Size(100, 20);
             this.txtlDesDataCenter.TabIndex = 18;
@@ -246,7 +249,7 @@
             // 
             this.lblHeader.AutoSize = true;
             this.lblHeader.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblHeader.Location = new System.Drawing.Point(330, 330);
+            this.lblHeader.Location = new System.Drawing.Point(329, 339);
             this.lblHeader.Name = "lblHeader";
             this.lblHeader.Size = new System.Drawing.Size(42, 13);
             this.lblHeader.TabIndex = 19;
@@ -255,7 +258,7 @@
             // txtHeader
             // 
             this.txtHeader.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.txtHeader.Location = new System.Drawing.Point(378, 326);
+            this.txtHeader.Location = new System.Drawing.Point(377, 335);
             this.txtHeader.Name = "txtHeader";
             this.txtHeader.Size = new System.Drawing.Size(100, 20);
             this.txtHeader.TabIndex = 20;
@@ -263,7 +266,7 @@
             // txtCName
             // 
             this.txtCName.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.txtCName.Location = new System.Drawing.Point(123, 356);
+            this.txtCName.Location = new System.Drawing.Point(122, 365);
             this.txtCName.Name = "txtCName";
             this.txtCName.Size = new System.Drawing.Size(100, 20);
             this.txtCName.TabIndex = 21;
@@ -272,7 +275,7 @@
             // 
             this.lblCName.AutoSize = true;
             this.lblCName.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblCName.Location = new System.Drawing.Point(12, 360);
+            this.lblCName.Location = new System.Drawing.Point(11, 369);
             this.lblCName.Name = "lblCName";
             this.lblCName.Size = new System.Drawing.Size(82, 13);
             this.lblCName.TabIndex = 22;
@@ -282,7 +285,7 @@
             // 
             this.lblCBrNo.AutoSize = true;
             this.lblCBrNo.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblCBrNo.Location = new System.Drawing.Point(12, 414);
+            this.lblCBrNo.Location = new System.Drawing.Point(11, 423);
             this.lblCBrNo.Name = "lblCBrNo";
             this.lblCBrNo.Size = new System.Drawing.Size(108, 13);
             this.lblCBrNo.TabIndex = 25;
@@ -292,7 +295,7 @@
             // 
             this.lblCBNo.AutoSize = true;
             this.lblCBNo.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblCBNo.Location = new System.Drawing.Point(12, 387);
+            this.lblCBNo.Location = new System.Drawing.Point(11, 396);
             this.lblCBNo.Name = "lblCBNo";
             this.lblCBNo.Size = new System.Drawing.Size(99, 13);
             this.lblCBNo.TabIndex = 26;
@@ -301,7 +304,7 @@
             // txtCBrNo
             // 
             this.txtCBrNo.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.txtCBrNo.Location = new System.Drawing.Point(123, 411);
+            this.txtCBrNo.Location = new System.Drawing.Point(122, 420);
             this.txtCBrNo.Name = "txtCBrNo";
             this.txtCBrNo.Size = new System.Drawing.Size(100, 20);
             this.txtCBrNo.TabIndex = 27;
@@ -309,7 +312,7 @@
             // txtCBNo
             // 
             this.txtCBNo.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.txtCBNo.Location = new System.Drawing.Point(123, 383);
+            this.txtCBNo.Location = new System.Drawing.Point(122, 392);
             this.txtCBNo.Name = "txtCBNo";
             this.txtCBNo.Size = new System.Drawing.Size(100, 20);
             this.txtCBNo.TabIndex = 28;
@@ -319,7 +322,7 @@
             this.btnUpdate.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUpdate.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnUpdate.Location = new System.Drawing.Point(378, 416);
+            this.btnUpdate.Location = new System.Drawing.Point(345, 425);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(99, 23);
             this.btnUpdate.TabIndex = 29;
@@ -344,7 +347,7 @@
             this.btnExportxl.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.btnExportxl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExportxl.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnExportxl.Location = new System.Drawing.Point(483, 416);
+            this.btnExportxl.Location = new System.Drawing.Point(450, 425);
             this.btnExportxl.Name = "btnExportxl";
             this.btnExportxl.Size = new System.Drawing.Size(106, 23);
             this.btnExportxl.TabIndex = 31;
@@ -357,7 +360,7 @@
             // 
             this.lblOrIDBMO.AutoSize = true;
             this.lblOrIDBMO.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblOrIDBMO.Location = new System.Drawing.Point(306, 360);
+            this.lblOrIDBMO.Location = new System.Drawing.Point(305, 369);
             this.lblOrIDBMO.Name = "lblOrIDBMO";
             this.lblOrIDBMO.Size = new System.Drawing.Size(66, 13);
             this.lblOrIDBMO.TabIndex = 32;
@@ -367,25 +370,56 @@
             // 
             this.cboOrID.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.cboOrID.FormattingEnabled = true;
-            this.cboOrID.Location = new System.Drawing.Point(378, 326);
+            this.cboOrID.Location = new System.Drawing.Point(377, 335);
             this.cboOrID.Name = "cboOrID";
             this.cboOrID.Size = new System.Drawing.Size(100, 21);
             this.cboOrID.TabIndex = 33;
             this.cboOrID.Visible = false;
             this.cboOrID.SelectedIndexChanged += new System.EventHandler(this.cboOrID_SelectedIndexChanged);
-       
-     
             // 
             // lblFileType
             // 
             this.lblFileType.AutoSize = true;
             this.lblFileType.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblFileType.Location = new System.Drawing.Point(322, 330);
+            this.lblFileType.Location = new System.Drawing.Point(321, 339);
             this.lblFileType.Name = "lblFileType";
             this.lblFileType.Size = new System.Drawing.Size(50, 13);
             this.lblFileType.TabIndex = 34;
             this.lblFileType.Text = "File Type";
             this.lblFileType.Visible = false;
+            // 
+            // lblTotAmount
+            // 
+            this.lblTotAmount.AutoSize = true;
+            this.lblTotAmount.Location = new System.Drawing.Point(305, 276);
+            this.lblTotAmount.Name = "lblTotAmount";
+            this.lblTotAmount.Size = new System.Drawing.Size(73, 13);
+            this.lblTotAmount.TabIndex = 35;
+            this.lblTotAmount.Text = "Total Amount:";
+            this.lblTotAmount.Visible = false;
+            // 
+            // TotAmount
+            // 
+            this.TotAmount.AutoSize = true;
+            this.TotAmount.Location = new System.Drawing.Point(387, 276);
+            this.TotAmount.Name = "TotAmount";
+            this.TotAmount.Size = new System.Drawing.Size(0, 13);
+            this.TotAmount.TabIndex = 36;
+            this.TotAmount.Visible = false;
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDelete.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnDelete.Location = new System.Drawing.Point(562, 425);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(118, 23);
+            this.btnDelete.TabIndex = 38;
+            this.btnDelete.Text = "Delete Selected Row";
+            this.btnDelete.TextAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click_1);
             // 
             // Form1
             // 
@@ -393,6 +427,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(794, 450);
+            this.Controls.Add(this.btnDelete);
+            this.Controls.Add(this.TotAmount);
+            this.Controls.Add(this.lblTotAmount);
             this.Controls.Add(this.lblFileType);
             this.Controls.Add(this.cboOrID);
             this.Controls.Add(this.lblOrIDBMO);
@@ -471,6 +508,9 @@
         private System.Windows.Forms.ComboBox cboOrID;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label lblFileType;
+        private System.Windows.Forms.Label lblTotAmount;
+        private System.Windows.Forms.Label TotAmount;
+        private System.Windows.Forms.Button btnDelete;
     }
 }
 

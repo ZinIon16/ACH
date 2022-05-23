@@ -8,7 +8,9 @@ namespace WindowsFormsApp1
     {
         public override void Export(DataTable dt)
         {
-            StreamWriter File = new StreamWriter("demo.txt");
+            FileName = Path.GetFileName(FileName);
+            FileName = FileName.Replace(".xlsx", ".txt");
+            StreamWriter File = new StreamWriter(FileName);
             int FalseRows = (dt.Rows.Count - 1);
             string Rows = (FalseRows.ToString());
             long TotalAmount = 0;
