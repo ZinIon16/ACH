@@ -144,7 +144,7 @@
             this.btnExport.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.btnExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExport.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnExport.Location = new System.Drawing.Point(240, 425);
+            this.btnExport.Location = new System.Drawing.Point(227, 423);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(99, 23);
             this.btnExport.TabIndex = 6;
@@ -166,6 +166,7 @@
             // cboBank
             // 
             this.cboBank.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.cboBank.DropDownWidth = 280;
             this.cboBank.FormattingEnabled = true;
             this.cboBank.Location = new System.Drawing.Point(681, 335);
             this.cboBank.Name = "cboBank";
@@ -322,7 +323,7 @@
             this.btnUpdate.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUpdate.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnUpdate.Location = new System.Drawing.Point(345, 425);
+            this.btnUpdate.Location = new System.Drawing.Point(332, 423);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(99, 23);
             this.btnUpdate.TabIndex = 29;
@@ -347,7 +348,7 @@
             this.btnExportxl.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.btnExportxl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExportxl.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnExportxl.Location = new System.Drawing.Point(450, 425);
+            this.btnExportxl.Location = new System.Drawing.Point(437, 423);
             this.btnExportxl.Name = "btnExportxl";
             this.btnExportxl.Size = new System.Drawing.Size(106, 23);
             this.btnExportxl.TabIndex = 31;
@@ -391,9 +392,10 @@
             // lblTotAmount
             // 
             this.lblTotAmount.AutoSize = true;
-            this.lblTotAmount.Location = new System.Drawing.Point(305, 276);
+            this.lblTotAmount.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotAmount.Location = new System.Drawing.Point(277, 276);
             this.lblTotAmount.Name = "lblTotAmount";
-            this.lblTotAmount.Size = new System.Drawing.Size(73, 13);
+            this.lblTotAmount.Size = new System.Drawing.Size(97, 16);
             this.lblTotAmount.TabIndex = 35;
             this.lblTotAmount.Text = "Total Amount:";
             this.lblTotAmount.Visible = false;
@@ -401,10 +403,12 @@
             // TotAmount
             // 
             this.TotAmount.AutoSize = true;
-            this.TotAmount.Location = new System.Drawing.Point(387, 276);
+            this.TotAmount.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TotAmount.Location = new System.Drawing.Point(410, 276);
             this.TotAmount.Name = "TotAmount";
-            this.TotAmount.Size = new System.Drawing.Size(0, 13);
+            this.TotAmount.Size = new System.Drawing.Size(14, 16);
             this.TotAmount.TabIndex = 36;
+            this.TotAmount.Text = "0";
             this.TotAmount.Visible = false;
             // 
             // btnDelete
@@ -412,7 +416,7 @@
             this.btnDelete.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDelete.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnDelete.Location = new System.Drawing.Point(562, 425);
+            this.btnDelete.Location = new System.Drawing.Point(549, 423);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(118, 23);
             this.btnDelete.TabIndex = 38;
@@ -464,7 +468,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ACH";

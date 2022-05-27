@@ -250,13 +250,13 @@ namespace WindowsFormsApp1
             //Insert
             base.Tail = base.Tail.Insert(2, Rows);
             base.Tail = base.Tail.Insert(10, TotAmount);
-            if (OriginatorID == "MBPOSCRD20")
+            if (FileType == "C")
             {
                 base.TailPrefix = base.TailPrefix.Insert(0, spaces.PadRight(19, '0'));
                 base.TailPrefix = base.TailPrefix.Insert(19, TotAmount);
                 base.TailPrefix = base.TailPrefix.Insert(TotAmount.Length + 19, Rows2);
             }
-            else if (OriginatorID == "MBPOSDRD20")
+            else if (FileType == "D")
             {
                 base.TailPrefix = base.TailPrefix.Insert(0, TotAmount);
                 base.TailPrefix = base.TailPrefix.Insert(TotAmount.Length + 0, Rows2);
