@@ -13,18 +13,23 @@ namespace WindowsFormsApp1
     {
         DataTable dt;
         int cboBankSelectedIndex, cboOrIDSelectedIndex;
-        public Form1(DataTable dt, int bankindex, int filetindex)
+        string FileName;
+        public Form1(DataTable dt, int bankindex, int filetindex, string BankName, string FileType,string FileName)
         {
             InitializeComponent();
             this.dt= dt;
             this.cboBankSelectedIndex= bankindex;
             this.cboOrIDSelectedIndex = filetindex;
+            this.txtBankName.Text = BankName;
+            this.txtFileType.Text = FileType;
+            this.FileName = FileName;
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            btnUpdate.Enabled = false;
+            //btnUpdate.Enabled = false;
             dataGridView1.DataSource = dt;
+            dt.AcceptChanges();
             lblTotAmount.Visible = true;
             TotAmount.Visible = true;
 
@@ -390,7 +395,7 @@ namespace WindowsFormsApp1
         {
 
             txtDate.Text = DateTime.Now.Date.ToString("d");
-            cboOrID.Text = "Credit/Debit";
+            //cboOrID.Text = "Credit/Debit";
             txtOrID.Clear();
             if (cboBankSelectedIndex == 0)
             {
@@ -628,14 +633,14 @@ namespace WindowsFormsApp1
             if (cboBankSelectedIndex == 0 || cboBankSelectedIndex == 2 || cboBankSelectedIndex == 3 || cboBankSelectedIndex == 4 || cboBankSelectedIndex == 7 || cboBankSelectedIndex == 8 || cboBankSelectedIndex == 9 || cboBankSelectedIndex == 10)
             {
                 lblFileType.Visible = true;
-                cboOrID.Visible = true;
+                //cboOrID.Visible = true;
                 txtHeader.Visible = false;
                 lblHeader.Visible = false;
             }
             else
             {
-                cboOrID.Visible = false;
-                lblFileType.Visible = false;
+                //cboOrID.Visible = false;
+                //lblFileType.Visible = false;
                 txtHeader.Visible = true;
                 lblHeader.Visible = true;
             }
@@ -644,26 +649,35 @@ namespace WindowsFormsApp1
 
         private void btnDelete_Click_1(object sender, EventArgs e)
         {
-            foreach (DataGridViewCell item in this.dataGridView1.SelectedCells)
+            try
             {
-                dataGridView1.Rows.RemoveAt(item.RowIndex);
+                foreach (DataGridViewCell item in this.dataGridView1.SelectedCells)
+                {
+                    dataGridView1.Rows.RemoveAt(item.RowIndex);
+                }
+                foreach (DataGridViewCell item in this.dataGridView1.SelectedRows)
+                {
+                    dataGridView1.Rows.RemoveAt(item.RowIndex);
+                }
+            }
+            catch(Exception)
+            {
+                //nothing
             }
         }
 
         private void btnExport_Click(object sender, EventArgs e)
         {
-
-
             ExportBtnClicked = true;
             BankFile objBank = null;
             DataTable dt = (DataTable)dataGridView1.DataSource;
             dt.AcceptChanges();
 
-            if (cboBank.SelectedIndex == 0 || cboBank.SelectedIndex == 2 || cboBank.SelectedIndex == 3 || cboBank.SelectedIndex == 4 || cboBank.SelectedIndex == 7 || cboBank.SelectedIndex == 8 || cboBank.SelectedIndex == 9 || cboBank.SelectedIndex == 10)
+            if (cboBankSelectedIndex == 0 || cboBankSelectedIndex == 2 || cboBankSelectedIndex == 3 || cboBankSelectedIndex == 4 || cboBankSelectedIndex == 7 || cboBankSelectedIndex == 8 || cboBankSelectedIndex == 9 || cboBankSelectedIndex == 10)
             {
                 objBank = new BMO();
             }
-            else if (cboBank.SelectedIndex == 1 || cboBank.SelectedIndex == 5 || cboBank.SelectedIndex == 6)
+            else if (cboBankSelectedIndex == 1 || cboBankSelectedIndex == 5 || cboBankSelectedIndex == 6)
             {
                 objBank = new RBC();
             }
@@ -685,16 +699,16 @@ namespace WindowsFormsApp1
             objBank.CompanyName = txtCName.Text;
             objBank.NoOfDays = txtDate.Text;
 
-            if (cboOrID.SelectedIndex == 0)
+            if (cboOrIDSelectedIndex == 0)
             {
                 objBank.FileType = "C";
             }
-            else if (cboOrID.SelectedIndex == 1)
+            else if (cboOrIDSelectedIndex == 1)
             {
                 objBank.FileType = "D";
             }
 
-            objBank.FileName = textBox1.Text;
+                objBank.FileName = FileName;
 
             //Adding to XML
             DataSet dataSet = new DataSet();
@@ -738,9 +752,9 @@ namespace WindowsFormsApp1
 
             dataSet2.ReadXml("Bank.xml");
 
-            if (cboBank.SelectedIndex == 0)
+            if (cboBankSelectedIndex == 0)
             {
-                if (cboOrID.SelectedIndex == 0)
+                if (cboOrIDSelectedIndex == 0)
                 {
                     row1["CompanyName"] = Eramake.eCryptography.Encrypt(txtCName.Text);
                     row1["CompanyBankNumber"] = Eramake.eCryptography.Encrypt(txtCBNo.Text);
@@ -946,7 +960,7 @@ namespace WindowsFormsApp1
                     dataSet.WriteXml("Bank.xml");
                 }
             }
-            else if (cboBank.SelectedIndex == 1)
+            else if (cboBankSelectedIndex == 1)
             {
                 row1["CompanyName"] = dataSet2.Tables["Banks"].Rows[0][0].ToString();
                 row1["CompanyBankNumber"] = dataSet2.Tables["Banks"].Rows[0][1].ToString();
@@ -1049,9 +1063,9 @@ namespace WindowsFormsApp1
 
                 dataSet.WriteXml("Bank.xml");
             }
-            else if (cboBank.SelectedIndex == 2)
+            else if (cboBankSelectedIndex == 2)
             {
-                if (cboOrID.SelectedIndex == 0)
+                if (cboOrIDSelectedIndex == 0)
                 {
                     row1["CompanyName"] = dataSet2.Tables["Banks"].Rows[0][0].ToString();
                     row1["CompanyBankNumber"] = dataSet2.Tables["Banks"].Rows[0][1].ToString();
@@ -1258,9 +1272,9 @@ namespace WindowsFormsApp1
                     dataSet.WriteXml("Bank.xml");
                 }
             }
-            else if (cboBank.SelectedIndex == 3)
+            else if (cboBankSelectedIndex == 3)
             {
-                if (cboOrID.SelectedIndex == 0)
+                if (cboOrIDSelectedIndex == 0)
                 {
                     row1["CompanyName"] = dataSet2.Tables["Banks"].Rows[0][0].ToString();
                     row1["CompanyBankNumber"] = dataSet2.Tables["Banks"].Rows[0][1].ToString();
@@ -1467,9 +1481,9 @@ namespace WindowsFormsApp1
                     dataSet.WriteXml("Bank.xml");
                 }
             }
-            else if (cboBank.SelectedIndex == 4)
+            else if (cboBankSelectedIndex == 4)
             {
-                if (cboOrID.SelectedIndex == 0)
+                if (cboOrIDSelectedIndex == 0)
                 {
                     row1["CompanyName"] = dataSet2.Tables["Banks"].Rows[0][0].ToString();
                     row1["CompanyBankNumber"] = dataSet2.Tables["Banks"].Rows[0][1].ToString();
@@ -1676,7 +1690,7 @@ namespace WindowsFormsApp1
                     dataSet.WriteXml("Bank.xml");
                 }
             }
-            else if (cboBank.SelectedIndex == 5)
+            else if (cboBankSelectedIndex == 5)
             {
                 row1["CompanyName"] = dataSet2.Tables["Banks"].Rows[0][0].ToString();
                 row1["CompanyBankNumber"] = dataSet2.Tables["Banks"].Rows[0][1].ToString();
@@ -1779,7 +1793,7 @@ namespace WindowsFormsApp1
 
                 dataSet.WriteXml("Bank.xml");
             }
-            else if (cboBank.SelectedIndex == 6)
+            else if (cboBankSelectedIndex == 6)
             {
                 row1["CompanyName"] = dataSet2.Tables["Banks"].Rows[0][0].ToString();
                 row1["CompanyBankNumber"] = dataSet2.Tables["Banks"].Rows[0][1].ToString();
@@ -1882,9 +1896,9 @@ namespace WindowsFormsApp1
 
                 dataSet.WriteXml("Bank.xml");
             }
-            else if (cboBank.SelectedIndex == 7)
+            else if (cboBankSelectedIndex == 7)
             {
-                if (cboOrID.SelectedIndex == 0)
+                if (cboOrIDSelectedIndex == 0)
                 {
                     row1["CompanyName"] = dataSet2.Tables["Banks"].Rows[0][0].ToString();
                     row1["CompanyBankNumber"] = dataSet2.Tables["Banks"].Rows[0][1].ToString();
@@ -2091,9 +2105,9 @@ namespace WindowsFormsApp1
                     dataSet.WriteXml("Bank.xml");
                 }
             }
-            else if (cboBank.SelectedIndex == 8)
+            else if (cboBankSelectedIndex == 8)
             {
-                if (cboOrID.SelectedIndex == 0)
+                if (cboOrIDSelectedIndex == 0)
                 {
                     row1["CompanyName"] = dataSet2.Tables["Banks"].Rows[0][0].ToString();
                     row1["CompanyBankNumber"] = dataSet2.Tables["Banks"].Rows[0][1].ToString();
@@ -2300,9 +2314,9 @@ namespace WindowsFormsApp1
                     dataSet.WriteXml("Bank.xml");
                 }
             }
-            else if (cboBank.SelectedIndex == 9)
+            else if (cboBankSelectedIndex == 9)
             {
-                if (cboOrID.SelectedIndex == 0)
+                if (cboOrIDSelectedIndex == 0)
                 {
                     row1["CompanyName"] = dataSet2.Tables["Banks"].Rows[0][0].ToString();
                     row1["CompanyBankNumber"] = dataSet2.Tables["Banks"].Rows[0][1].ToString();
@@ -2509,9 +2523,9 @@ namespace WindowsFormsApp1
                     dataSet.WriteXml("Bank.xml");
                 }
             }
-            else if (cboBank.SelectedIndex == 10)
+            else if (cboBankSelectedIndex == 10)
             {
-                if (cboOrID.SelectedIndex == 0)
+                if (cboOrIDSelectedIndex == 0)
                 {
                     row1["CompanyName"] = dataSet2.Tables["Banks"].Rows[0][0].ToString();
                     row1["CompanyBankNumber"] = dataSet2.Tables["Banks"].Rows[0][1].ToString();
@@ -2870,7 +2884,7 @@ namespace WindowsFormsApp1
             }
             else if (cboBankSelectedIndex == 9)
             {
-                if (cboOrID.SelectedIndex == 0)
+                if (cboOrIDSelectedIndex == 0)
                 {
                     DataSet dataSet2 = new DataSet();
                     dataSet2.ReadXml("Bank.xml");

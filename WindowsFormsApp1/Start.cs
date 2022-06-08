@@ -27,7 +27,7 @@ namespace WindowsFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Form1 form1 = new Form1(dt,cboBank.SelectedIndex,cboOrID.SelectedIndex);
+            Form1 form1 = new Form1(dt,cboBank.SelectedIndex,cboOrID.SelectedIndex, cboBank.Text,cboOrID.Text, textBox1.Text);
             form1.Show();
 
         }
