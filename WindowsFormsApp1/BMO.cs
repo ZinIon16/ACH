@@ -18,12 +18,13 @@ namespace WindowsFormsApp1
             String CompanyName2;
             string PrefixVar = "";
 
-            string NoOfDays;
+            DateTime datetime;
 
             //FileNumber and Number of Days
             FileNo = "0000" + FileNo;
             FileNo = FileNo.Substring(FileNo.Length - 4);
-            NoOfDays = (DateTime.Now.DayOfYear).ToString();
+            datetime = Convert.ToDateTime(NoOfDays);
+            NoOfDays = datetime.DayOfYear.ToString();
             NoOfDays = "000" + NoOfDays;
             NoOfDays = NoOfDays.Substring(NoOfDays.Length - 3);
 
@@ -180,7 +181,7 @@ namespace WindowsFormsApp1
                             if (dt.Rows[i][j].ToString() == "Amount")
                             {
                                 Amount = (dt.Rows[k][j].ToString());
-                                Am = ((Convert.ToInt64(Convert.ToDecimal(Amount) * 100)));
+                                Am = ((Convert.ToInt64(Convert.ToDecimal(Amount)*100)));
                                 Amount = "0000000000" + (Am).ToString();
                                 Amount = Amount.Substring(Amount.Length - 10);
                                 base.Record = base.Record.Replace("AMOUNT_IND", Amount);

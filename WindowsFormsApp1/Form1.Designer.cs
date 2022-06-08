@@ -34,12 +34,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.txtFilename = new System.Windows.Forms.Label();
-            this.cboSheet = new System.Windows.Forms.ComboBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.txtSheet = new System.Windows.Forms.Label();
             this.btnExport = new System.Windows.Forms.Button();
             this.txtBank = new System.Windows.Forms.Label();
-            this.cboBank = new System.Windows.Forms.ComboBox();
             this.lblAcc = new System.Windows.Forms.Label();
             this.lblFileNo = new System.Windows.Forms.Label();
             this.txtAcc = new System.Windows.Forms.TextBox();
@@ -66,6 +64,10 @@
             this.lblTotAmount = new System.Windows.Forms.Label();
             this.TotAmount = new System.Windows.Forms.Label();
             this.btnDelete = new System.Windows.Forms.Button();
+            this.lblDate = new System.Windows.Forms.Label();
+            this.txtDate = new System.Windows.Forms.DateTimePicker();
+            this.cboSheet = new System.Windows.Forms.ComboBox();
+            this.cboBank = new System.Windows.Forms.ComboBox();
             btnBrowse = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -81,7 +83,6 @@
             btnBrowse.TabIndex = 0;
             btnBrowse.Text = "Browse..";
             btnBrowse.UseVisualStyleBackColor = false;
-            btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
             // dataGridView1
             // 
@@ -110,16 +111,6 @@
             this.txtFilename.Size = new System.Drawing.Size(51, 13);
             this.txtFilename.TabIndex = 2;
             this.txtFilename.Text = "FileName";
-            // 
-            // cboSheet
-            // 
-            this.cboSheet.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.cboSheet.FormattingEnabled = true;
-            this.cboSheet.Location = new System.Drawing.Point(122, 335);
-            this.cboSheet.Name = "cboSheet";
-            this.cboSheet.Size = new System.Drawing.Size(100, 21);
-            this.cboSheet.TabIndex = 3;
-            this.cboSheet.SelectedIndexChanged += new System.EventHandler(this.cboSheet_SelectedIndexChanged);
             // 
             // textBox1
             // 
@@ -162,17 +153,6 @@
             this.txtBank.Size = new System.Drawing.Size(63, 13);
             this.txtBank.TabIndex = 7;
             this.txtBank.Text = "Bank Name";
-            // 
-            // cboBank
-            // 
-            this.cboBank.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.cboBank.DropDownWidth = 280;
-            this.cboBank.FormattingEnabled = true;
-            this.cboBank.Location = new System.Drawing.Point(681, 335);
-            this.cboBank.Name = "cboBank";
-            this.cboBank.Size = new System.Drawing.Size(100, 21);
-            this.cboBank.TabIndex = 8;
-            this.cboBank.SelectedIndexChanged += new System.EventHandler(this.cboBank_SelectedIndexChanged);
             // 
             // lblAcc
             // 
@@ -376,7 +356,6 @@
             this.cboOrID.Size = new System.Drawing.Size(100, 21);
             this.cboOrID.TabIndex = 33;
             this.cboOrID.Visible = false;
-            this.cboOrID.SelectedIndexChanged += new System.EventHandler(this.cboOrID_SelectedIndexChanged);
             // 
             // lblFileType
             // 
@@ -425,12 +404,51 @@
             this.btnDelete.UseVisualStyleBackColor = false;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click_1);
             // 
+            // lblDate
+            // 
+            this.lblDate.AutoSize = true;
+            this.lblDate.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.lblDate.Location = new System.Drawing.Point(483, 339);
+            this.lblDate.Name = "lblDate";
+            this.lblDate.Size = new System.Drawing.Size(30, 13);
+            this.lblDate.TabIndex = 40;
+            this.lblDate.Text = "Date";
+            // 
+            // txtDate
+            // 
+            this.txtDate.CalendarMonthBackground = System.Drawing.SystemColors.ActiveCaption;
+            this.txtDate.Location = new System.Drawing.Point(486, 365);
+            this.txtDate.Name = "txtDate";
+            this.txtDate.Size = new System.Drawing.Size(120, 20);
+            this.txtDate.TabIndex = 41;
+            // 
+            // cboSheet
+            // 
+            this.cboSheet.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.cboSheet.FormattingEnabled = true;
+            this.cboSheet.Location = new System.Drawing.Point(122, 335);
+            this.cboSheet.Name = "cboSheet";
+            this.cboSheet.Size = new System.Drawing.Size(100, 21);
+            this.cboSheet.TabIndex = 3;
+            // 
+            // cboBank
+            // 
+            this.cboBank.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.cboBank.DropDownWidth = 280;
+            this.cboBank.FormattingEnabled = true;
+            this.cboBank.Location = new System.Drawing.Point(681, 335);
+            this.cboBank.Name = "cboBank";
+            this.cboBank.Size = new System.Drawing.Size(100, 21);
+            this.cboBank.TabIndex = 8;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(794, 450);
+            this.Controls.Add(this.txtDate);
+            this.Controls.Add(this.lblDate);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.TotAmount);
             this.Controls.Add(this.lblTotAmount);
@@ -482,12 +500,10 @@
 
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label txtFilename;
-        private System.Windows.Forms.ComboBox cboSheet;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label txtSheet;
         private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.Label txtBank;
-        private System.Windows.Forms.ComboBox cboBank;
         private System.Windows.Forms.Label lblAcc;
         private System.Windows.Forms.Label lblFileNo;
         private System.Windows.Forms.TextBox txtAcc;
@@ -514,6 +530,10 @@
         private System.Windows.Forms.Label lblTotAmount;
         private System.Windows.Forms.Label TotAmount;
         private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Label lblDate;
+        private System.Windows.Forms.DateTimePicker txtDate;
+        private System.Windows.Forms.ComboBox cboSheet;
+        private System.Windows.Forms.ComboBox cboBank;
     }
 }
 

@@ -11,71 +11,23 @@ namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
-        public Form1()
+        DataTable dt;
+        int cboBankSelectedIndex, cboOrIDSelectedIndex;
+        public Form1(DataTable dt, int bankindex, int filetindex)
         {
             InitializeComponent();
+            this.dt= dt;
+            this.cboBankSelectedIndex= bankindex;
+            this.cboOrIDSelectedIndex = filetindex;
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             btnUpdate.Enabled = false;
-        }
-
-        private bool ExportBtnClicked = false;
-        private DataTableCollection tableCollection;
-
-        private void btnBrowse_Click(object sender, EventArgs e)
-        {
-            //Allowing user to choose the excel file
-            using (OpenFileDialog dlg = new OpenFileDialog() { Filter = "Excel Workbook|*.xlsx" })
-            {
-                if (dlg.ShowDialog() == DialogResult.OK)
-                {
-                    textBox1.Text = dlg.FileName;
-                    using (var stream = File.Open(dlg.FileName, FileMode.Open, FileAccess.Read))
-                    {
-                        using (IExcelDataReader reader = ExcelReaderFactory.CreateReader(stream))
-                        {
-                            DataSet result = reader.AsDataSet(new ExcelDataSetConfiguration()
-                            {
-                                ConfigureDataTable = ExcelDataReader => new ExcelDataTableConfiguration()
-                                {
-                                    UseHeaderRow = false
-                                }
-                            });
-                            tableCollection = result.Tables;
-                            cboSheet.Items.Clear();
-                            foreach (DataTable table in tableCollection)
-                                cboSheet.Items.Add(table.TableName);
-                            //Adding items in combo boxes
-                            cboBank.Items.Clear();
-                            cboBank.Items.Add("MBE POS INC");
-                            cboBank.Items.Add("MB ENTERPIRSES RBC");
-                            cboBank.Items.Add("MB ENTERPIRSES");
-                            cboBank.Items.Add("2570993 ONT INC DEBIT EFT");
-                            cboBank.Items.Add("2570993 ONTARIO INC OR THE SENATORS HOTEL");
-                            cboBank.Items.Add("GLOBAL PROCESSING CENTRE");
-                            cboBank.Items.Add("GREAT POS");
-                            cboBank.Items.Add("MANSOOR BROTHER ENT 744");
-                            cboBank.Items.Add("MBBP");
-                            cboBank.Items.Add("MBE US ACCOUNT");
-                            cboBank.Items.Add("M-RIDES");
-                            cboOrID.Items.Clear();
-                            cboOrID.Items.Add("Credit");
-                            cboOrID.Items.Add("Debit");
-                            cboOrID.Text = "Credit/Debit";
-                        }
-                    }
-                }
-            }
-        }
-
-        private void cboSheet_SelectedIndexChanged(object sender, EventArgs e)
-        {
+            dataGridView1.DataSource = dt;
             lblTotAmount.Visible = true;
             TotAmount.Visible = true;
-            //Getting the excel sheet data inside the data table so that we can display it in grid view
-            DataTable dt = tableCollection[cboSheet.SelectedItem.ToString()];
+
 
             long TotalAmount = 0;
             decimal Total = 0;
@@ -97,73 +49,8 @@ namespace WindowsFormsApp1
             Total = Total / 100;
             TotAmount.Text = Total.ToString();
 
-            dataGridView1.DataSource = dt;
-            bool error = false;
 
-            //Validation Check for Amount
-            for (int i = 0; i < (dt.Rows.Count); i++)
-            {
-                for (int j = 0; j < (dt.Columns.Count); j++)
-                {
-                    if (dt.Rows[i][j].ToString() == "Amount" || dt.Rows[i][j].ToString() == "Account")
-                    {
-                        for (int x = i + 1; x < dt.Rows.Count; x++)
-                        {
-                            if (dataGridView1.Rows[x].Cells[j].Value.ToString().Contains(" ") == true)
-                            {
-                                error = true;
-                                dataGridView1.Rows[x].Cells[j].Style.ForeColor = Color.Red;
-                            }
-                        }
-                    }
-                }
-            }
-            if (error == true)
-            {
-                DialogResult result = MessageBox.Show("Highlighted field(s) have white spaces, do you want to make changes?", " Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (result == DialogResult.Yes)
-                {
-                    //nothing
-                }
-                else
-                {
-                    MessageBox.Show("Click on Export to proceed!", "Click on OK");
-                }
-            }
-
-            //Validation check for TransitCode
-            error = false;
-            for (int i = 0; i < ((dt.Rows.Count) - 1); i++)
-            {
-                for (int j = 0; j < (dt.Columns.Count); j++)
-                {
-                    if (dt.Rows[i][j].ToString() == "TransitCode")
-                    {
-                        for (int x = i + 1; x < ((dt.Rows.Count) - 1); x++)
-                        {
-                            if (dataGridView1.Rows[x].Cells[j].Value == null)
-                            {
-                                break;
-                            }
-                            if (dataGridView1.Rows[x].Cells[j].Value.ToString() != "TransitCode")
-                            {
-                                if (dataGridView1.Rows[x].Cells[j].Value.ToString().Length != 9)
-                                {
-                                    error = true;
-                                    btnExport.Enabled = false;
-                                    btnUpdate.Enabled = true;
-                                    dataGridView1.Rows[x].Cells[j].Style.ForeColor = Color.Red;
-                                    dataGridView1.Rows[x].Cells[j].Value = dataGridView1.Rows[x].Cells[j].Value.ToString() + "*";
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            if (error == true)
-            {
-                MessageBox.Show("The Transit Code must be of 9 digits, change it and then click on" + "Update Button" + " in order to proceed!", " Transit Code Error");
-            }
+            
 
             //Checking if file doesn't exist. If it doesn't exists then the program will create the file automatically.
             DataSet dataSet = new DataSet();
@@ -433,16 +320,79 @@ namespace WindowsFormsApp1
                 row11["FileNumber"] = "";
 
                 dataSet.WriteXml("Bank.xml");
+
+                
             }
+            DisplayBank();
+            GetOriginiatorID();
         }
+
+        private bool ExportBtnClicked = false;
+        //private DataTableCollection tableCollection;
+
+        //private void btnBrowse_Click(object sender, EventArgs e)
+        //{
+        //    //Allowing user to choose the excel file
+        //    using (OpenFileDialog dlg = new OpenFileDialog() { Filter = "Excel Workbook|*.xlsx" })
+        //    {
+        //        if (dlg.ShowDialog() == DialogResult.OK)
+        //        {
+        //            textBox1.Text = dlg.FileName;
+        //            using (var stream = File.Open(dlg.FileName, FileMode.Open, FileAccess.Read))
+        //            {
+        //                using (IExcelDataReader reader = ExcelReaderFactory.CreateReader(stream))
+        //                {
+        //                    DataSet result = reader.AsDataSet(new ExcelDataSetConfiguration()
+        //                    {
+        //                        ConfigureDataTable = ExcelDataReader => new ExcelDataTableConfiguration()
+        //                        {
+        //                            UseHeaderRow = false
+        //                        }
+        //                    });
+        //                    tableCollection = result.Tables;
+        //                    cboSheet.Items.Clear();
+        //                    foreach (DataTable table in tableCollection)
+        //                        cboSheet.Items.Add(table.TableName);
+        //                    //Adding items in combo boxes
+        //                    cboBank.Items.Clear();
+        //                    cboBank.Items.Add("MBE POS INC");
+        //                    cboBank.Items.Add("MB ENTERPIRSES RBC");
+        //                    cboBank.Items.Add("MB ENTERPIRSES");
+        //                    cboBank.Items.Add("2570993 ONT INC DEBIT EFT");
+        //                    cboBank.Items.Add("2570993 ONTARIO INC OR THE SENATORS HOTEL");
+        //                    cboBank.Items.Add("GLOBAL PROCESSING CENTRE");
+        //                    cboBank.Items.Add("GREAT POS");
+        //                    cboBank.Items.Add("MANSOOR BROTHER ENT 744");
+        //                    cboBank.Items.Add("MBBP");
+        //                    cboBank.Items.Add("MBE US ACCOUNT");
+        //                    cboBank.Items.Add("M-RIDES");
+        //                    cboOrID.Items.Clear();
+        //                    cboOrID.Items.Add("Credit");
+        //                    cboOrID.Items.Add("Debit");
+        //                    cboOrID.Text = "Credit/Debit";
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
+
+        //private void cboSheet_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+
+        //    //Getting the excel sheet data inside the data table so that we can display it in grid view
+        //    //DataTable dt = tableCollection[cboSheet.SelectedItem.ToString()];
+
+        //}
 
         private long FileNumber = 0;
 
-        private void cboBank_SelectedIndexChanged(object sender, EventArgs e)
+        public void DisplayBank()
         {
+
+            txtDate.Text = DateTime.Now.Date.ToString("d");
             cboOrID.Text = "Credit/Debit";
             txtOrID.Clear();
-            if (cboBank.SelectedIndex == 0)
+            if (cboBankSelectedIndex == 0)
             {
                 DataSet dataSet2 = new DataSet();
                 dataSet2.ReadXml("Bank.xml");
@@ -462,7 +412,7 @@ namespace WindowsFormsApp1
                     txtFileNo.Text = FileNumber.ToString();
                 }
             }
-            else if (cboBank.SelectedIndex == 1)
+            else if (cboBankSelectedIndex == 1)
             {
                 DataSet dataSet2 = new DataSet();
                 dataSet2.ReadXml("Bank.xml");
@@ -484,7 +434,7 @@ namespace WindowsFormsApp1
                     txtFileNo.Text = FileNumber.ToString();
                 }
             }
-            else if (cboBank.SelectedIndex == 2)
+            else if (cboBankSelectedIndex == 2)
             {
                 DataSet dataSet2 = new DataSet();
                 dataSet2.ReadXml("Bank.xml");
@@ -504,7 +454,7 @@ namespace WindowsFormsApp1
                     txtFileNo.Text = FileNumber.ToString();
                 }
             }
-            else if (cboBank.SelectedIndex == 3)
+            else if (cboBankSelectedIndex == 3)
             {
                 DataSet dataSet2 = new DataSet();
                 dataSet2.ReadXml("Bank.xml");
@@ -524,7 +474,7 @@ namespace WindowsFormsApp1
                     txtFileNo.Text = FileNumber.ToString();
                 }
             }
-            else if (cboBank.SelectedIndex == 4)
+            else if (cboBankSelectedIndex == 4)
             {
                 DataSet dataSet2 = new DataSet();
                 dataSet2.ReadXml("Bank.xml");
@@ -544,7 +494,7 @@ namespace WindowsFormsApp1
                     txtFileNo.Text = FileNumber.ToString();
                 }
             }
-            else if (cboBank.SelectedIndex == 5)
+            else if (cboBankSelectedIndex == 5)
             {
                 DataSet dataSet2 = new DataSet();
                 dataSet2.ReadXml("Bank.xml");
@@ -566,7 +516,7 @@ namespace WindowsFormsApp1
                     txtFileNo.Text = FileNumber.ToString();
                 }
             }
-            else if (cboBank.SelectedIndex == 6)
+            else if (cboBankSelectedIndex == 6)
             {
                 DataSet dataSet2 = new DataSet();
                 dataSet2.ReadXml("Bank.xml");
@@ -589,7 +539,7 @@ namespace WindowsFormsApp1
                 }
             }
 
-            if (cboBank.SelectedIndex == 7)
+            if (cboBankSelectedIndex == 7)
             {
                 DataSet dataSet2 = new DataSet();
                 dataSet2.ReadXml("Bank.xml");
@@ -610,7 +560,7 @@ namespace WindowsFormsApp1
                 }
             }
 
-            if (cboBank.SelectedIndex == 8)
+            if (cboBankSelectedIndex == 8)
             {
                 DataSet dataSet2 = new DataSet();
                 dataSet2.ReadXml("Bank.xml");
@@ -631,7 +581,7 @@ namespace WindowsFormsApp1
                 }
             }
 
-            if (cboBank.SelectedIndex == 9)
+            if (cboBankSelectedIndex == 9)
             {
                 DataSet dataSet2 = new DataSet();
                 dataSet2.ReadXml("Bank.xml");
@@ -652,7 +602,7 @@ namespace WindowsFormsApp1
                 }
             }
 
-            if (cboBank.SelectedIndex == 10)
+            if (cboBankSelectedIndex == 10)
             {
                 DataSet dataSet2 = new DataSet();
                 dataSet2.ReadXml("Bank.xml");
@@ -675,7 +625,7 @@ namespace WindowsFormsApp1
 
             //condition to check the bank and display originator id accordingly
 
-            if (cboBank.SelectedIndex == 0 || cboBank.SelectedIndex == 2 || cboBank.SelectedIndex == 3 || cboBank.SelectedIndex == 4 || cboBank.SelectedIndex == 7 || cboBank.SelectedIndex == 8 || cboBank.SelectedIndex == 9 || cboBank.SelectedIndex == 10)
+            if (cboBankSelectedIndex == 0 || cboBankSelectedIndex == 2 || cboBankSelectedIndex == 3 || cboBankSelectedIndex == 4 || cboBankSelectedIndex == 7 || cboBankSelectedIndex == 8 || cboBankSelectedIndex == 9 || cboBankSelectedIndex == 10)
             {
                 lblFileType.Visible = true;
                 cboOrID.Visible = true;
@@ -689,6 +639,7 @@ namespace WindowsFormsApp1
                 txtHeader.Visible = true;
                 lblHeader.Visible = true;
             }
+          
         }
 
         private void btnDelete_Click_1(object sender, EventArgs e)
@@ -701,6 +652,8 @@ namespace WindowsFormsApp1
 
         private void btnExport_Click(object sender, EventArgs e)
         {
+
+
             ExportBtnClicked = true;
             BankFile objBank = null;
             DataTable dt = (DataTable)dataGridView1.DataSource;
@@ -714,7 +667,14 @@ namespace WindowsFormsApp1
             {
                 objBank = new RBC();
             }
-
+            DateTime date;
+            date = Convert.ToDateTime(txtDate.Text);
+            if (date < DateTime.Now.Date)
+            {
+                MessageBox.Show("Please enter a valid date and then click on update");
+            }
+            else
+            {
             objBank.FileNo = txtFileNo.Text;
             objBank.CompanyBank = txtCBNo.Text;
             objBank.CompanyBranch = txtCBrNo.Text;
@@ -723,6 +683,7 @@ namespace WindowsFormsApp1
             objBank.DestinationDataCenter = txtlDesDataCenter.Text;
             objBank.OriginatorID = txtOrID.Text;
             objBank.CompanyName = txtCName.Text;
+            objBank.NoOfDays = txtDate.Text;
 
             if (cboOrID.SelectedIndex == 0)
             {
@@ -2765,148 +2726,149 @@ namespace WindowsFormsApp1
 
             objBank.Export(dt);
         }
+        }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            DataTable dt = (DataTable)dataGridView1.DataSource;
+            //    DataTable dt = (DataTable)dataGridView1.DataSource;
 
-            //Validation check for TransitCode after changes
-            int check = 0;
-            bool error = false;
-            for (int i = 0; i < (dt.Rows.Count); i++)
-            {
-                for (int j = 0; j < (dt.Columns.Count); j++)
-                {
-                    if (dt.Rows[i][j].ToString() == "TransitCode")
-                    {
-                        for (int x = i + 1; x < dt.Rows.Count; x++)
-                        {
-                            if (dataGridView1.Rows[x].Cells[j].Value == null)
-                            {
-                                break;
-                            }
-                            if (dataGridView1.Rows[x].Cells[j].Value.ToString() != "TransitCode")
-                            {
-                                if ((dataGridView1.Rows[x].Cells[j].Value.ToString().Length != 9) || dataGridView1.Rows[x].Cells[j].Value.ToString().Contains("*"))
-                                {
-                                    error = true;
-                                    btnExport.Enabled = false;
-                                    dataGridView1.Rows[x].Cells[j].Style.ForeColor = Color.Red;
-                                }
-                                else
-                                {
-                                    check = check + 1;
-                                    dataGridView1.Rows[x].Cells[j].Style.ForeColor = Color.Black;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            if (error == true)
-            {
-                MessageBox.Show("The Transit Code must be of 9 digits, change it and then click on" + "Update Button" + " in order to proceed!", " Transit Code Error");
-            }
-            if (dt.Rows.Count - 1 == check)
-            {
-                btnExport.Enabled = true;
-                MessageBox.Show("The Transit Code has been updated successfully!", " Success");
-            }
+            //    //Validation check for TransitCode after changes
+            //    int check = 0;
+            //    bool error = false;
+            //    for (int i = 0; i < (dt.Rows.Count); i++)
+            //    {
+            //        for (int j = 0; j < (dt.Columns.Count); j++)
+            //        {
+            //            if (dt.Rows[i][j].ToString() == "TransitCode")
+            //            {
+            //                for (int x = i + 1; x < dt.Rows.Count; x++)
+            //                {
+            //                    if (dataGridView1.Rows[x].Cells[j].Value == null)
+            //                    {
+            //                        break;
+            //                    }
+            //                    if (dataGridView1.Rows[x].Cells[j].Value.ToString() != "TransitCode")
+            //                    {
+            //                        if ((dataGridView1.Rows[x].Cells[j].Value.ToString().Length != 9) || dataGridView1.Rows[x].Cells[j].Value.ToString().Contains("*"))
+            //                        {
+            //                            error = true;
+            //                            btnExport.Enabled = false;
+            //                            dataGridView1.Rows[x].Cells[j].Style.ForeColor = Color.Red;
+            //                        }
+            //                        else
+            //                        {
+            //                            check = check + 1;
+            //                            dataGridView1.Rows[x].Cells[j].Style.ForeColor = Color.Black;
+            //                        }
+            //                    }
+            //                }
+            //            }
+            //        }
+            //    }
+            //    if (error == true)
+            //    {
+            //        MessageBox.Show("The Transit Code must be of 9 digits, change it and then click on" + "Update Button" + " in order to proceed!", " Transit Code Error");
+            //    }
+            //    if (dt.Rows.Count - 1 == check)
+            //    {
+            //        btnExport.Enabled = true;
+            //        MessageBox.Show("The Transit Code has been updated successfully!", " Success");
+            //    }
         }
 
-        private void cboOrID_SelectedIndexChanged(object sender, EventArgs e)
+        private void GetOriginiatorID()
         {
-            if (cboBank.SelectedIndex == 0)
+            if (cboBankSelectedIndex == 0)
             {
-                if (cboOrID.SelectedIndex == 0)
+                if (cboOrIDSelectedIndex == 0)
                 {
                     DataSet dataSet2 = new DataSet();
                     dataSet2.ReadXml("Bank.xml");
                     txtOrID.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[0][7].ToString());
                 }
-                else if (cboOrID.SelectedIndex == 1)
+                else if (cboOrIDSelectedIndex == 1)
                 {
                     DataSet dataSet2 = new DataSet();
                     dataSet2.ReadXml("Bank.xml");
                     txtOrID.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[0][8].ToString());
                 }
             }
-            else if (cboBank.SelectedIndex == 2)
+            else if (cboBankSelectedIndex == 2)
             {
-                if (cboOrID.SelectedIndex == 0)
+                if (cboOrIDSelectedIndex == 0)
                 {
                     DataSet dataSet2 = new DataSet();
                     dataSet2.ReadXml("Bank.xml");
                     txtOrID.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[2][7].ToString());
                 }
-                else if (cboOrID.SelectedIndex == 1)
+                else if (cboOrIDSelectedIndex == 1)
                 {
                     DataSet dataSet2 = new DataSet();
                     dataSet2.ReadXml("Bank.xml");
                     txtOrID.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[2][8].ToString());
                 }
             }
-            else if (cboBank.SelectedIndex == 3)
+            else if (cboBankSelectedIndex == 3)
             {
-                if (cboOrID.SelectedIndex == 0)
+                if (cboOrIDSelectedIndex == 0)
                 {
                     DataSet dataSet2 = new DataSet();
                     dataSet2.ReadXml("Bank.xml");
                     txtOrID.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[3][7].ToString());
                 }
-                else if (cboOrID.SelectedIndex == 1)
+                else if (cboOrIDSelectedIndex == 1)
                 {
                     DataSet dataSet2 = new DataSet();
                     dataSet2.ReadXml("Bank.xml");
                     txtOrID.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[3][8].ToString());
                 }
             }
-            else if (cboBank.SelectedIndex == 4)
+            else if (cboBankSelectedIndex == 4)
             {
-                if (cboOrID.SelectedIndex == 0)
+                if (cboOrIDSelectedIndex == 0)
                 {
                     DataSet dataSet2 = new DataSet();
                     dataSet2.ReadXml("Bank.xml");
                     txtOrID.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[4][7].ToString());
                 }
-                else if (cboOrID.SelectedIndex == 1)
+                else if (cboOrIDSelectedIndex == 1)
                 {
                     DataSet dataSet2 = new DataSet();
                     dataSet2.ReadXml("Bank.xml");
                     txtOrID.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[4][8].ToString());
                 }
             }
-            else if (cboBank.SelectedIndex == 7)
+            else if (cboBankSelectedIndex == 7)
             {
-                if (cboOrID.SelectedIndex == 0)
+                if (cboOrIDSelectedIndex == 0)
                 {
                     DataSet dataSet2 = new DataSet();
                     dataSet2.ReadXml("Bank.xml");
                     txtOrID.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[7][7].ToString());
                 }
-                else if (cboOrID.SelectedIndex == 1)
+                else if (cboOrIDSelectedIndex == 1)
                 {
                     DataSet dataSet2 = new DataSet();
                     dataSet2.ReadXml("Bank.xml");
                     txtOrID.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[7][8].ToString());
                 }
             }
-            else if (cboBank.SelectedIndex == 8)
+            else if (cboBankSelectedIndex == 8)
             {
-                if (cboOrID.SelectedIndex == 0)
+                if (cboOrIDSelectedIndex == 0)
                 {
                     DataSet dataSet2 = new DataSet();
                     dataSet2.ReadXml("Bank.xml");
                     txtOrID.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[8][7].ToString());
                 }
-                else if (cboOrID.SelectedIndex == 1)
+                else if (cboOrIDSelectedIndex == 1)
                 {
                     DataSet dataSet2 = new DataSet();
                     dataSet2.ReadXml("Bank.xml");
                     txtOrID.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[8][8].ToString());
                 }
             }
-            else if (cboBank.SelectedIndex == 9)
+            else if (cboBankSelectedIndex == 9)
             {
                 if (cboOrID.SelectedIndex == 0)
                 {
@@ -2914,22 +2876,22 @@ namespace WindowsFormsApp1
                     dataSet2.ReadXml("Bank.xml");
                     txtOrID.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[9][7].ToString());
                 }
-                else if (cboOrID.SelectedIndex == 1)
+                else if (cboOrIDSelectedIndex == 1)
                 {
                     DataSet dataSet2 = new DataSet();
                     dataSet2.ReadXml("Bank.xml");
                     txtOrID.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[9][8].ToString());
                 }
             }
-            else if (cboBank.SelectedIndex == 10)
+            else if (cboBankSelectedIndex == 10)
             {
-                if (cboOrID.SelectedIndex == 0)
+                if (cboOrIDSelectedIndex == 0)
                 {
                     DataSet dataSet2 = new DataSet();
                     dataSet2.ReadXml("Bank.xml");
                     txtOrID.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[10][7].ToString());
                 }
-                else if (cboOrID.SelectedIndex == 1)
+                else if (cboOrIDSelectedIndex == 1)
                 {
                     DataSet dataSet2 = new DataSet();
                     dataSet2.ReadXml("Bank.xml");

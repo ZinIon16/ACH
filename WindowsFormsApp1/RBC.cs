@@ -14,7 +14,7 @@ namespace WindowsFormsApp1
             int FalseRows = (dt.Rows.Count - 1);
             string Rows = (FalseRows.ToString());
             long TotalAmount = 0;
-            string NoOfDays;
+            DateTime datetime;
             int CountRec = 0;
             string TotRec = "000000000" + CountRec.ToString();
             TotRec = TotRec.Substring(TotRec.Length - 9);
@@ -22,7 +22,8 @@ namespace WindowsFormsApp1
             //FileNumber and Number of Days
             FileNo = "0000" + FileNo;
             FileNo = FileNo.Substring(FileNo.Length - 4);
-            NoOfDays = (DateTime.Now.DayOfYear).ToString();
+            datetime = Convert.ToDateTime(NoOfDays);
+            NoOfDays = datetime.DayOfYear.ToString();
             NoOfDays = "000" + NoOfDays;
             NoOfDays = NoOfDays.Substring(NoOfDays.Length - 3);
 
@@ -171,7 +172,7 @@ namespace WindowsFormsApp1
                             {
                                 Amount = (dt.Rows[k][j].ToString());
                                 Am = ((Convert.ToInt64(Convert.ToDecimal(Amount) * 100)));
-                                Amount = "0000000000" + (Am * 100).ToString();
+                                Amount = "0000000000" + (Am).ToString();
                                 Amount = Amount.Substring(Amount.Length - 10);
                                 //base.Record = "TCOAMOUNT_IND022088TRANSITCOACCOUNTNUMBER     0000000000000000000000000MB STARTOFENTITYNAMEENDOFENTITYNAME      MB ENTERPRISES I              2689620000STARTOFENTITYNAMEENDOFENTITYNAME0003000021139658     000000000000000                        ";
                                 base.Record = base.Record.Replace("AMOUNT_IND", Amount);
