@@ -62,6 +62,8 @@
             this.txtDate = new System.Windows.Forms.DateTimePicker();
             this.txtBankName = new System.Windows.Forms.TextBox();
             this.txtFileType = new System.Windows.Forms.TextBox();
+            this.btnRefresh = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -101,7 +103,7 @@
             // 
             this.txtBank.AutoSize = true;
             this.txtBank.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.txtBank.Location = new System.Drawing.Point(612, 311);
+            this.txtBank.Location = new System.Drawing.Point(612, 300);
             this.txtBank.Name = "txtBank";
             this.txtBank.Size = new System.Drawing.Size(63, 13);
             this.txtBank.TabIndex = 7;
@@ -111,7 +113,7 @@
             // 
             this.lblAcc.AutoSize = true;
             this.lblAcc.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblAcc.Location = new System.Drawing.Point(277, 378);
+            this.lblAcc.Location = new System.Drawing.Point(277, 367);
             this.lblAcc.Name = "lblAcc";
             this.lblAcc.Size = new System.Drawing.Size(94, 13);
             this.lblAcc.TabIndex = 9;
@@ -121,7 +123,7 @@
             // 
             this.lblFileNo.AutoSize = true;
             this.lblFileNo.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblFileNo.Location = new System.Drawing.Point(612, 344);
+            this.lblFileNo.Location = new System.Drawing.Point(612, 333);
             this.lblFileNo.Name = "lblFileNo";
             this.lblFileNo.Size = new System.Drawing.Size(63, 13);
             this.lblFileNo.TabIndex = 11;
@@ -130,7 +132,7 @@
             // txtAcc
             // 
             this.txtAcc.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.txtAcc.Location = new System.Drawing.Point(377, 370);
+            this.txtAcc.Location = new System.Drawing.Point(377, 359);
             this.txtAcc.Name = "txtAcc";
             this.txtAcc.Size = new System.Drawing.Size(100, 20);
             this.txtAcc.TabIndex = 12;
@@ -138,7 +140,7 @@
             // txtFileNo
             // 
             this.txtFileNo.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.txtFileNo.Location = new System.Drawing.Point(681, 338);
+            this.txtFileNo.Location = new System.Drawing.Point(681, 327);
             this.txtFileNo.Name = "txtFileNo";
             this.txtFileNo.Size = new System.Drawing.Size(100, 20);
             this.txtFileNo.TabIndex = 14;
@@ -147,7 +149,7 @@
             // 
             this.lblOrID.AutoSize = true;
             this.lblOrID.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblOrID.Location = new System.Drawing.Point(305, 345);
+            this.lblOrID.Location = new System.Drawing.Point(305, 334);
             this.lblOrID.Name = "lblOrID";
             this.lblOrID.Size = new System.Drawing.Size(66, 13);
             this.lblOrID.TabIndex = 15;
@@ -156,7 +158,7 @@
             // txtOrID
             // 
             this.txtOrID.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.txtOrID.Location = new System.Drawing.Point(377, 341);
+            this.txtOrID.Location = new System.Drawing.Point(377, 330);
             this.txtOrID.Name = "txtOrID";
             this.txtOrID.Size = new System.Drawing.Size(100, 20);
             this.txtOrID.TabIndex = 16;
@@ -165,7 +167,7 @@
             // 
             this.labelDesDataCenter.AutoSize = true;
             this.labelDesDataCenter.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.labelDesDataCenter.Location = new System.Drawing.Point(555, 377);
+            this.labelDesDataCenter.Location = new System.Drawing.Point(555, 366);
             this.labelDesDataCenter.Name = "labelDesDataCenter";
             this.labelDesDataCenter.Size = new System.Drawing.Size(120, 13);
             this.labelDesDataCenter.TabIndex = 17;
@@ -174,7 +176,7 @@
             // txtlDesDataCenter
             // 
             this.txtlDesDataCenter.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.txtlDesDataCenter.Location = new System.Drawing.Point(681, 371);
+            this.txtlDesDataCenter.Location = new System.Drawing.Point(681, 360);
             this.txtlDesDataCenter.Name = "txtlDesDataCenter";
             this.txtlDesDataCenter.Size = new System.Drawing.Size(100, 20);
             this.txtlDesDataCenter.TabIndex = 18;
@@ -183,7 +185,7 @@
             // 
             this.lblHeader.AutoSize = true;
             this.lblHeader.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblHeader.Location = new System.Drawing.Point(633, 410);
+            this.lblHeader.Location = new System.Drawing.Point(633, 399);
             this.lblHeader.Name = "lblHeader";
             this.lblHeader.Size = new System.Drawing.Size(42, 13);
             this.lblHeader.TabIndex = 19;
@@ -192,7 +194,7 @@
             // txtHeader
             // 
             this.txtHeader.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.txtHeader.Location = new System.Drawing.Point(681, 404);
+            this.txtHeader.Location = new System.Drawing.Point(681, 393);
             this.txtHeader.Name = "txtHeader";
             this.txtHeader.Size = new System.Drawing.Size(100, 20);
             this.txtHeader.TabIndex = 20;
@@ -200,7 +202,7 @@
             // txtCName
             // 
             this.txtCName.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.txtCName.Location = new System.Drawing.Point(122, 338);
+            this.txtCName.Location = new System.Drawing.Point(122, 327);
             this.txtCName.Name = "txtCName";
             this.txtCName.Size = new System.Drawing.Size(100, 20);
             this.txtCName.TabIndex = 21;
@@ -209,7 +211,7 @@
             // 
             this.lblCName.AutoSize = true;
             this.lblCName.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblCName.Location = new System.Drawing.Point(11, 344);
+            this.lblCName.Location = new System.Drawing.Point(11, 333);
             this.lblCName.Name = "lblCName";
             this.lblCName.Size = new System.Drawing.Size(82, 13);
             this.lblCName.TabIndex = 22;
@@ -219,7 +221,7 @@
             // 
             this.lblCBrNo.AutoSize = true;
             this.lblCBrNo.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblCBrNo.Location = new System.Drawing.Point(12, 410);
+            this.lblCBrNo.Location = new System.Drawing.Point(12, 399);
             this.lblCBrNo.Name = "lblCBrNo";
             this.lblCBrNo.Size = new System.Drawing.Size(108, 13);
             this.lblCBrNo.TabIndex = 25;
@@ -229,7 +231,7 @@
             // 
             this.lblCBNo.AutoSize = true;
             this.lblCBNo.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblCBNo.Location = new System.Drawing.Point(11, 377);
+            this.lblCBNo.Location = new System.Drawing.Point(11, 366);
             this.lblCBNo.Name = "lblCBNo";
             this.lblCBNo.Size = new System.Drawing.Size(99, 13);
             this.lblCBNo.TabIndex = 26;
@@ -238,7 +240,7 @@
             // txtCBrNo
             // 
             this.txtCBrNo.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.txtCBrNo.Location = new System.Drawing.Point(122, 404);
+            this.txtCBrNo.Location = new System.Drawing.Point(122, 393);
             this.txtCBrNo.Name = "txtCBrNo";
             this.txtCBrNo.Size = new System.Drawing.Size(100, 20);
             this.txtCBrNo.TabIndex = 27;
@@ -246,7 +248,7 @@
             // txtCBNo
             // 
             this.txtCBNo.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.txtCBNo.Location = new System.Drawing.Point(122, 371);
+            this.txtCBNo.Location = new System.Drawing.Point(122, 360);
             this.txtCBNo.Name = "txtCBNo";
             this.txtCBNo.Size = new System.Drawing.Size(100, 20);
             this.txtCBNo.TabIndex = 28;
@@ -281,7 +283,7 @@
             // 
             this.lblOrIDBMO.AutoSize = true;
             this.lblOrIDBMO.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblOrIDBMO.Location = new System.Drawing.Point(305, 344);
+            this.lblOrIDBMO.Location = new System.Drawing.Point(305, 333);
             this.lblOrIDBMO.Name = "lblOrIDBMO";
             this.lblOrIDBMO.Size = new System.Drawing.Size(66, 13);
             this.lblOrIDBMO.TabIndex = 32;
@@ -291,7 +293,7 @@
             // 
             this.lblFileType.AutoSize = true;
             this.lblFileType.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblFileType.Location = new System.Drawing.Point(12, 311);
+            this.lblFileType.Location = new System.Drawing.Point(12, 300);
             this.lblFileType.Name = "lblFileType";
             this.lblFileType.Size = new System.Drawing.Size(50, 13);
             this.lblFileType.TabIndex = 34;
@@ -337,7 +339,7 @@
             // 
             this.lblDate.AutoSize = true;
             this.lblDate.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblDate.Location = new System.Drawing.Point(341, 312);
+            this.lblDate.Location = new System.Drawing.Point(341, 301);
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(30, 13);
             this.lblDate.TabIndex = 40;
@@ -347,7 +349,7 @@
             // 
             this.txtDate.CalendarForeColor = System.Drawing.Color.Aqua;
             this.txtDate.CalendarMonthBackground = System.Drawing.Color.AliceBlue;
-            this.txtDate.Location = new System.Drawing.Point(377, 306);
+            this.txtDate.Location = new System.Drawing.Point(377, 295);
             this.txtDate.Name = "txtDate";
             this.txtDate.Size = new System.Drawing.Size(187, 20);
             this.txtDate.TabIndex = 41;
@@ -355,7 +357,7 @@
             // txtBankName
             // 
             this.txtBankName.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.txtBankName.Location = new System.Drawing.Point(681, 305);
+            this.txtBankName.Location = new System.Drawing.Point(681, 294);
             this.txtBankName.Name = "txtBankName";
             this.txtBankName.Size = new System.Drawing.Size(100, 20);
             this.txtBankName.TabIndex = 42;
@@ -363,10 +365,32 @@
             // txtFileType
             // 
             this.txtFileType.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.txtFileType.Location = new System.Drawing.Point(122, 305);
+            this.txtFileType.Location = new System.Drawing.Point(122, 294);
             this.txtFileType.Name = "txtFileType";
             this.txtFileType.Size = new System.Drawing.Size(100, 20);
             this.txtFileType.TabIndex = 43;
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnRefresh.Image = ((System.Drawing.Image)(resources.GetObject("btnRefresh.Image")));
+            this.btnRefresh.Location = new System.Drawing.Point(57, 415);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(33, 35);
+            this.btnRefresh.TabIndex = 44;
+            this.btnRefresh.UseVisualStyleBackColor = false;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
+            // btnSave
+            // 
+            this.btnSave.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
+            this.btnSave.Location = new System.Drawing.Point(12, 415);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(39, 33);
+            this.btnSave.TabIndex = 45;
+            this.btnSave.UseVisualStyleBackColor = false;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // Form1
             // 
@@ -374,6 +398,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(794, 450);
+            this.Controls.Add(this.btnSave);
+            this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.txtFileType);
             this.Controls.Add(this.txtBankName);
             this.Controls.Add(this.txtDate);
@@ -450,6 +476,8 @@
         private System.Windows.Forms.DateTimePicker txtDate;
         private System.Windows.Forms.TextBox txtBankName;
         private System.Windows.Forms.TextBox txtFileType;
+        private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.Button btnSave;
     }
 }
 
