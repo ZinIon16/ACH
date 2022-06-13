@@ -1,8 +1,13 @@
-﻿using System.Data;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Data;
 
-namespace WindowsFormsApp1
+namespace BankFile
 {
-    internal abstract class BankFile
+    public abstract class BankFile
     {
         public string MainHeader;
         public string SubHeader;
