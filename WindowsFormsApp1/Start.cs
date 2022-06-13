@@ -238,7 +238,7 @@ namespace WindowsFormsApp1
                                 else
                                 {
                                     
-                                    check = check + 1;
+                                    check++;
                                     GridView.Rows[x].Cells[j].Style.ForeColor = Color.Black;
                                 }
                             }
@@ -281,7 +281,7 @@ namespace WindowsFormsApp1
                                 }
                                 else
                                 {
-                                    check = check + 1;
+                                    check++;
                                     GridView.Rows[x].Cells[j].Style.ForeColor = Color.Black;
                                 }
                             }
