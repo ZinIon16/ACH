@@ -1,13 +1,31 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Data;
 using System.IO;
 
-namespace WindowsFormsApp1
+namespace BMO
 {
-    internal class BMO : BankFile
+    public class BMO 
     {
-        public override void Export(DataTable dt)
+        public string MainHeader;
+        public string SubHeader;
+        public string TailPrefix;
+        public string Tail;
+        public string RecordPrefix;
+        public string Record;
+        public string spaces = "";
+        public string TotAmount = "";
+        public string FileNo, CompanyBank, CompanyBranch, CompanyAccount, Header, DestinationDataCenter, OriginatorID, CompanyName;
+        public string FileType;
+        public string FileName;
+        public string NoOfDays;
+
+        public void Export(DataTable dt)
         {
+
             FileName = Path.GetFileName(FileName);
             FileName = FileName.Replace(".xlsx", ".txt");
             StreamWriter File = new StreamWriter(FileName);
@@ -60,11 +78,11 @@ namespace WindowsFormsApp1
             //File Write
             //MAINHEADER
 
-            base.MainHeader = base.MainHeader.Replace("Originator", OriginatorID);
-            base.MainHeader = base.MainHeader.Replace("File", FileNo);
-            base.MainHeader = base.MainHeader.Replace("Day", NoOfDays);
-            base.MainHeader = base.MainHeader.Replace("DeDaC", DestinationDataCenter);
-            File.Write("A" + base.MainHeader);
+            MainHeader = MainHeader.Replace("Originator", OriginatorID);
+            MainHeader = MainHeader.Replace("File", FileNo);
+            MainHeader = MainHeader.Replace("Day", NoOfDays);
+            MainHeader = MainHeader.Replace("DeDaC", DestinationDataCenter);
+            File.Write("A" + MainHeader);
 
             //Prefix
             if (FileType == "C")
@@ -78,7 +96,7 @@ namespace WindowsFormsApp1
 
             //SUBHEADER
             File.WriteLine("");
-            base.SubHeader = base.SubHeader.Replace("?", PrefixVar);
+            SubHeader = SubHeader.Replace("?", PrefixVar);
 
             //TRANSACTIONCODE
             for (int k = 1; k < ((dt.Rows.Count)); k++)
@@ -92,21 +110,21 @@ namespace WindowsFormsApp1
                             TransactionCode = (dt.Rows[k][j].ToString());
                             TransactionCode = "000" + TransactionCode;
                             TransactionCode = TransactionCode.Substring(TransactionCode.Length - 3);
-                            //base.Record = "TCOAMOUNTTT00022088TRANSITCOACCOUNTNUMBER     0000000000000000000000000MB STARTOFENTITYNAMEENDOFENTITYNAME      MB ENTERPRISES I              2689620000STARTOFENTITYNAMEENDOFENTITYNAME0003000021139658     000000000000000                        ";
-                            base.Record = base.Record.Replace("TCO", TransactionCode);
+                            //Record = "TCOAMOUNTTT00022088TRANSITCOACCOUNTNUMBER     0000000000000000000000000MB STARTOFENTITYNAMEENDOFENTITYNAME      MB ENTERPRISES I              2689620000STARTOFENTITYNAMEENDOFENTITYNAME0003000021139658     000000000000000                        ";
+                            Record = Record.Replace("TCO", TransactionCode);
                             //File.Write(TransactionCode);
                         }
                     }
                 }
             }
-            base.SubHeader = base.SubHeader.Replace("TCO", TransactionCode);
-            base.SubHeader = base.SubHeader.Replace("Day", NoOfDays);
-            base.SubHeader = base.SubHeader.Replace("CompanyNameName", CompanyName2);
-            base.SubHeader = base.SubHeader.Replace("CompanyName1234CompanyName1234", CompanyName);
-            base.SubHeader = base.SubHeader.Replace("Bank", CompanyBank);
-            base.SubHeader = base.SubHeader.Replace("Brnch", CompanyBranch);
-            base.SubHeader = base.SubHeader.Replace("Account", CompanyAccount);
-            File.Write(base.SubHeader);
+            SubHeader = SubHeader.Replace("TCO", TransactionCode);
+            SubHeader = SubHeader.Replace("Day", NoOfDays);
+            SubHeader = SubHeader.Replace("CompanyNameName", CompanyName2);
+            SubHeader = SubHeader.Replace("CompanyName1234CompanyName1234", CompanyName);
+            SubHeader = SubHeader.Replace("Bank", CompanyBank);
+            SubHeader = SubHeader.Replace("Brnch", CompanyBranch);
+            SubHeader = SubHeader.Replace("Account", CompanyAccount);
+            File.Write(SubHeader);
 
             //ROWS1
             Rows = "00000000" + Rows;
@@ -129,7 +147,7 @@ namespace WindowsFormsApp1
                 EntityID = "";
                 EntityName = "";
 
-                base.Record = "AMOUNT_INDTRANSITCOACCOUNT" + "EntityName" + "ID";
+                Record = "AMOUNT_INDTRANSITCOACCOUNT" + "EntityName" + "ID";
 
                 if (k > dt.Rows.Count - 1)
                 {
@@ -149,7 +167,7 @@ namespace WindowsFormsApp1
 
                                 AccountNumber = AccountNumber + "            ";
                                 AccountNumber = AccountNumber.Substring(0, 12);
-                                base.Record = base.Record.Replace("ACCOUNT", AccountNumber);
+                                Record = Record.Replace("ACCOUNT", AccountNumber);
 
                                 //File.Write(AccountNumber);
                             }
@@ -167,7 +185,7 @@ namespace WindowsFormsApp1
                                 TransitC = (dt.Rows[k][j].ToString());
                                 TransitC = "000000000" + TransitC;
                                 TransitC = TransitC.Substring(TransitC.Length - 9);
-                                base.Record = base.Record.Replace("TRANSITCO", TransitC);
+                                Record = Record.Replace("TRANSITCO", TransitC);
                             }
                         }
                     }
@@ -181,10 +199,10 @@ namespace WindowsFormsApp1
                             if (dt.Rows[i][j].ToString() == "Amount")
                             {
                                 Amount = (dt.Rows[k][j].ToString());
-                                Am = ((Convert.ToInt64(Convert.ToDecimal(Amount)*100)));
+                                Am = ((Convert.ToInt64(Convert.ToDecimal(Amount) * 100)));
                                 Amount = "0000000000" + (Am).ToString();
                                 Amount = Amount.Substring(Amount.Length - 10);
-                                base.Record = base.Record.Replace("AMOUNT_IND", Amount);
+                                Record = Record.Replace("AMOUNT_IND", Amount);
 
                                 //File.Write(Amount);
                             }
@@ -201,7 +219,7 @@ namespace WindowsFormsApp1
                                 EntityID = (dt.Rows[k][j].ToString());
                                 EntityID = EntityID + "                   ";
                                 EntityID = EntityID.Substring(0, 19);
-                                base.Record = base.Record.Replace("ID", EntityID);
+                                Record = Record.Replace("ID", EntityID);
 
                                 //File.Write(EntityID);
                             }
@@ -218,7 +236,7 @@ namespace WindowsFormsApp1
                                 EntityName = (dt.Rows[k][j].ToString());
                                 EntityName = EntityName + "                             ";
                                 EntityName = EntityName.Substring(0, 29);
-                                base.Record = base.Record.Replace("EntityName", EntityName);
+                                Record = Record.Replace("EntityName", EntityName);
 
                                 //File.Write(EntityName);
                             }
@@ -241,41 +259,42 @@ namespace WindowsFormsApp1
                     //    }
                     //}
                     File.WriteLine("");
-                    File.Write(PrefixVar + base.Record);
+                    File.Write(PrefixVar + Record);
                 }
             }
 
             //Tail Prefix
 
-            base.Tail = base.Tail.Replace("?", PrefixVar);
+            Tail = Tail.Replace("?", PrefixVar);
             //Insert
-            base.Tail = base.Tail.Insert(2, Rows);
-            base.Tail = base.Tail.Insert(10, TotAmount);
+            Tail = Tail.Insert(2, Rows);
+            Tail = Tail.Insert(10, TotAmount);
             if (FileType == "C")
             {
-                base.TailPrefix = base.TailPrefix.Insert(0, spaces.PadRight(19, '0'));
-                base.TailPrefix = base.TailPrefix.Insert(19, TotAmount);
-                base.TailPrefix = base.TailPrefix.Insert(TotAmount.Length + 19, Rows2);
+                TailPrefix = TailPrefix.Insert(0, spaces.PadRight(19, '0'));
+                TailPrefix = TailPrefix.Insert(19, TotAmount);
+                TailPrefix = TailPrefix.Insert(TotAmount.Length + 19, Rows2);
             }
             else if (FileType == "D")
             {
-                base.TailPrefix = base.TailPrefix.Insert(0, TotAmount);
-                base.TailPrefix = base.TailPrefix.Insert(TotAmount.Length + 0, Rows2);
-                base.TailPrefix = base.TailPrefix.Insert((TotAmount.Length + 0 + Rows2.Length), spaces.PadRight(19, '0'));
+                TailPrefix = TailPrefix.Insert(0, TotAmount);
+                TailPrefix = TailPrefix.Insert(TotAmount.Length + 0, Rows2);
+                TailPrefix = TailPrefix.Insert((TotAmount.Length + 0 + Rows2.Length), spaces.PadRight(19, '0'));
             }
             File.WriteLine("");
-            File.WriteLine(base.Tail);
-            File.WriteLine("Z" + base.TailPrefix);
+            File.WriteLine(Tail);
+            File.WriteLine("Z" + TailPrefix);
             File.Close();
         }
 
         public BMO()
         {
-            base.MainHeader = "OriginatorFile022DayDeDaC" + spaces.PadRight(54);
-            base.SubHeader = "X?TCO022Day" + "CompanyNameName" + "CompanyName1234CompanyName1234" + "BankBrnchAccount" + spaces.PadRight(8);
-            base.Record = "AMOUNT_INDTRANSITCOACCOUNT" + "EntityName" + "ID";
-            base.Tail = "Y?" + spaces.PadRight(56);
-            base.TailPrefix = spaces.PadRight(41);
+            MainHeader = "OriginatorFile022DayDeDaC" + spaces.PadRight(54);
+            SubHeader = "X?TCO022Day" + "CompanyNameName" + "CompanyName1234CompanyName1234" + "BankBrnchAccount" + spaces.PadRight(8);
+            Record = "AMOUNT_INDTRANSITCOACCOUNT" + "EntityName" + "ID";
+            Tail = "Y?" + spaces.PadRight(56);
+            TailPrefix = spaces.PadRight(41);
         }
     }
 }
+
