@@ -21,13 +21,17 @@ namespace WindowsFormsApp1
 
         private void Start_Load(object sender, EventArgs e)
         {
+            cboBankType.Items.Add("RBC");
+            cboBankType.Items.Add("BMO");
+            lblBankType.Visible = false;
+            cboBankType.Visible = false;
             cboSheet.Enabled = false;
             cboOrID.Enabled = false;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Form1 form1 = new Form1(dt,cboBank.SelectedIndex,cboOrID.SelectedIndex, cboBank.Text,cboOrID.Text, textBox1.Text);
+            Form1 form1 = new Form1(dt,cboBank.SelectedIndex,cboOrID.SelectedIndex, cboBank.Text,cboOrID.Text, textBox1.Text/*, cboBankType.SelectedIndex*/);
             form1.Show();
 
         }
@@ -57,17 +61,16 @@ namespace WindowsFormsApp1
                                 cboSheet.Items.Add(table.TableName);
                             //Adding items in combo boxes
                             cboBank.Items.Clear();
-                            cboBank.Items.Add("MBE POS INC");
-                            cboBank.Items.Add("MB ENTERPIRSES RBC");
-                            cboBank.Items.Add("MB ENTERPIRSES");
-                            cboBank.Items.Add("2570993 ONT INC DEBIT EFT");
-                            cboBank.Items.Add("2570993 ONTARIO INC OR THE SENATORS HOTEL");
-                            cboBank.Items.Add("GLOBAL PROCESSING CENTRE");
-                            cboBank.Items.Add("GREAT POS");
-                            cboBank.Items.Add("MANSOOR BROTHER ENT 744");
-                            cboBank.Items.Add("MBBP");
-                            cboBank.Items.Add("MBE US ACCOUNT");
-                            cboBank.Items.Add("M-RIDES");
+                            DataSet dataSet2 = new DataSet();
+                            dataSet2.ReadXml("Bank.xml");
+                            
+                            for(int x = 0; x < dataSet2.Tables["Banks"].Rows.Count; x++)
+                            {
+                                cboBank.Items.Add(Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[x][0].ToString()));
+                            }
+                            //cboBank.Items.Remove(Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[11][0].ToString()));
+                            cboBank.Items.Remove(Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[1][0].ToString()));
+                            cboBank.Items.Insert(1, "MB ENTERPRISES RBC");
                             cboOrID.Items.Clear();
                             cboOrID.Items.Add("Credit");
                             cboOrID.Items.Add("Debit");
@@ -197,6 +200,14 @@ namespace WindowsFormsApp1
 
         private void cboOrID_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //dt = tableCollection[cboSheet.SelectedItem.ToString()];
+
+            //GridView.DataSource = dt;
+
+            //cboSheet.Items.Clear();
+
+            GridView.DataSource = null;
+
             cboSheet.Enabled = true;
             if (cboOrID.SelectedIndex == 0)
             {
@@ -298,6 +309,30 @@ namespace WindowsFormsApp1
                 btnNext.Enabled = true;
                 MessageBox.Show("The Transit Code has been updated successfully!", " Success");
             }
+        }
+        string NewBankName;
+        private void btnAddBank_Click(object sender, EventArgs e)
+        {
+            NewBankName = Microsoft.VisualBasic.Interaction.InputBox("Enter the name of the bank", "New Bank", "", 240, 160);
+            //string  = Microsoft.VisualBasic.Interaction.InputBox("Enter the name of the bank", "New Bank", "", 240, 160);
+            if (NewBankName != "")
+            {
+                MessageBox.Show("Please select the bank type: RBC/BMO");
+                lblBankType.Visible = true;
+                cboBankType.Visible = true;
+                lblBankType.ForeColor = Color.Red;
+                //AddBank addBank = new AddBank(NewBankName, cboBankType.SelectedIndex);
+                //addBank.Show();
+            }
+
+          
+        }
+
+        private void cboBankType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            AddBank addBank = new AddBank(NewBankName, cboBankType.SelectedIndex);
+            addBank.Show();
         }
     }
 }

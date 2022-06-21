@@ -42,6 +42,9 @@
             this.txtFilename = new System.Windows.Forms.Label();
             this.btnNext = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
+            this.btnAddBank = new System.Windows.Forms.Button();
+            this.lblBankType = new System.Windows.Forms.Label();
+            this.cboBankType = new System.Windows.Forms.ComboBox();
             btnBrowse = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.GridView)).BeginInit();
             this.SuspendLayout();
@@ -159,9 +162,9 @@
             // btnNext
             // 
             this.btnNext.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.btnNext.Location = new System.Drawing.Point(445, 399);
+            this.btnNext.Location = new System.Drawing.Point(477, 401);
             this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(75, 23);
+            this.btnNext.Size = new System.Drawing.Size(79, 23);
             this.btnNext.TabIndex = 52;
             this.btnNext.Text = "Next";
             this.btnNext.UseVisualStyleBackColor = false;
@@ -170,7 +173,7 @@
             // btnUpdate
             // 
             this.btnUpdate.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.btnUpdate.Location = new System.Drawing.Point(311, 399);
+            this.btnUpdate.Location = new System.Drawing.Point(396, 401);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnUpdate.TabIndex = 53;
@@ -178,12 +181,46 @@
             this.btnUpdate.UseVisualStyleBackColor = false;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
+            // btnAddBank
+            // 
+            this.btnAddBank.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.btnAddBank.Location = new System.Drawing.Point(301, 401);
+            this.btnAddBank.Name = "btnAddBank";
+            this.btnAddBank.Size = new System.Drawing.Size(89, 23);
+            this.btnAddBank.TabIndex = 54;
+            this.btnAddBank.Text = "Add New Bank";
+            this.btnAddBank.UseVisualStyleBackColor = false;
+            this.btnAddBank.Click += new System.EventHandler(this.btnAddBank_Click);
+            // 
+            // lblBankType
+            // 
+            this.lblBankType.AutoSize = true;
+            this.lblBankType.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.lblBankType.Location = new System.Drawing.Point(9, 406);
+            this.lblBankType.Name = "lblBankType";
+            this.lblBankType.Size = new System.Drawing.Size(66, 13);
+            this.lblBankType.TabIndex = 57;
+            this.lblBankType.Text = "* Bank Type";
+            // 
+            // cboBankType
+            // 
+            this.cboBankType.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.cboBankType.FormattingEnabled = true;
+            this.cboBankType.Location = new System.Drawing.Point(73, 401);
+            this.cboBankType.Name = "cboBankType";
+            this.cboBankType.Size = new System.Drawing.Size(100, 21);
+            this.cboBankType.TabIndex = 56;
+            this.cboBankType.SelectedIndexChanged += new System.EventHandler(this.cboBankType_SelectedIndexChanged);
+            // 
             // Start
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(794, 450);
+            this.Controls.Add(this.lblBankType);
+            this.Controls.Add(this.cboBankType);
+            this.Controls.Add(this.btnAddBank);
             this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.btnNext);
             this.Controls.Add(this.lblFileType);
@@ -222,5 +259,8 @@
         private System.Windows.Forms.Label txtFilename;
         private System.Windows.Forms.Button btnNext;
         private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.Button btnAddBank;
+        private System.Windows.Forms.Label lblBankType;
+        private System.Windows.Forms.ComboBox cboBankType;
     }
 }
