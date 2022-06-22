@@ -62,15 +62,34 @@ namespace WindowsFormsApp1
                             //Adding items in combo boxes
                             cboBank.Items.Clear();
                             DataSet dataSet2 = new DataSet();
-                            dataSet2.ReadXml("Bank.xml");
-                            
-                            for(int x = 0; x < dataSet2.Tables["Banks"].Rows.Count; x++)
+
+                            if (File.Exists("Bank.xml"))
                             {
-                                cboBank.Items.Add(Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[x][0].ToString()));
+                                dataSet2.ReadXml("Bank.xml");
+                                for (int x = 0; x < dataSet2.Tables["Banks"].Rows.Count; x++)
+                                {
+                                    if ((Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[x][0].ToString()).Contains("MB ENTERPRISES I")) == true)
+                                    {
+                                        cboBank.Items.Remove(Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[x][0].ToString()));
+                                        cboBank.Items.Insert(x, "MB ENTERPRISES RBC");
+                                    }
+
+                                }
+                                for (int x = 0; x < dataSet2.Tables["Banks"].Rows.Count; x++)
+                                {
+                                    cboBank.Items.Add(Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[x][0].ToString()));
+                                }
                             }
+                            else
+                            {
+                                //File.Create("Bank.xml");
+                                MessageBox.Show("File doesn't exists, Add a bank first");
+                            }
+                           
                             //cboBank.Items.Remove(Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[11][0].ToString()));
-                            cboBank.Items.Remove(Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[1][0].ToString()));
-                            cboBank.Items.Insert(1, "MB ENTERPRISES RBC");
+                            
+                              
+                          
                             cboOrID.Items.Clear();
                             cboOrID.Items.Add("Credit");
                             cboOrID.Items.Add("Debit");
