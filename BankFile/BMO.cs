@@ -13,7 +13,6 @@ namespace BankFile
         {
             public override void Export(DataTable dt)
             {
-                //FileName = Path.GetFileName(FileName);
                 FileName = FileName.Replace(".xlsx", ".txt");
                 StreamWriter File = new StreamWriter(FileName);
                 int FalseRows = (dt.Rows.Count - 1);
@@ -45,13 +44,13 @@ namespace BankFile
                 {
                     for (int j = 0; j < dt.Columns.Count; j++)
                     {
-                        if (dt.Rows[i][j].ToString() == "Amount")
-                        {
+                        //if (dt.Rows[i][j].ToString() == "Amount")
+                        //{
                             for (int x = i + 1; x < dt.Rows.Count; x++)
                             {
-                                TotalAmount = Convert.ToInt64(Convert.ToDecimal(dt.Rows[x][j].ToString()) * 100) + TotalAmount;
+                                TotalAmount = Convert.ToInt64(Convert.ToDecimal(dt.Rows[x][2].ToString()) * 100) + TotalAmount;
                             }
-                        }
+                        //}
                     }
                 }
                 string AccountNumber = "";
@@ -92,15 +91,15 @@ namespace BankFile
                     {
                         for (int j = 0; j < dt.Columns.Count; j++)
                         {
-                            if (dt.Rows[i][j].ToString() == "TranCode")
-                            {
-                                TransactionCode = (dt.Rows[k][j].ToString());
+                            //if (dt.Rows[i][j].ToString() == "TranCode")
+                            //{
+                                TransactionCode = (dt.Rows[k][5].ToString());
                                 TransactionCode = "000" + TransactionCode;
                                 TransactionCode = TransactionCode.Substring(TransactionCode.Length - 3);
                                 //base.Record = "TCOAMOUNTTT00022088TRANSITCOACCOUNTNUMBER     0000000000000000000000000MB STARTOFENTITYNAMEENDOFENTITYNAME      MB ENTERPRISES I              2689620000STARTOFENTITYNAMEENDOFENTITYNAME0003000021139658     000000000000000                        ";
                                 base.Record = base.Record.Replace("TCO", TransactionCode);
                                 //File.Write(TransactionCode);
-                            }
+                            //}
                         }
                     }
                 }
@@ -148,16 +147,16 @@ namespace BankFile
                         {
                             for (int j = 0; j < dt.Columns.Count; j++)
                             {
-                                if (dt.Rows[i][j].ToString() == "Account")
-                                {
-                                    AccountNumber = dt.Rows[k][j].ToString();
+                                //if (dt.Rows[i][j].ToString() == "Account")
+                                //{
+                                    AccountNumber = dt.Rows[k][4].ToString();
 
                                     AccountNumber = AccountNumber + "            ";
                                     AccountNumber = AccountNumber.Substring(0, 12);
                                     base.Record = base.Record.Replace("ACCOUNT", AccountNumber);
 
                                     //File.Write(AccountNumber);
-                                }
+                                //}
                             }
                         }
 
@@ -167,14 +166,14 @@ namespace BankFile
                         {
                             for (int j = 0; j < dt.Columns.Count; j++)
                             {
-                                if (dt.Rows[i][j].ToString() == "TransitCode")
-                                {
-                                    TransitC = (dt.Rows[k][j].ToString());
+                                //if (dt.Rows[i][j].ToString() == "TransitCode")
+                                //{
+                                    TransitC = (dt.Rows[k][3].ToString());
                                     TransitC = "000000000" + TransitC;
                                     TransitC = TransitC.Substring(TransitC.Length - 9);
                                     base.Record = base.Record.Replace("TRANSITCO", TransitC);
                                 }
-                            }
+                            //}
                         }
 
                         //AMOUNT
@@ -183,9 +182,9 @@ namespace BankFile
                         {
                             for (int j = 0; j < dt.Columns.Count; j++)
                             {
-                                if (dt.Rows[i][j].ToString() == "Amount")
-                                {
-                                    Amount = (dt.Rows[k][j].ToString());
+                                //if (dt.Rows[i][j].ToString() == "Amount")
+                                //{
+                                    Amount = (dt.Rows[k][2].ToString());
                                     Am = ((Convert.ToInt64(Convert.ToDecimal(Amount) * 100)));
                                     Amount = "0000000000" + (Am).ToString();
                                     Amount = Amount.Substring(Amount.Length - 10);
@@ -193,7 +192,7 @@ namespace BankFile
 
                                     //File.Write(Amount);
                                 }
-                            }
+                            //}
                         }
                         //ENTITYID1
 
@@ -201,15 +200,15 @@ namespace BankFile
                         {
                             for (int j = 0; j < dt.Columns.Count; j++)
                             {
-                                if (dt.Rows[i][j].ToString() == "EntityID")
-                                {
-                                    EntityID = (dt.Rows[k][j].ToString());
+                                //if (dt.Rows[i][j].ToString() == "EntityID")
+                                //{
+                                    EntityID = (dt.Rows[k][0].ToString());
                                     EntityID = EntityID + "                   ";
                                     EntityID = EntityID.Substring(0, 19);
                                     base.Record = base.Record.Replace("ID", EntityID);
 
                                     //File.Write(EntityID);
-                                }
+                                //}
                             }
                         }
                         //ENTITYNAME
@@ -218,15 +217,15 @@ namespace BankFile
                         {
                             for (int j = 0; j < dt.Columns.Count; j++)
                             {
-                                if (dt.Rows[i][j].ToString() == "EntityName")
-                                {
-                                    EntityName = (dt.Rows[k][j].ToString());
+                                //if (dt.Rows[i][j].ToString() == "EntityName")
+                                //{
+                                    EntityName = (dt.Rows[k][1].ToString());
                                     EntityName = EntityName + "                             ";
                                     EntityName = EntityName.Substring(0, 29);
                                     base.Record = base.Record.Replace("EntityName", EntityName);
 
                                     //File.Write(EntityName);
-                                }
+                                //}
                             }
                         }
                         //DESCRIPTION

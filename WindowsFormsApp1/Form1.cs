@@ -153,6 +153,8 @@ namespace WindowsFormsApp1
                 row2["CompanyBranchNumber"] = "";
                 row2["CompanyAccountNumber"] = "";
                 row2["DestinationDataCenter"] = "";
+                row2["Credit"] = "";
+                row2["Debit"] = "";
                 row2["OriginatorID"] = "";
                 row2["HeaderCredit"] = "";
                 row2["FileNumber"] = "";
@@ -199,6 +201,8 @@ namespace WindowsFormsApp1
                 row6["CompanyBranchNumber"] = "";
                 row6["CompanyAccountNumber"] = "";
                 row6["DestinationDataCenter"] = "";
+                row6["Credit"] = "";
+                row6["Debit"] = "";
                 row6["OriginatorID"] = "";
                 row6["HeaderCredit"] = "";
                 row6["FileNumber"] = "";
@@ -209,6 +213,8 @@ namespace WindowsFormsApp1
                 row7["CompanyBranchNumber"] = "";
                 row7["CompanyAccountNumber"] = "";
                 row7["DestinationDataCenter"] = "";
+                row7["Credit"] = "";
+                row7["Debit"] = "";
                 row7["OriginatorID"] = "";
                 row7["HeaderCredit"] = "";
                 row7["FileNumber"] = "";
@@ -285,8 +291,8 @@ namespace WindowsFormsApp1
                 txtCBrNo.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][2].ToString());
                 txtAcc.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][3].ToString());
                 txtlDesDataCenter.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][4].ToString());
-                txtOrID.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][5].ToString());
-                //txtHeader.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][6].ToString());
+                    //txtOrID.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][5].ToString());
+                    //txtHeader.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][6].ToString());
                     if (Eramake.eCryptography.Decrypt((dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][9]).ToString()) == "")
                 {
                     txtFileNo.Text = Eramake.eCryptography.Decrypt((dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][9]).ToString());
@@ -421,12 +427,14 @@ namespace WindowsFormsApp1
                 {
                     DataSet dataSet2 = new DataSet();
                     dataSet2.ReadXml("Bank.xml");
+                    txtOrID.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][7].ToString());
                     txtHeader.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][6].ToString());
                 }
                 else if (cboOrIDSelectedIndex == 1)
                 {
                     DataSet dataSet2 = new DataSet();
                     dataSet2.ReadXml("Bank.xml");
+                    txtOrID.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][8].ToString());
                     txtHeader.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][10].ToString());
                 }
             }
@@ -539,7 +547,8 @@ namespace WindowsFormsApp1
                             dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][2] = Eramake.eCryptography.Encrypt(txtCBrNo.Text);
                             dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][3] = Eramake.eCryptography.Encrypt(txtAcc.Text);
                             dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][4] = Eramake.eCryptography.Encrypt(txtlDesDataCenter.Text);
-                            dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][5] = Eramake.eCryptography.Encrypt(txtOrID.Text);
+                            dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][7] = Eramake.eCryptography.Encrypt(txtOrID.Text);
+                            //dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][5] = Eramake.eCryptography.Encrypt(txtOrID.Text);
                             dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][6] = Eramake.eCryptography.Encrypt(txtHeader.Text);
                             dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][9] = Eramake.eCryptography.Encrypt(txtFileNo.Text);
 
@@ -553,7 +562,8 @@ namespace WindowsFormsApp1
                             dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][2] = Eramake.eCryptography.Encrypt(txtCBrNo.Text);
                             dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][3] = Eramake.eCryptography.Encrypt(txtAcc.Text);
                             dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][4] = Eramake.eCryptography.Encrypt(txtlDesDataCenter.Text);
-                            dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][5] = Eramake.eCryptography.Encrypt(txtOrID.Text);
+                            dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][8] = Eramake.eCryptography.Encrypt(txtOrID.Text);
+                            //dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][5] = Eramake.eCryptography.Encrypt(txtOrID.Text);
                             dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][10] = Eramake.eCryptography.Encrypt(txtHeader.Text);
                             dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][9] = Eramake.eCryptography.Encrypt(txtFileNo.Text);
 
