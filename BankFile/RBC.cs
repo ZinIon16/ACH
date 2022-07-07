@@ -12,7 +12,6 @@ namespace BankFile
         {
             public override void Export(DataTable dt)
             {
-                FileName = Path.GetFileName(FileName);
                 FileName = FileName.Replace(".xlsx", ".txt");
                 StreamWriter File = new StreamWriter(FileName);
                 int FalseRows = (dt.Rows.Count - 1);
@@ -31,11 +30,15 @@ namespace BankFile
                 NoOfDays = "000" + NoOfDays;
                 NoOfDays = NoOfDays.Substring(NoOfDays.Length - 3);
 
-                //CompanyName
+            //CompanyName
+                string CompanyName2;
+                CompanyName2 = CompanyName;
                 CompanyName = CompanyName + "                              ";
                 CompanyName = CompanyName.Substring(0, 30);
-                //TOTALAMOUNT
-                for (int i = 0; i < dt.Rows.Count; i++)
+                CompanyName2 = CompanyName2 + "               ";
+                CompanyName2 = CompanyName2.Substring(0, 15);
+            //TOTALAMOUNT
+            for (int i = 0; i < dt.Rows.Count; i++)
                 {
                     for (int j = 0; j < dt.Columns.Count; j++)
                     {
@@ -100,7 +103,7 @@ namespace BankFile
                     EntityID = "";
                     Description = "";
                     TransactionCode = "";
-                    base.Record = "TCOAMOUNT_IND022DayTRANSITCOACCOUNT" + spaces.PadRight(25, '0') + "MB ENTERPRISES ID" + "CompanyName12345" + "OriginatorIdBankBrnchAccount" + "     000000000000000                        00000000000";
+                    base.Record = "TCOAMOUNT_IND022DayTRANSITCOACCOUNT" + spaces.PadRight(25, '0') + "CompanyName1234ID" + "CompanyName12345" + "OriginatorIdBankBrnchAccount" + "     000000000000000                        00000000000";
 
                     base.Record = base.Record.Replace("Day", NoOfDays);
                     base.Record = base.Record.Replace("Bank", CompanyBank);
@@ -108,8 +111,15 @@ namespace BankFile
                     base.Record = base.Record.Replace("Account", CompanyAccount);
                     base.Record = base.Record.Replace("Originator", OriginatorID);
                     base.Record = base.Record.Replace("CompanyName12345", CompanyName);
-
-                    if (k % 6 == 1)
+                if (CompanyName == "MB ENTERPRISES I")
+                {
+                    base.Record = base.Record.Replace("CompanyName1234", "MB ENTERPRISES");
+                }
+                else
+                {
+                    base.Record = base.Record.Replace("CompanyName1234", CompanyName2);
+                }
+                if (k % 6 == 1)
                     {
                         CountRec += 1;
                         base.RecordPrefix = "TOTALRECDOriginatorFile";
@@ -122,7 +132,7 @@ namespace BankFile
                         base.RecordPrefix = base.RecordPrefix.Replace("Originator", OriginatorID);
 
                         File.WriteLine("");
-                        File.Write("C" + base.RecordPrefix);
+                        File.Write(base.FileType + base.RecordPrefix);
                     }
 
                     if (k > dt.Rows.Count - 1)
@@ -297,7 +307,7 @@ namespace BankFile
             {
                 base.SubHeader = "TOTALRECDOriginatorFile022DayDeDaC" + spaces.PadRight(20) + "CAD" + spaces.PadRight(1406);
                 base.RecordPrefix = "TOTALRECDOriginatorFile";
-                base.Record = "TCOAMOUNT_IND022DayTRANSITCOACCOUNT" + spaces.PadRight(25, '0') + "MB ENTERPRISES ID" + "CompanyName12345" + "OriginatorIdBankBrnchAccount" + spaces.PadRight(5) + spaces.PadRight(15, '0') + spaces.PadRight(24);
+                base.Record = "TCOAMOUNT_IND022DayTRANSITCOACCOUNT" + spaces.PadRight(25, '0') + "CompanyName1234ID" + "CompanyName12345" + "OriginatorIdBankBrnchAccount" + spaces.PadRight(5) + spaces.PadRight(15, '0') + spaces.PadRight(24);
                 base.TailPrefix = "TOTALRECDOriginatorFile" + spaces.PadRight(1396, '0');
             }
         }

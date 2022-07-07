@@ -13,7 +13,7 @@ namespace BankFile
         {
             public override void Export(DataTable dt)
             {
-                FileName = Path.GetFileName(FileName);
+                //FileName = Path.GetFileName(FileName);
                 FileName = FileName.Replace(".xlsx", ".txt");
                 StreamWriter File = new StreamWriter(FileName);
                 int FalseRows = (dt.Rows.Count - 1);

@@ -66,18 +66,17 @@ namespace WindowsFormsApp1
                             if (File.Exists("Bank.xml"))
                             {
                                 dataSet2.ReadXml("Bank.xml");
-                                for (int x = 0; x < dataSet2.Tables["Banks"].Rows.Count; x++)
-                                {
-                                    if ((Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[x][0].ToString()).Contains("MB ENTERPRISES I")) == true)
-                                    {
-                                        cboBank.Items.Remove(Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[x][0].ToString()));
-                                        cboBank.Items.Insert(x, "MB ENTERPRISES RBC");
-                                    }
 
-                                }
                                 for (int x = 0; x < dataSet2.Tables["Banks"].Rows.Count; x++)
                                 {
                                     cboBank.Items.Add(Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[x][0].ToString()));
+                                    if ((Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[x][0].ToString()).Contains("MB ENTERPRISES I")) == true)
+                                    {
+
+                                        cboBank.Items.Remove("MB ENTERPRISES I");
+                                        cboBank.Items.Insert(x, "MB ENTERPRISES RBC");
+
+                                    }
                                 }
                             }
                             else
@@ -85,11 +84,10 @@ namespace WindowsFormsApp1
                                 //File.Create("Bank.xml");
                                 MessageBox.Show("File doesn't exists, Add a bank first");
                             }
-                           
                             //cboBank.Items.Remove(Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[11][0].ToString()));
-                            
-                              
-                          
+
+
+
                             cboOrID.Items.Clear();
                             cboOrID.Items.Add("Credit");
                             cboOrID.Items.Add("Debit");

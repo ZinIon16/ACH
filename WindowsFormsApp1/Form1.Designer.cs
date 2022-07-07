@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.btnExport = new System.Windows.Forms.Button();
@@ -64,6 +64,9 @@
             this.txtFileType = new System.Windows.Forms.TextBox();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -76,18 +79,19 @@
             this.dataGridView1.GridColor = System.Drawing.SystemColors.InactiveCaption;
             this.dataGridView1.Location = new System.Drawing.Point(12, 12);
             this.dataGridView1.Name = "dataGridView1";
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.PaleTurquoise;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.RoyalBlue;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle16.BackColor = System.Drawing.Color.PaleTurquoise;
+            dataGridViewCellStyle16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle16.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.Color.RoyalBlue;
+            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.Color.White;
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle16;
             this.dataGridView1.Size = new System.Drawing.Size(773, 257);
             this.dataGridView1.TabIndex = 1;
             // 
             // btnExport
             // 
             this.btnExport.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.btnExport.Enabled = false;
             this.btnExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExport.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.btnExport.Location = new System.Drawing.Point(272, 423);
@@ -113,7 +117,7 @@
             // 
             this.lblAcc.AutoSize = true;
             this.lblAcc.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblAcc.Location = new System.Drawing.Point(277, 367);
+            this.lblAcc.Location = new System.Drawing.Point(233, 366);
             this.lblAcc.Name = "lblAcc";
             this.lblAcc.Size = new System.Drawing.Size(94, 13);
             this.lblAcc.TabIndex = 9;
@@ -132,9 +136,9 @@
             // txtAcc
             // 
             this.txtAcc.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.txtAcc.Location = new System.Drawing.Point(377, 359);
+            this.txtAcc.Location = new System.Drawing.Point(333, 363);
             this.txtAcc.Name = "txtAcc";
-            this.txtAcc.Size = new System.Drawing.Size(100, 20);
+            this.txtAcc.Size = new System.Drawing.Size(210, 20);
             this.txtAcc.TabIndex = 12;
             // 
             // txtFileNo
@@ -149,7 +153,7 @@
             // 
             this.lblOrID.AutoSize = true;
             this.lblOrID.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblOrID.Location = new System.Drawing.Point(305, 334);
+            this.lblOrID.Location = new System.Drawing.Point(261, 331);
             this.lblOrID.Name = "lblOrID";
             this.lblOrID.Size = new System.Drawing.Size(66, 13);
             this.lblOrID.TabIndex = 15;
@@ -158,9 +162,9 @@
             // txtOrID
             // 
             this.txtOrID.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.txtOrID.Location = new System.Drawing.Point(377, 330);
+            this.txtOrID.Location = new System.Drawing.Point(333, 327);
             this.txtOrID.Name = "txtOrID";
-            this.txtOrID.Size = new System.Drawing.Size(100, 20);
+            this.txtOrID.Size = new System.Drawing.Size(210, 20);
             this.txtOrID.TabIndex = 16;
             // 
             // labelDesDataCenter
@@ -185,7 +189,7 @@
             // 
             this.lblHeader.AutoSize = true;
             this.lblHeader.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblHeader.Location = new System.Drawing.Point(633, 399);
+            this.lblHeader.Location = new System.Drawing.Point(484, 396);
             this.lblHeader.Name = "lblHeader";
             this.lblHeader.Size = new System.Drawing.Size(42, 13);
             this.lblHeader.TabIndex = 19;
@@ -194,9 +198,9 @@
             // txtHeader
             // 
             this.txtHeader.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.txtHeader.Location = new System.Drawing.Point(681, 393);
+            this.txtHeader.Location = new System.Drawing.Point(532, 393);
             this.txtHeader.Name = "txtHeader";
-            this.txtHeader.Size = new System.Drawing.Size(100, 20);
+            this.txtHeader.Size = new System.Drawing.Size(228, 20);
             this.txtHeader.TabIndex = 20;
             // 
             // txtCName
@@ -283,7 +287,7 @@
             // 
             this.lblOrIDBMO.AutoSize = true;
             this.lblOrIDBMO.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblOrIDBMO.Location = new System.Drawing.Point(305, 333);
+            this.lblOrIDBMO.Location = new System.Drawing.Point(261, 330);
             this.lblOrIDBMO.Name = "lblOrIDBMO";
             this.lblOrIDBMO.Size = new System.Drawing.Size(66, 13);
             this.lblOrIDBMO.TabIndex = 32;
@@ -339,7 +343,7 @@
             // 
             this.lblDate.AutoSize = true;
             this.lblDate.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblDate.Location = new System.Drawing.Point(341, 301);
+            this.lblDate.Location = new System.Drawing.Point(297, 301);
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(30, 13);
             this.lblDate.TabIndex = 40;
@@ -348,10 +352,10 @@
             // txtDate
             // 
             this.txtDate.CalendarForeColor = System.Drawing.Color.Aqua;
-            this.txtDate.CalendarMonthBackground = System.Drawing.Color.AliceBlue;
-            this.txtDate.Location = new System.Drawing.Point(377, 295);
+            this.txtDate.CalendarMonthBackground = System.Drawing.SystemColors.ActiveCaption;
+            this.txtDate.Location = new System.Drawing.Point(333, 295);
             this.txtDate.Name = "txtDate";
-            this.txtDate.Size = new System.Drawing.Size(187, 20);
+            this.txtDate.Size = new System.Drawing.Size(210, 20);
             this.txtDate.TabIndex = 41;
             // 
             // txtBankName
@@ -392,12 +396,45 @@
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(558, 275);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(15, 14);
+            this.checkBox1.TabIndex = 46;
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(770, 396);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(15, 14);
+            this.checkBox2.TabIndex = 47;
+            this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // checkBox3
+            // 
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.Location = new System.Drawing.Point(558, 329);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(15, 14);
+            this.checkBox3.TabIndex = 48;
+            this.checkBox3.UseVisualStyleBackColor = true;
+            this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(794, 450);
+            this.Controls.Add(this.checkBox3);
+            this.Controls.Add(this.checkBox2);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.txtFileType);
@@ -478,6 +515,9 @@
         private System.Windows.Forms.TextBox txtFileType;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox checkBox3;
     }
 }
 
