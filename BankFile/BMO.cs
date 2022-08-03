@@ -42,16 +42,13 @@ namespace BankFile
                 //TOTALAMOUNT
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                    for (int j = 0; j < dt.Columns.Count; j++)
-                    {
+                
                         //if (dt.Rows[i][j].ToString() == "Amount")
                         //{
-                            for (int x = i + 1; x < dt.Rows.Count; x++)
-                            {
-                                TotalAmount = Convert.ToInt64(Convert.ToDecimal(dt.Rows[x][2].ToString()) * 100) + TotalAmount;
-                            }
-                        //}
-                    }
+                          
+                                TotalAmount = Convert.ToInt64(Convert.ToDecimal(dt.Rows[i][2].ToString()) * 100) + TotalAmount;
+                   
+            
                 }
                 string AccountNumber = "";
                 string TransitC = "";
