@@ -1,29 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace WindowsFormsApp1
 {
     public partial class AddBank : Form
     {
-        string bankName;
-        int banktype;
-        public AddBank(string Bankname,int banktypeindex)
+        private string bankName;
+        private int banktype;
+
+        public AddBank(string Bankname, int banktypeindex)
         {
             this.banktype = banktypeindex;
             this.bankName = Bankname;
             InitializeComponent();
         }
-        DataSet dataSet2 = new DataSet();
-        DataSet dataSet1 = new DataSet();
-        int counter;
+
+        private DataSet dataSet2 = new DataSet();
+        private DataSet dataSet1 = new DataSet();
+        private int counter;
+
         private void AddBank_Load(object sender, EventArgs e)
         {
             if (File.Exists("Bank.xml"))
@@ -66,7 +63,6 @@ namespace WindowsFormsApp1
                 dataSet.WriteXml("Bank.xml");
             }
 
-            
             MessageBox.Show("Click on Proceed button to go to next step");
             if (banktype == 0)
             {
@@ -83,11 +79,9 @@ namespace WindowsFormsApp1
                 lblHeader.Visible = false;
                 txtOrID.Visible = false;
                 txtHeader.Visible = false;
-
             }
 
             lblBank.Text = "Bank Name is : " + bankName;
-            
         }
 
         private void btnAddNewBank_Click(object sender, EventArgs e)
@@ -97,7 +91,6 @@ namespace WindowsFormsApp1
 
         private void btnProceed_Click(object sender, EventArgs e)
         {
-           
             //cboBankType.Items.Add("RBC");
             //cboBankType.Items.Add("BMO");
             dataSet2.ReadXml("Bank.xml");
@@ -111,7 +104,7 @@ namespace WindowsFormsApp1
             {
                 if (dataSet2.Tables["Banks"].Rows[0][0].ToString() == "")
                 {
-                    counter= counter - 1;
+                    counter = counter - 1;
                     dataSet2.Tables["Banks"].Rows[counter][0] = Eramake.eCryptography.Encrypt(txtCName.Text);
                     dataSet2.Tables["Banks"].Rows[counter][1] = Eramake.eCryptography.Encrypt(txtCBNo.Text);
                     dataSet2.Tables["Banks"].Rows[counter][2] = Eramake.eCryptography.Encrypt(txtCBrNo.Text);
@@ -155,14 +148,12 @@ namespace WindowsFormsApp1
                     dataSet2.Tables["Banks"].Rows[counter][9] = "";
 
                     dataSet2.WriteXml("Bank.xml");
-
                 }
                 MessageBox.Show("Bank has been added successfully");
                 this.Close();
                 Start start = new Start();
                 start.Show();
             }
-           
         }
     }
 }

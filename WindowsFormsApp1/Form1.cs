@@ -1,11 +1,8 @@
-﻿using ExcelDataReader;
+﻿using BankFile;
 using System;
 using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
-using Microsoft.VisualBasic;
-using BankFile;
 
 //ACH SOFTWARE
 
@@ -13,15 +10,16 @@ namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
-        DataTable dt;
-        int cboBankSelectedIndex, cboOrIDSelectedIndex;
-        string FileName;
-        int BankTypeIndex;
-        public Form1(DataTable dt, int bankindex, int filetindex, string BankName, string FileType,string FileName/*,int BankTypeIndex*/)
+        private DataTable dt;
+        private int cboBankSelectedIndex, cboOrIDSelectedIndex;
+        private string FileName;
+        private int BankTypeIndex;
+
+        public Form1(DataTable dt, int bankindex, int filetindex, string BankName, string FileType, string FileName/*,int BankTypeIndex*/)
         {
             InitializeComponent();
-            this.dt= dt;
-            this.cboBankSelectedIndex= bankindex;
+            this.dt = dt;
+            this.cboBankSelectedIndex = bankindex;
             this.cboOrIDSelectedIndex = filetindex;
             this.txtBankName.Text = BankName;
             this.txtFileType.Text = FileType;
@@ -51,7 +49,6 @@ namespace WindowsFormsApp1
                 txtHeader.Visible = true;
                 lblHeader.Visible = true;
             }
-
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -61,7 +58,6 @@ namespace WindowsFormsApp1
             dt.AcceptChanges();
             lblTotAmount.Visible = true;
             TotAmount.Visible = true;
-
 
             long TotalAmount = 0;
             decimal Total = 0;
@@ -82,9 +78,6 @@ namespace WindowsFormsApp1
             Total = Convert.ToDecimal(TotalAmount);
             Total = Total / 100;
             TotAmount.Text = Total.ToString();
-
-
-            
 
             //Checking if file doesn't exist. If it doesn't exists then the program will create the file automatically.
             DataSet dataSet = new DataSet();
@@ -134,7 +127,6 @@ namespace WindowsFormsApp1
             if (File.Exists("Bank.xml"))
             {
                 dataSet2.ReadXml("Bank.xml");
-               
             }
             else
             {
@@ -256,23 +248,18 @@ namespace WindowsFormsApp1
                 row11["Debit"] = "";
                 row11["FileNumber"] = "";
 
-              
                 dataSet.WriteXml("Bank.xml");
-
-                
             }
             DisplayBank();
             GetOriginiatorID();
         }
 
         private bool ExportBtnClicked = false;
-       
 
         private long FileNumber = 0;
 
         public void DisplayBank()
         {
-
             txtDate.Text = DateTime.Now.Date.ToString("d");
             //cboOrID.Text = "Credit/Debit";
             txtOrID.Clear();
@@ -280,52 +267,50 @@ namespace WindowsFormsApp1
             //condition to check the bank and display originator id accordingly
 
             if (cboBankSelectedIndex != -1)
-          {  
-
-            if (BankTypeIndex == 0)
             {
-                DataSet dataSet2 = new DataSet();
-                dataSet2.ReadXml("Bank.xml");
-                txtCName.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][0].ToString());
-                txtCBNo.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][1].ToString());
-                txtCBrNo.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][2].ToString());
-                txtAcc.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][3].ToString());
-                txtlDesDataCenter.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][4].ToString());
+                if (BankTypeIndex == 0)
+                {
+                    DataSet dataSet2 = new DataSet();
+                    dataSet2.ReadXml("Bank.xml");
+                    txtCName.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][0].ToString());
+                    txtCBNo.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][1].ToString());
+                    txtCBrNo.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][2].ToString());
+                    txtAcc.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][3].ToString());
+                    txtlDesDataCenter.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][4].ToString());
                     //txtOrID.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][5].ToString());
                     //txtHeader.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][6].ToString());
                     if (Eramake.eCryptography.Decrypt((dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][9]).ToString()) == "")
-                {
-                    txtFileNo.Text = Eramake.eCryptography.Decrypt((dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][9]).ToString());
+                    {
+                        txtFileNo.Text = Eramake.eCryptography.Decrypt((dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][9]).ToString());
+                    }
+                    else
+                    {
+                        FileNumber = Convert.ToInt32(Eramake.eCryptography.Decrypt((dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][9]).ToString()));
+                        FileNumber = FileNumber + 1;
+                        txtFileNo.Text = FileNumber.ToString();
+                    }
                 }
-                else
+                else if (BankTypeIndex == 1)
                 {
-                    FileNumber = Convert.ToInt32(Eramake.eCryptography.Decrypt((dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][9]).ToString()));
-                    FileNumber = FileNumber + 1;
-                    txtFileNo.Text = FileNumber.ToString();
+                    DataSet dataSet2 = new DataSet();
+                    dataSet2.ReadXml("Bank.xml");
+                    txtCName.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][0].ToString());
+                    txtCBNo.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][1].ToString());
+                    txtCBrNo.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][2].ToString());
+                    txtAcc.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][3].ToString());
+                    txtlDesDataCenter.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][4].ToString());
+                    if (Eramake.eCryptography.Decrypt((dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][9]).ToString()) == "")
+                    {
+                        txtFileNo.Text = Eramake.eCryptography.Decrypt((dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][9]).ToString());
+                    }
+                    else
+                    {
+                        FileNumber = Convert.ToInt32(Eramake.eCryptography.Decrypt((dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][9]).ToString()));
+                        FileNumber = FileNumber + 1;
+                        txtFileNo.Text = FileNumber.ToString();
+                    }
                 }
             }
-            else if (BankTypeIndex == 1)
-            {
-                DataSet dataSet2 = new DataSet();
-                dataSet2.ReadXml("Bank.xml");
-                txtCName.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][0].ToString());
-                txtCBNo.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][1].ToString());
-                txtCBrNo.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][2].ToString());
-                txtAcc.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][3].ToString());
-                txtlDesDataCenter.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][4].ToString());
-                if (Eramake.eCryptography.Decrypt((dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][9]).ToString()) == "")
-                {
-                    txtFileNo.Text = Eramake.eCryptography.Decrypt((dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][9]).ToString());
-                }
-                else
-                {
-                    FileNumber = Convert.ToInt32(Eramake.eCryptography.Decrypt((dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][9]).ToString()));
-                    FileNumber = FileNumber + 1;
-                    txtFileNo.Text = FileNumber.ToString();
-                }
-             }
-            }
-           
         }
 
         private void btnDelete_Click_1(object sender, EventArgs e)
@@ -341,7 +326,7 @@ namespace WindowsFormsApp1
                     dataGridView1.Rows.RemoveAt(item.RowIndex);
                 }
             }
-            catch(Exception)
+            catch (Exception)
             {
                 //nothing
             }
@@ -349,38 +334,36 @@ namespace WindowsFormsApp1
 
         private void btnExport_Click(object sender, EventArgs e)
         {
-           
+            ExportBtnClicked = true;
+            BankFile.BankFile objBank = null;
+            DataTable dt = (DataTable)dataGridView1.DataSource;
+            dt.AcceptChanges();
 
-                ExportBtnClicked = true;
-                BankFile.BankFile objBank = null;
-                DataTable dt = (DataTable)dataGridView1.DataSource;
-                dt.AcceptChanges();
-
-                if (BankTypeIndex == 1 )
-                {
-                    objBank = new BMO();
-                }
-                else if (BankTypeIndex == 0 )
-                {
-                    objBank = new RBC();
-                }
-                DateTime date;
-                date = Convert.ToDateTime(txtDate.Text);
-                if (date < DateTime.Now.Date)
-                {
-                    MessageBox.Show("Please enter a valid date and then click on update");
-                }
-                else
-                {
-                    objBank.FileNo = txtFileNo.Text;
-                    objBank.CompanyBank = txtCBNo.Text;
-                    objBank.CompanyBranch = txtCBrNo.Text;
-                    objBank.CompanyAccount = txtAcc.Text;
-                    objBank.Header = txtHeader.Text;
-                    objBank.DestinationDataCenter = txtlDesDataCenter.Text;
-                    objBank.OriginatorID = txtOrID.Text;
-                    objBank.CompanyName = txtCName.Text;
-                    objBank.NoOfDays = txtDate.Text;
+            if (BankTypeIndex == 1)
+            {
+                objBank = new BMO();
+            }
+            else if (BankTypeIndex == 0)
+            {
+                objBank = new RBC();
+            }
+            DateTime date;
+            date = Convert.ToDateTime(txtDate.Text);
+            if (date < DateTime.Now.Date)
+            {
+                MessageBox.Show("Please enter a valid date and then click on update");
+            }
+            else
+            {
+                objBank.FileNo = txtFileNo.Text;
+                objBank.CompanyBank = txtCBNo.Text;
+                objBank.CompanyBranch = txtCBrNo.Text;
+                objBank.CompanyAccount = txtAcc.Text;
+                objBank.Header = txtHeader.Text;
+                objBank.DestinationDataCenter = txtlDesDataCenter.Text;
+                objBank.OriginatorID = txtOrID.Text;
+                objBank.CompanyName = txtCName.Text;
+                objBank.NoOfDays = txtDate.Text;
 
                 if (BankTypeIndex == 1 || BankTypeIndex == 0)
                 {
@@ -394,15 +377,14 @@ namespace WindowsFormsApp1
                     }
                 }
 
-                    objBank.FileName = FileName;
-                    objBank.Export(dt);
+                objBank.FileName = FileName;
+                objBank.Export(dt);
                 if (ExportBtnClicked == true)
                 {
                     MessageBox.Show("Text file has been created", " Success", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 }
             }
         }
-
 
         private void GetOriginiatorID()
         {
@@ -442,58 +424,56 @@ namespace WindowsFormsApp1
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-          
-                //Adding to XML
-                DataSet dataSet = new DataSet();
-                DataTable dataTable = new DataTable();
-                dataTable.TableName = "Banks";
-                dataTable.Columns.Add("CompanyName");
-                dataTable.Columns.Add("CompanyBankNumber");
-                dataTable.Columns.Add("CompanyBranchNumber");
-                dataTable.Columns.Add("CompanyAccountNumber");
-                dataTable.Columns.Add("DestinationDataCenter");
-                dataTable.Columns.Add("OriginatorID");
-                dataTable.Columns.Add("Credit");
-                dataTable.Columns.Add("Debit");
-                dataTable.Columns.Add("HeaderCredit");
-                dataTable.Columns.Add("FileNumber");
-                dataTable.Columns.Add("Password", typeof(String)).SetOrdinal(10);
-                dataTable.Columns.Add("HeaderDebit");
+            //Adding to XML
+            DataSet dataSet = new DataSet();
+            DataTable dataTable = new DataTable();
+            dataTable.TableName = "Banks";
+            dataTable.Columns.Add("CompanyName");
+            dataTable.Columns.Add("CompanyBankNumber");
+            dataTable.Columns.Add("CompanyBranchNumber");
+            dataTable.Columns.Add("CompanyAccountNumber");
+            dataTable.Columns.Add("DestinationDataCenter");
+            dataTable.Columns.Add("OriginatorID");
+            dataTable.Columns.Add("Credit");
+            dataTable.Columns.Add("Debit");
+            dataTable.Columns.Add("HeaderCredit");
+            dataTable.Columns.Add("FileNumber");
+            dataTable.Columns.Add("Password", typeof(String)).SetOrdinal(10);
+            dataTable.Columns.Add("HeaderDebit");
             dataSet.Tables.Add(dataTable);
 
-                DataRow row1 = dataSet.Tables["Banks"].NewRow();
-                DataRow row2 = dataSet.Tables["Banks"].NewRow();
-                DataRow row3 = dataSet.Tables["Banks"].NewRow();
-                DataRow row4 = dataSet.Tables["Banks"].NewRow();
-                DataRow row5 = dataSet.Tables["Banks"].NewRow();
-                DataRow row6 = dataSet.Tables["Banks"].NewRow();
-                DataRow row7 = dataSet.Tables["Banks"].NewRow();
-                DataRow row8 = dataSet.Tables["Banks"].NewRow();
-                DataRow row9 = dataSet.Tables["Banks"].NewRow();
-                DataRow row10 = dataSet.Tables["Banks"].NewRow();
-                DataRow row11 = dataSet.Tables["Banks"].NewRow();
-                //DataRow row12 = dataSet.Tables["Banks"].NewRow();
-                dataSet.Tables["Banks"].Rows.Add(row1);
-                dataSet.Tables["Banks"].Rows.Add(row2);
-                dataSet.Tables["Banks"].Rows.Add(row3);
-                dataSet.Tables["Banks"].Rows.Add(row4);
-                dataSet.Tables["Banks"].Rows.Add(row5);
-                dataSet.Tables["Banks"].Rows.Add(row6);
-                dataSet.Tables["Banks"].Rows.Add(row7);
-                dataSet.Tables["Banks"].Rows.Add(row8);
-                dataSet.Tables["Banks"].Rows.Add(row9);
-                dataSet.Tables["Banks"].Rows.Add(row10);
-                dataSet.Tables["Banks"].Rows.Add(row11);
-                //dataSet.Tables["Banks"].Rows.Add(row12);
-                dataSet.Merge(dataTable);
-                DataSet dataSet2 = new DataSet();
-                dataSet2.ReadXml("Bank.xml");
-                //DataRow row13 = dataSet2.Tables["Banks"].NewRow();
-                //dataSet2.Tables["Banks"].Rows.Add(row13);
-
+            DataRow row1 = dataSet.Tables["Banks"].NewRow();
+            DataRow row2 = dataSet.Tables["Banks"].NewRow();
+            DataRow row3 = dataSet.Tables["Banks"].NewRow();
+            DataRow row4 = dataSet.Tables["Banks"].NewRow();
+            DataRow row5 = dataSet.Tables["Banks"].NewRow();
+            DataRow row6 = dataSet.Tables["Banks"].NewRow();
+            DataRow row7 = dataSet.Tables["Banks"].NewRow();
+            DataRow row8 = dataSet.Tables["Banks"].NewRow();
+            DataRow row9 = dataSet.Tables["Banks"].NewRow();
+            DataRow row10 = dataSet.Tables["Banks"].NewRow();
+            DataRow row11 = dataSet.Tables["Banks"].NewRow();
+            //DataRow row12 = dataSet.Tables["Banks"].NewRow();
+            dataSet.Tables["Banks"].Rows.Add(row1);
+            dataSet.Tables["Banks"].Rows.Add(row2);
+            dataSet.Tables["Banks"].Rows.Add(row3);
+            dataSet.Tables["Banks"].Rows.Add(row4);
+            dataSet.Tables["Banks"].Rows.Add(row5);
+            dataSet.Tables["Banks"].Rows.Add(row6);
+            dataSet.Tables["Banks"].Rows.Add(row7);
+            dataSet.Tables["Banks"].Rows.Add(row8);
+            dataSet.Tables["Banks"].Rows.Add(row9);
+            dataSet.Tables["Banks"].Rows.Add(row10);
+            dataSet.Tables["Banks"].Rows.Add(row11);
+            //dataSet.Tables["Banks"].Rows.Add(row12);
+            dataSet.Merge(dataTable);
+            DataSet dataSet2 = new DataSet();
+            dataSet2.ReadXml("Bank.xml");
+            //DataRow row13 = dataSet2.Tables["Banks"].NewRow();
+            //dataSet2.Tables["Banks"].Rows.Add(row13);
 
             string password = Microsoft.VisualBasic.Interaction.InputBox("Enter the password", "Password", "", 240, 160);
-         
+
             if (/*password != "1"*/ password != Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[0][11].ToString()))
             {
                 MessageBox.Show("Incorrect Password", "Error");
@@ -502,7 +482,7 @@ namespace WindowsFormsApp1
             {
                 MessageBox.Show("Correct Password", "Success!");
                 //checking new banks
-                if(cboBankSelectedIndex != -1)
+                if (cboBankSelectedIndex != -1)
                 {
                     if (BankTypeIndex == 1)
                     {
@@ -518,7 +498,6 @@ namespace WindowsFormsApp1
                             //dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][0] = dataSet2.Tables["Banks"].Rows[0][8].ToString();
                             dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][9] = Eramake.eCryptography.Encrypt(txtFileNo.Text);
 
-
                             //row12["Password"] = "6hGvVnbkaGpo8mUHOX8EHQ==";
                             dataSet2.WriteXml("Bank.xml");
                         }
@@ -533,7 +512,6 @@ namespace WindowsFormsApp1
                             //row1["Credit"] = dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][7].ToString();
                             dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][8] = Eramake.eCryptography.Encrypt(txtOrID.Text);
                             dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][9] = Eramake.eCryptography.Encrypt(txtFileNo.Text);
-
 
                             dataSet2.WriteXml("Bank.xml");
                         }
@@ -552,7 +530,6 @@ namespace WindowsFormsApp1
                             dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][6] = Eramake.eCryptography.Encrypt(txtHeader.Text);
                             dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][9] = Eramake.eCryptography.Encrypt(txtFileNo.Text);
 
-
                             dataSet2.WriteXml("Bank.xml");
                         }
                         else
@@ -567,14 +544,11 @@ namespace WindowsFormsApp1
                             dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][10] = Eramake.eCryptography.Encrypt(txtHeader.Text);
                             dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][9] = Eramake.eCryptography.Encrypt(txtFileNo.Text);
 
-
                             dataSet2.WriteXml("Bank.xml");
                         }
                     }
                 }
-
             }
-
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)

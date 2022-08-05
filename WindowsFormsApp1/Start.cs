@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using ExcelDataReader;
+using System;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ExcelDataReader;
 using System.IO;
+using System.Windows.Forms;
 
 namespace WindowsFormsApp1
 {
@@ -31,11 +26,12 @@ namespace WindowsFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Form1 form1 = new Form1(dt,cboBank.SelectedIndex,cboOrID.SelectedIndex, cboBank.Text,cboOrID.Text, textBox1.Text/*, cboBankType.SelectedIndex*/);
+            Form1 form1 = new Form1(dt, cboBank.SelectedIndex, cboOrID.SelectedIndex, cboBank.Text, cboOrID.Text, textBox1.Text/*, cboBankType.SelectedIndex*/);
             form1.Show();
-
         }
+
         private DataTableCollection tableCollection;
+
         private void btnBrowse_Click(object sender, EventArgs e)
         {
             //Allowing user to choose the excel file
@@ -72,10 +68,8 @@ namespace WindowsFormsApp1
                                     cboBank.Items.Add(Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[x][0].ToString()));
                                     if ((Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[x][0].ToString()).Contains("MB ENTERPRISES I")) == true)
                                     {
-
                                         cboBank.Items.Remove("MB ENTERPRISES I");
                                         cboBank.Items.Insert(x, "MB ENTERPRISES RBC");
-
                                     }
                                 }
                             }
@@ -86,8 +80,6 @@ namespace WindowsFormsApp1
                             }
                             //cboBank.Items.Remove(Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[11][0].ToString()));
 
-
-
                             cboOrID.Items.Clear();
                             cboOrID.Items.Add("Credit");
                             cboOrID.Items.Add("Debit");
@@ -97,7 +89,8 @@ namespace WindowsFormsApp1
                 }
             }
         }
-        DataTable dt;
+
+        private DataTable dt;
 
         private void cboSheet_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -108,13 +101,13 @@ namespace WindowsFormsApp1
             bool error = false;
 
             //Validation Check for Transaction Code
-            for (int i = 0; i < ((dt.Rows.Count)-1 ); i++)
+            for (int i = 0; i < ((dt.Rows.Count) - 1); i++)
             {
                 for (int j = 0; j < (dt.Columns.Count); j++)
                 {
                     if (dt.Rows[i][j].ToString() == "TranCode")
                     {
-                        for (int x = i + 1; x < ((dt.Rows.Count) ); x++)
+                        for (int x = i + 1; x < ((dt.Rows.Count)); x++)
                         {
                             if (GridView.Rows[x].Cells[j].Value == null)
                             {
@@ -204,12 +197,10 @@ namespace WindowsFormsApp1
                 MessageBox.Show("The Transit Code must be of 9 digits, change it and then click on" + " Next Button" + " in order to proceed!", " Transit Code Error");
                 btnNext.Enabled = false;
             }
-
-
-
         }
-        string TransactionCode = "";
-        
+
+        private string TransactionCode = "";
+
         private void cboBank_SelectedIndexChanged(object sender, EventArgs e)
         {
             cboOrID.Enabled = true;
@@ -238,7 +229,6 @@ namespace WindowsFormsApp1
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-
             //Validation check for TransactionCode after changes
             int check = 0;
             bool error;
@@ -265,7 +255,6 @@ namespace WindowsFormsApp1
                                 }
                                 else
                                 {
-                                    
                                     check++;
                                     GridView.Rows[x].Cells[j].Style.ForeColor = Color.Black;
                                 }
@@ -278,14 +267,14 @@ namespace WindowsFormsApp1
             {
                 MessageBox.Show("The Transaction Code must match with the File type, change it and then click on" + "Update Button" + " in order to proceed!", " Transit Code Error");
             }
-            if (dt.Rows.Count-1 == check)
+            if (dt.Rows.Count - 1 == check)
             {
                 btnNext.Enabled = true;
                 MessageBox.Show("The Transaction Code has been updated successfully!", " Success");
             }
 
             //Validation check for TransitCode after changes
-            
+
             error = false;
             for (int i = 0; i < (dt.Rows.Count); i++)
             {
@@ -327,7 +316,9 @@ namespace WindowsFormsApp1
                 MessageBox.Show("The Transit Code has been updated successfully!", " Success");
             }
         }
-        string NewBankName;
+
+        private string NewBankName;
+
         private void btnAddBank_Click(object sender, EventArgs e)
         {
             NewBankName = Microsoft.VisualBasic.Interaction.InputBox("Enter the name of the bank", "New Bank", "", 240, 160);
@@ -341,13 +332,10 @@ namespace WindowsFormsApp1
                 //AddBank addBank = new AddBank(NewBankName, cboBankType.SelectedIndex);
                 //addBank.Show();
             }
-
-          
         }
 
         private void cboBankType_SelectedIndexChanged(object sender, EventArgs e)
         {
-
             AddBank addBank = new AddBank(NewBankName, cboBankType.SelectedIndex);
             addBank.Show();
         }
