@@ -284,8 +284,9 @@ namespace BankFile
             //Insert
             if (base.FileType == "C")
             {
-                base.TailPrefix = base.TailPrefix.Insert(23, TotAmount);
-                base.TailPrefix = base.TailPrefix.Insert(23 + TotAmount.Length, Rows);
+                base.TailPrefix = base.TailPrefix + spaces.PadRight(22, '0');
+                base.TailPrefix = base.TailPrefix.Insert(45, TotAmount);
+                base.TailPrefix = base.TailPrefix.Insert(45 + TotAmount.Length, Rows) + spaces.PadRight(1396, '0');
                 File.WriteLine("");
                 File.WriteLine("Z" + base.TailPrefix);
                 File.Close();
@@ -294,7 +295,7 @@ namespace BankFile
             {
                 base.TailPrefix = base.TailPrefix.Insert(23, TotAmount);
                 base.TailPrefix = base.TailPrefix.Insert(23 + TotAmount.Length, Rows
-                + spaces.PadRight(1418, '0'));
+                ) + spaces.PadRight(1418, '0');
                 File.WriteLine("");
                 File.WriteLine("Z" + base.TailPrefix);
                 File.Close();
@@ -306,7 +307,7 @@ namespace BankFile
             base.SubHeader = "TOTALRECDOriginatorFile022DayDeDaC" + spaces.PadRight(20) + "CAD" + spaces.PadRight(1406);
             base.RecordPrefix = "TOTALRECDOriginatorFile";
             base.Record = "TCOAMOUNT_IND022DayTRANSITCOACCOUNT" + spaces.PadRight(25, '0') + "CompanyName1234ID" + "CompanyName12345" + "OriginatorIdBankBrnchAccount" + spaces.PadRight(5) + spaces.PadRight(15, '0') + spaces.PadRight(24);
-            base.TailPrefix = "TOTALRECDOriginatorFile" + spaces.PadRight(22, '0');
+            base.TailPrefix = "TOTALRECDOriginatorFile";
         }
     }
 }
