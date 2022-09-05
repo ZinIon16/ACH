@@ -119,7 +119,7 @@ namespace BankFile
                 EntityID = "";
                 EntityName = "";
 
-                base.Record = "AMOUNT_INDTRANSITCOACCOUNT" + "EntityName" + "ID";
+                base.Record = "AMOUNT_INDTRANSITCOACCOUNT" + "EntityName" + "~~";
 
                 if (k > dt.Rows.Count - 1)
                 {
@@ -191,7 +191,7 @@ namespace BankFile
                             EntityID = (dt.Rows[k][0].ToString());
                             EntityID = EntityID + "                   ";
                             EntityID = EntityID.Substring(0, 19);
-                            base.Record = base.Record.Replace("ID", EntityID);
+                            base.Record = base.Record.Replace("~~", EntityID);
 
                             //File.Write(EntityID);
                             //}
@@ -263,7 +263,7 @@ namespace BankFile
         {
             base.MainHeader = "OriginatorFile022DayDeDaC" + spaces.PadRight(54);
             base.SubHeader = "X?TCO022Day" + "CompanyNameName" + "CompanyName1234CompanyName1234" + "BankBrnchAccount" + spaces.PadRight(8);
-            base.Record = "AMOUNT_INDTRANSITCOACCOUNT" + "EntityName" + "ID";
+            base.Record = "AMOUNT_INDTRANSITCOACCOUNT" + "EntityName" + "~~";
             base.Tail = "Y?" + spaces.PadRight(56);
             base.TailPrefix = spaces.PadRight(41);
         }

@@ -1,8 +1,17 @@
-﻿using ExcelDataReader;
+﻿// <copyright file="Start.cs" company="">
+//    
+// </copyright>
+// <author></author>
+// <copyright file="Start.cs" company="">
+//    
+// </copyright>
+// <author></author>
+using ExcelDataReader;
 using System;
 using System.Data;
 using System.Drawing;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace WindowsFormsApp1
@@ -71,6 +80,16 @@ namespace WindowsFormsApp1
                                         cboBank.Items.Remove("MB ENTERPRISES I");
                                         cboBank.Items.Insert(x, "MB ENTERPRISES RBC");
                                     }
+                                    if ((Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[x][0].ToString()).Contains("2570993 ONT INC")) == true)
+                                    {
+                                        cboBank.Items.Remove("2570993 ONT INC");
+                                        cboBank.Items.Insert(x, "2570993 ONT INC SENATORS HOTEL DEBIT FILE");
+                                    }
+                                    if ((Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[x][0].ToString()).Contains("2570993 ONTARIO")) == true)
+                                    {
+                                        cboBank.Items.Remove("2570993 ONTARIO");
+                                        cboBank.Items.Insert(x, "2570993 ONTARIO INC THE SENATORS HOTEL");
+                                    }
                                 }
                             }
                             else
@@ -99,32 +118,60 @@ namespace WindowsFormsApp1
             GridView.DataSource = dt;
 
             bool error = false;
-
+            int[] Array = { 0, 1, 4 };
+            //Validation for EntityID, Account,Amount and EntityName
+            for (int j = 0; j < Array.Length; j++)
+            {
+                for (int i = 1; i < (dt.Rows.Count); i++)
+                {
+                    //for (int j = 0; j < (dt.Columns.Count); j++)
+                    //{
+                    if (!Regex.Match(dt.Rows[i][Array[j]].ToString(), "^[a-zA-Z0-9\\s]+$").Success)
+                    {
+                        error = true;
+                        //btnNext.Enabled = false;
+                        GridView.Rows[i].Cells[Array[j]].Style.ForeColor = Color.Red;
+                    }
+                    //if (!Regex.Match(dt.Rows[i][1].ToString(), "^[a-zA-Z0-9\\s]+$").Success)
+                    //{
+                    //    error = true;
+                    //    btnNext.Enabled = false;
+                    //    GridView.Rows[i].Cells[1].Style.ForeColor = Color.Red;
+                    //}
+                    //}
+                }
+            }
+            if (error == true)
+            {
+                MessageBox.Show("The EntityID/EntityName might have special character(s), change it and then click on" + " Update Button" + " in order to proceed!", " EntityID/Name Error");
+                btnNext.Enabled = false;
+            }
+            error = false;
             //Validation Check for Transaction Code
             for (int i = 0; i < ((dt.Rows.Count) - 1); i++)
             {
-                for (int j = 0; j < (dt.Columns.Count); j++)
+                //for (int j = 0; j < (dt.Columns.Count); j++)
+                //{
+                //if (dt.Rows[i][j].ToString() == "TranCode")
+                //{
+                for (int x = i + 1; x < ((dt.Rows.Count)); x++)
                 {
-                    if (dt.Rows[i][j].ToString() == "TranCode")
+                    if (GridView.Rows[x].Cells[5].Value == null)
                     {
-                        for (int x = i + 1; x < ((dt.Rows.Count)); x++)
-                        {
-                            if (GridView.Rows[x].Cells[j].Value == null)
-                            {
-                                break;
-                            }
-                            if (GridView.Rows[x].Cells[j].Value.ToString() != "TranCode")
-                            {
-                                if (GridView.Rows[x].Cells[j].Value.ToString() != TransactionCode)
-                                {
-                                    error = true;
-                                    GridView.Rows[x].Cells[j].Style.ForeColor = Color.Red;
-                                    GridView.Rows[x].Cells[j].Value = GridView.Rows[x].Cells[j].Value.ToString();
-                                }
-                            }
-                        }
+                        break;
                     }
+                    //if (GridView.Rows[x].Cells[j].Value.ToString() != "TranCode")
+                    //{
+                    if (GridView.Rows[x].Cells[5].Value.ToString() != TransactionCode)
+                    {
+                        error = true;
+                        GridView.Rows[x].Cells[5].Style.ForeColor = Color.Red;
+                        GridView.Rows[x].Cells[5].Value = GridView.Rows[x].Cells[5].Value.ToString();
+                    }
+                    //}
                 }
+                //}
+                //}
             }
             if (error == true)
             {
@@ -137,20 +184,25 @@ namespace WindowsFormsApp1
             //Validation Check for Amount
             for (int i = 0; i < (dt.Rows.Count); i++)
             {
-                for (int j = 0; j < (dt.Columns.Count); j++)
+                //for (int j = 0; j < (dt.Columns.Count); j++)
+                //{
+                //if (dt.Rows[i][j].ToString() == "Amount" || dt.Rows[i][j].ToString() == "Account")
+                //{
+                for (int x = i + 1; x < dt.Rows.Count; x++)
                 {
-                    if (dt.Rows[i][j].ToString() == "Amount" || dt.Rows[i][j].ToString() == "Account")
+                    if (GridView.Rows[x].Cells[2].Value.ToString().Contains(" ") == true || GridView.Rows[x].Cells[4].Value.ToString().Contains(" ") == true)
                     {
-                        for (int x = i + 1; x < dt.Rows.Count; x++)
-                        {
-                            if (GridView.Rows[x].Cells[j].Value.ToString().Contains(" ") == true)
-                            {
-                                error = true;
-                                GridView.Rows[x].Cells[j].Style.ForeColor = Color.Red;
-                            }
-                        }
+                        error = true;
+                        GridView.Rows[x].Cells[2].Style.ForeColor = Color.Red;
+                    }
+                    if (GridView.Rows[x].Cells[4].Value.ToString().Contains(" ") == true)
+                    {
+                        error = true;
+                        GridView.Rows[x].Cells[4].Style.ForeColor = Color.Red;
                     }
                 }
+                //}
+                //}
             }
             if (error == true)
             {
@@ -169,28 +221,28 @@ namespace WindowsFormsApp1
             error = false;
             for (int i = 0; i < ((dt.Rows.Count) - 1); i++)
             {
-                for (int j = 0; j < (dt.Columns.Count); j++)
+                //for (int j = 0; j < (dt.Columns.Count); j++)
+                //{
+                //if (dt.Rows[i][j].ToString() == "TransitCode")
+                //{
+                for (int x = i + 1; x < ((dt.Rows.Count) - 1); x++)
                 {
-                    if (dt.Rows[i][j].ToString() == "TransitCode")
+                    if (GridView.Rows[x].Cells[3].Value == null)
                     {
-                        for (int x = i + 1; x < ((dt.Rows.Count) - 1); x++)
-                        {
-                            if (GridView.Rows[x].Cells[j].Value == null)
-                            {
-                                break;
-                            }
-                            if (GridView.Rows[x].Cells[j].Value.ToString() != "TransitCode")
-                            {
-                                if (GridView.Rows[x].Cells[j].Value.ToString().Length != 9)
-                                {
-                                    error = true;
-                                    GridView.Rows[x].Cells[j].Style.ForeColor = Color.Red;
-                                    GridView.Rows[x].Cells[j].Value = GridView.Rows[x].Cells[j].Value.ToString();
-                                }
-                            }
-                        }
+                        break;
                     }
+                    //if (GridView.Rows[x].Cells[j].Value.ToString() != "TransitCode")
+                    //{
+                    if (GridView.Rows[x].Cells[3].Value.ToString().Length != 9)
+                    {
+                        error = true;
+                        GridView.Rows[x].Cells[3].Style.ForeColor = Color.Red;
+                        GridView.Rows[x].Cells[3].Value = GridView.Rows[x].Cells[3].Value.ToString();
+                    }
+                    //}
                 }
+                //}
+                //}
             }
             if (error == true)
             {
@@ -229,92 +281,136 @@ namespace WindowsFormsApp1
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
+
             //Validation check for TransactionCode after changes
             int check = 0;
             bool error;
+            check = 0;
             error = false;
             for (int i = 0; i < (dt.Rows.Count); i++)
             {
-                for (int j = 0; j < (dt.Columns.Count); j++)
+                //for (int j = 0; j < (dt.Columns.Count); j++)
+                //{
+                //if (dt.Rows[i][j].ToString() == "TranCode")
+                //{
+                for (int x = i + 1; x < dt.Rows.Count; x++)
                 {
-                    if (dt.Rows[i][j].ToString() == "TranCode")
+                    if (GridView.Rows[x].Cells[5].Value == null)
                     {
-                        for (int x = i + 1; x < dt.Rows.Count; x++)
-                        {
-                            if (GridView.Rows[x].Cells[j].Value == null)
-                            {
-                                break;
-                            }
-                            if (GridView.Rows[x].Cells[j].Value.ToString() != "TranCode")
-                            {
-                                if ((GridView.Rows[x].Cells[j].Value.ToString() != TransactionCode) || GridView.Rows[x].Cells[j].Value.ToString().Contains("*"))
-                                {
-                                    error = true;
-                                    btnNext.Enabled = false;
-                                    GridView.Rows[x].Cells[j].Style.ForeColor = Color.Red;
-                                }
-                                else
-                                {
-                                    check++;
-                                    GridView.Rows[x].Cells[j].Style.ForeColor = Color.Black;
-                                }
-                            }
-                        }
+                        break;
                     }
+                    //if (GridView.Rows[x].Cells[j].Value.ToString() != "TranCode")
+                    //{
+                    if ((GridView.Rows[x].Cells[5].Value.ToString() != TransactionCode) || GridView.Rows[x].Cells[5].Value.ToString().Contains("*"))
+                    {
+                        error = true;
+                        btnNext.Enabled = false;
+                        GridView.Rows[x].Cells[5].Style.ForeColor = Color.Red;
+                    }
+                    else
+                    {
+                        check++;
+                        GridView.Rows[x].Cells[5].Style.ForeColor = Color.Black;
+                    }
+                    //}
+                    //}
+                    //}
                 }
             }
-            if (error == true)
-            {
-                MessageBox.Show("The Transaction Code must match with the File type, change it and then click on" + "Update Button" + " in order to proceed!", " Transit Code Error");
-            }
-            if (dt.Rows.Count - 1 == check)
-            {
-                btnNext.Enabled = true;
-                MessageBox.Show("The Transaction Code has been updated successfully!", " Success");
-            }
+            //if (error == true)
+            //{
+            //    MessageBox.Show("The Transaction Code must match with the File type, change it and then click on" + "Update Button" + " in order to proceed!", " Transit Code Error");
+            //}
+            //if (dt.Rows.Count - 1 == check)
+            //{
+            //    btnNext.Enabled = true;
+            //    MessageBox.Show("The Transaction Code has been updated successfully!", " Success");
+            //}
 
             //Validation check for TransitCode after changes
-
-            error = false;
+            check = 0;
+            //error = false;
             for (int i = 0; i < (dt.Rows.Count); i++)
             {
-                for (int j = 0; j < (dt.Columns.Count); j++)
+                //for (int j = 0; j < (dt.Columns.Count); j++)
+                //{
+                //if (dt.Rows[i][j].ToString() == "TransitCode")
+                //{
+                for (int x = i + 1; x < dt.Rows.Count; x++)
                 {
-                    if (dt.Rows[i][j].ToString() == "TransitCode")
+                    if (GridView.Rows[x].Cells[3].Value == null)
                     {
-                        for (int x = i + 1; x < dt.Rows.Count; x++)
-                        {
-                            if (GridView.Rows[x].Cells[j].Value == null)
-                            {
-                                break;
-                            }
-                            if (GridView.Rows[x].Cells[j].Value.ToString() != "TransitCode")
-                            {
-                                if ((GridView.Rows[x].Cells[j].Value.ToString().Length != 9) || GridView.Rows[x].Cells[j].Value.ToString().Contains("*"))
-                                {
-                                    error = true;
-                                    btnNext.Enabled = false;
-                                    GridView.Rows[x].Cells[j].Style.ForeColor = Color.Red;
-                                }
-                                else
-                                {
-                                    check++;
-                                    GridView.Rows[x].Cells[j].Style.ForeColor = Color.Black;
-                                }
-                            }
-                        }
+                        break;
                     }
+                    //if (GridView.Rows[x].Cells[j].Value.ToString() != "TransitCode")
+                    //{
+                    if ((GridView.Rows[x].Cells[3].Value.ToString().Length != 9) || GridView.Rows[x].Cells[3].Value.ToString().Contains("*"))
+                    {
+                        error = true;
+                        btnNext.Enabled = false;
+                        GridView.Rows[x].Cells[3].Style.ForeColor = Color.Red;
+                    }
+                    else
+                    {
+                        check++;
+                        GridView.Rows[x].Cells[3].Style.ForeColor = Color.Black;
+                    }
+                    //}
+                }
+                //}
+                //}
+            }
+            //if (error == true)
+            //{
+            //    MessageBox.Show("The Transit Code must be of 9 digits, change it and then click on" + "Update Button" + " in order to proceed!", " Transit Code Error");
+            //}
+
+            //if (dt.Rows.Count - 1 == check)
+            //{
+            //    btnNext.Enabled = true;
+            //    MessageBox.Show("The Transit Code has been updated successfully!", " Success");
+            //}
+            check = 0;
+            //error = false;
+            //Validation for EntityID and EntityName
+            int[] Array = { 0, 1, 4 };
+            for (int j = 0; j < Array.Length; j++)
+            {
+                btnNext.Enabled = true;
+                for (int i = 0; i < (dt.Rows.Count); i++)
+                {
+                    //for (int j = 0; j < (dt.Columns.Count); j++)
+                    //{
+                    if (!Regex.Match(dt.Rows[i][Array[j]].ToString(), "^[a-zA-Z0-9\\s]+$").Success)
+                    {
+                        error = true;
+                        //btnNext.Enabled = false;
+                        GridView.Rows[i].Cells[Array[j]].Style.ForeColor = Color.Red;
+                    }
+                    else
+                    {
+                        check = 0;
+                        check++;
+                        GridView.Rows[i].Cells[Array[j]].Style.ForeColor = Color.Black;
+                    }
+
+                    //}
                 }
             }
             if (error == true)
             {
-                MessageBox.Show("The Transit Code must be of 9 digits, change it and then click on" + "Update Button" + " in order to proceed!", " Transit Code Error");
+                MessageBox.Show("There are Error(s), fix it and then click on" + " Update Button" + " in order to proceed!", " EntityID/Name Error");
             }
-            if (dt.Rows.Count - 1 == check)
+            else
             {
                 btnNext.Enabled = true;
-                MessageBox.Show("The Transit Code has been updated successfully!", " Success");
+                MessageBox.Show("The field(s) has been updated successfully!", " Success");
             }
+            //if (dt.Rows.Count - 1 == check)
+            //{
+            //    btnNext.Enabled = true;
+            //    MessageBox.Show("The field(s) has been updated successfully!", " Success");
+            //}
         }
 
         private string NewBankName;

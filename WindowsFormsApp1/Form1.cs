@@ -260,7 +260,10 @@ namespace WindowsFormsApp1
 
         public void DisplayBank()
         {
-            txtDate.Text = DateTime.Now.Date.ToString("d");
+            //txtDate.Text = DateTime.Now.Date.ToString("d");
+            txtDate.Value = DateTime.Now.AddDays(-1);
+            txtDate.CustomFormat = " ";
+            txtDate.Format = DateTimePickerFormat.Custom;
             //cboOrID.Text = "Credit/Debit";
             txtOrID.Clear();
 
@@ -292,6 +295,7 @@ namespace WindowsFormsApp1
                 }
                 else if (BankTypeIndex == 1)
                 {
+                    checkBox2.Visible = false;
                     DataSet dataSet2 = new DataSet();
                     dataSet2.ReadXml("Bank.xml");
                     txtCName.Text = Eramake.eCryptography.Decrypt(dataSet2.Tables["Banks"].Rows[cboBankSelectedIndex][0].ToString());
@@ -566,10 +570,26 @@ namespace WindowsFormsApp1
         private void Enabledexportbtn()
         {
             btnExport.Enabled = false;
-            if (checkBox1.Checked && checkBox2.Checked && checkBox3.Checked)
+            if (BankTypeIndex == 0)
             {
-                btnExport.Enabled = true;
+                if (checkBox1.Checked && checkBox2.Checked && checkBox3.Checked)
+                {
+                    btnExport.Enabled = true;
+                }
             }
+            else
+            {
+                if (checkBox1.Checked && checkBox3.Checked)
+                {
+                    btnExport.Enabled = true;
+                }
+            }
+       
+        }
+
+        private void txtDate_ValueChanged(object sender, EventArgs e)
+        {
+            txtDate.CustomFormat = "MM/dd/yyyy";
         }
 
         private void btnExportxl_Click(object sender, EventArgs e)

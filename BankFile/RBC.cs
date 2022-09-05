@@ -90,7 +90,7 @@ namespace BankFile
                 EntityID = "";
                 Description = "";
                 TransactionCode = "";
-                base.Record = "TCOAMOUNT_IND022DayTRANSITCOACCOUNT" + spaces.PadRight(25, '0') + "CompanyName1234ID" + "CompanyName12345" + "OriginatorIdBankBrnchAccount" + "     000000000000000                        00000000000";
+                base.Record = "TCOAMOUNT_IND022DayTRANSITCOACCOUNT" + spaces.PadRight(25, '0') + "CompanyName1234~~" + "CompanyName12345" + "Originator``BankBrnchAccount" + "     000000000000000                        00000000000";
 
                 base.Record = base.Record.Replace("Day", NoOfDays);
                 base.Record = base.Record.Replace("Bank", CompanyBank);
@@ -192,7 +192,7 @@ namespace BankFile
                             EntityID = EntityID + "                              ";
                             EntityID = EntityID.Substring(0, 30);
                             //base.Record = "TCOAMOUNTTT00022088TRANSITCOACCOUNTNUMBER     0000000000000000000000000MB ID                            MB ENTERPRISES I              2689620000STARTOFENTITYNAMEENDOFENTITYNAME0003000021139658     000000000000000                        ";
-                            base.Record = base.Record.Replace("ID", EntityID);
+                            base.Record = base.Record.Replace("~~", EntityID);
                             //}
                         }
                     }
@@ -207,7 +207,7 @@ namespace BankFile
                             EntityID = EntityID + "                   ";
                             EntityID = EntityID.Substring(0, 19);
                             //base.Record = "TCOAMOUNTTT00022088TRANSITCOACCOUNTNUMBER     0000000000000000000000000MB ID                            MB ENTERPRISES I              2689620000ID                 0003000021139658     000000000000000                        ";
-                            base.Record = base.Record.Replace("Id", EntityID);
+                            base.Record = base.Record.Replace("``", EntityID);
 
                             //File.Write(EntityName);
                             //}
@@ -306,7 +306,7 @@ namespace BankFile
         {
             base.SubHeader = "TOTALRECDOriginatorFile022DayDeDaC" + spaces.PadRight(20) + "CAD" + spaces.PadRight(1406);
             base.RecordPrefix = "TOTALRECDOriginatorFile";
-            base.Record = "TCOAMOUNT_IND022DayTRANSITCOACCOUNT" + spaces.PadRight(25, '0') + "CompanyName1234ID" + "CompanyName12345" + "OriginatorIdBankBrnchAccount" + spaces.PadRight(5) + spaces.PadRight(15, '0') + spaces.PadRight(24);
+            base.Record = "TCOAMOUNT_IND022DayTRANSITCOACCOUNT" + spaces.PadRight(25, '0') + "CompanyName1234~~" + "CompanyName12345" + "Originator``BankBrnchAccount" + spaces.PadRight(5) + spaces.PadRight(15, '0') + spaces.PadRight(24);
             base.TailPrefix = "TOTALRECDOriginatorFile";
         }
     }
